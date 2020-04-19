@@ -17,7 +17,7 @@
                         </span>
                     <% } %>
                     <% if(page.categories.length!==0 && theme.post_category_enable){ %>
-                        <span class="post-category">
+                        | <span class="post-category">
                             <i class="iconfont icon-category"></i>
                             <% page.categories.forEach(item=>{ %>
                                 <a href="<%- url_for(item.path) %>"><%- item.name %></a>
@@ -25,7 +25,7 @@
                         </span>
                     <% } %>
                     <% if(page.tags.length!==0 && theme.post_category_enable){ %>
-                        <span class="post-category">
+                        | <span class="post-category">
                             <i class="iconfont icon-tags"></i>
                             <% page.tags.forEach(item=>{ %>
                                 <a href="<%- url_for(item.path) %>"><%- item.name %></a>

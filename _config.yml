@@ -100,6 +100,6 @@ theme: chic
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/erictt/erictt.github.io
+  repo: https://github.com/erictt/blog
   # example, https://github.com/hexojs/hexojs.github.io
   branch: gh-pages

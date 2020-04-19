@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Eric Yang">
+
+
+
+
+
+<title>VIM的基本命令使用以及插件配置 | Eric&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Eric&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Eric&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开</a>
+        <a onclick="go_top()">返回顶部</a>
+        <!-- <a onclick="go_bottom()">底部</a> -->
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "收起"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">VIM的基本命令使用以及插件配置</h1>
+            
+                <div class="post-meta">
+                    
+                        <span class="post-time">
+                        2017/01/04
+                        </span>
+                    
+                    
+                        <span class="post-category"> | 发布在 :
+                            
+                                <a href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
+                            
+                        </span>
+                    
+                    
+                        <span class="post-category"> | 标签:
+                            
+                                <a href="/tags/Mac/">Mac</a>
+                            
+                                <a href="/tags/VIM/">VIM</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <ul>
+<li>好不容易用英语写完了， 懒得翻译了</li>
+</ul>
+<h2 id="Basic-Usage"><a href="#Basic-Usage" class="headerlink" title="Basic Usage"></a>Basic Usage</h2><h3 id="Normal-Mode"><a href="#Normal-Mode" class="headerlink" title="Normal Mode:"></a>Normal Mode:</h3><ul>
+<li>First Open file with VIM command, with get into Normal Mode</li>
+<li><code>h``j``k``l</code> : <code>←``↓``↑``→</code></li>
+<li><code>dd</code> : delete current line</li>
+<li><code>x</code> : delete current character</li>
+<li><code>yy</code> : copy current line</li>
+<li><code>p</code> : paste. It will paste last copied, cut or deleted texts.</li>
+<li><code>^</code> : go to first non-blank character in current line, <code>$</code> to the end</li>
+<li><code>u</code> : undo, <code>&lt;C-r&gt;</code> : redo. <code>g-</code>/<code>g+</code> : go to older/newer text state</li>
+<li><code>.</code> : repeat last action</li>
+<li><code>N&lt;command&gt;</code> : repeat <code>Command</code> <code>N</code> times. For example, <code>2dd</code> : delete two line</li>
+<li><code>gg</code>: go to first line, <code>G</code> : Go to last line, <code>NG</code> : Go to line <code>N</code> (<code>N</code> stands for a number, for example, <code>10G</code>)</li>
+<li><code>w</code> : move cursor to the beginning of next word, <code>e</code> : move cursor to the end of next word</li>
+<li><code>%</code> : match the closest <code>{</code>, <code>[</code>, <code>(</code></li>
+<li><code>*</code> : search forward for the occurrence of the word nearest to the cursor., <code>#</code> : search backward.</li>
+</ul>
+<h3 id="Insert-Mode"><a href="#Insert-Mode" class="headerlink" title="Insert Mode:"></a>Insert Mode:</h3><ul>
+<li><code>i</code> : Get into Insert Mode, <code>Esc</code> back to Normal Mode</li>
+<li><code>I</code> : Start to insert text at the beginning of the current line</li>
+<li><code>o</code> : Begin a new line below the cursor and insert text</li>
+<li><code>O</code> : Begin a new line above the cursor and insert text</li>
+</ul>
+<h3 id="Command-Mode"><a href="#Command-Mode" class="headerlink" title="Command Mode:"></a>Command Mode:</h3><ul>
+<li>Execute command (<code>:</code>), search patterns<br>(<code>/</code> and <code>?</code>), and filter commands (<code>!</code>)</li>
+<li><code>:wq</code> : Save then quit, <code>:q</code>: Quit, <code>:w</code>: Save, <code>:q!</code>: Quit current file without saving, <code>:qa!</code> Quit all files without saving</li>
+<li><code>:e &lt;path/to/file&gt;</code> : Open another file</li>
+<li><code>:saveas &lt;path/to/file&gt;</code> : Save as another file</li>
+</ul>
+<h2 id="Advance-Usage"><a href="#Advance-Usage" class="headerlink" title="Advance Usage"></a>Advance Usage</h2><h3 id="Insert-Mode-1"><a href="#Insert-Mode-1" class="headerlink" title="Insert Mode:"></a>Insert Mode:</h3><ul>
+<li><code>gi</code> : goto Insert mode where you left it last time</li>
+</ul>
+<h3 id="Normal-Mode-1"><a href="#Normal-Mode-1" class="headerlink" title="Normal Mode:"></a>Normal Mode:</h3><ul>
+<li><p><code>&lt;C-y&gt;</code>, <code>&lt;C-e&gt;</code> : check the text above or below the cursor</p>
+</li>
+<li><p><code>&lt;C-w&gt;w</code> : Switch windows between last one and current one</p>
+</li>
+<li><p><code>&lt;C-w&gt;&lt;dir&gt;</code> : <code>&lt;dir&gt;</code> can be <code>h``j``k``l</code>, switch windows to left, down, up or right.</p>
+</li>
+<li><p>to move at current line</p>
+<ul>
+<li><p><code>0</code> → head</p>
+</li>
+<li><p><code>^</code> → non-blank head</p>
+</li>
+<li><p><code>$</code> → end</p>
+</li>
+<li><p><code>g_</code> → non-blank end</p>
+</li>
+<li><p><code>fa</code> → to next character <code>a</code></p>
+</li>
+<li><p><code>t,</code> → to the character right before the next <code>,</code></p>
+</li>
+<li><p><code>3fa</code> → to the third <code>a</code></p>
+</li>
+<li><p><code>F</code>, <code>T</code> → same as <code>f</code>, <code>t</code> with reverse direction</p>
+<p>  <img src="/public/img/media/line_moves-1.jpg" alt="line_moves"></p>
+</li>
+</ul>
+</li>
+<li><p>manipulate a text block <code>&lt;C-v&gt;</code>, for example:</p>
+<ul>
+<li><p>add prefixes to multi lines</p>
+<p>  <img src="/public/img/media/rectangular-blocks.gif" alt="rectangular-blocks"><br>`</p>
+<ul>
+<li><code>^</code> → to the head of the line</li>
+<li><code>&lt;C-v&gt;</code> → Start to select a block of text</li>
+<li><code>&lt;C-d&gt;</code> → to move downward, you also can use <code>h``j``k``l</code> or <code>%</code> instead</li>
+<li><code>I--</code>  → Insert <code>--</code></li>
+<li><code>[ESC]</code> → to make effects to every line</li>
+</ul>
+</li>
+<li><p>append text to multi lines</p>
+<p>  <img src="/public/img/media/append-to-many-lines.gif" alt="append-to-many-lines"></p>
+<ul>
+<li><code>&lt;C-v&gt;</code> → Choose lines (You can also use <code>j</code>, <code>&lt;C-d&gt;</code>, <code>/pattern</code>, <code>%</code>, etc.</li>
+<li><code>$</code> → move cursor to the end</li>
+<li><code>A</code> → start to input text, type press <code>ESC</code></li>
+</ul>
+</li>
+<li><p>indentation</p>
+<p>  <img src="/public/img/media/autoindent.gif" alt="autoindent"></p>
+<ul>
+<li><code>J</code> → convert multi lines to single line</li>
+<li><code>&lt;</code> <code>&gt;</code> → indent to left or right</li>
+<li><code>=</code> → auto indent</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Visual-Mode"><a href="#Visual-Mode" class="headerlink" title="Visual Mode:"></a>Visual Mode:</h3><ul>
+<li><p>Block Choosing <code>&lt;action&gt;a&lt;object&gt;</code> or <code>&lt;action&gt;i&lt;object&gt;</code></p>
+<ul>
+<li><p><code>&lt;action&gt;</code> can be any actions, like <code>d</code>(delete), <code>y</code>(copy), <code>v</code>(text selecting).</p>
+</li>
+<li><p><code>&lt;object&gt;</code> can be <code>w</code>(a word), <code>W</code>(a phrase), <code>s</code>(a sentance), <code>p</code>(a paragraph), or a special symbol like <code>&quot;</code>, <code>&#39;</code>, <code>)</code>, <code>}</code>, <code>]</code>.</p>
+</li>
+<li><p>For example:</p>
+<p> <img src="/public/img/media/textobjects.png" alt="textobjects"></p>
+<ul>
+<li><code>vi&quot;</code> → foo</li>
+<li><code>va&quot;</code> → “foo”</li>
+<li><code>vi)</code> → “foo”</li>
+<li><code>va)</code> → (“foo”)</li>
+<li><code>v2i)</code> → map (+) (“foo”)</li>
+<li><code>v2a)</code> → (map (+) (“foo”))</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Command-Mode-1"><a href="#Command-Mode-1" class="headerlink" title="Command Mode:"></a>Command Mode:</h3><ul>
+<li><p><code>:split</code> : split window horizontally, <code>:vsplit</code> : split window vertically.</p>
+</li>
+<li><p><code>q</code> : Record typed characters into register, then repeat them.</p>
+<ul>
+<li><p><code>qa</code> : record every action into register <code>a</code></p>
+</li>
+<li><p><code>@a</code> : replay it</p>
+</li>
+<li><p><code>@@</code> : to replay the latest register</p>
+</li>
+<li><p>For example:</p>
+<p>  <img src="/public/img/media/macros.gif" alt="macros"></p>
+<ul>
+<li><p>In this text file, only have “1” in it, start to input: <code>qaYp&lt;C-a&gt;q</code></p>
+<ul>
+<li><code>qa</code> → start to record</li>
+<li><code>yyp</code> → copy current line to next line</li>
+<li><code>&lt;C-a&gt;</code> → add 1</li>
+<li><code>q</code> → stop recording</li>
+<li><code>@a</code> → write down 2 under 1</li>
+<li><code>@@</code> → write down 3 under 2</li>
+<li><code>100@@</code> → repeat it 100 times.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>:[range]s/&lt;pattern&gt;/&lt;replace&gt;/{flags}</code> : replace text</p>
+<ul>
+<li>TODO</li>
+<li><code>[range]</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h2><h3 id="Explanations-of-Important-Keywords"><a href="#Explanations-of-Important-Keywords" class="headerlink" title="Explanations of Important Keywords"></a>Explanations of Important Keywords</h3><ul>
+<li><p><code>&lt;Leader&gt;</code>: default is <code>\</code>, you can change it by using <code>let mapleader = &#39;,&#39;</code> in <code>.vimrc</code> file.</p>
+</li>
+<li><p><code>&lt;CR&gt;</code>: equals <code>&lt;Return&gt;</code>    &amp; <code>&lt;Enter&gt;</code></p>
+</li>
+<li><p><code>&lt;S-...&gt;</code>    : shift-key</p>
+</li>
+<li><p><code>&lt;C-...&gt;</code>: control-key</p>
+</li>
+<li><p><code>&lt;M-...&gt;</code> &amp; <code>&lt;A-...&gt;</code>: alt-key</p>
+</li>
+<li><p><code>&lt;D-...&gt;</code>: command-key (Mac only)</p>
+</li>
+<li><p><code>g:</code>: means globally. Example:</p>
+<ul>
+<li><code>let g:last_active_tab = 1</code> toggle switch between current tab and the last one globally.</li>
+</ul>
+</li>
+<li><p><code>remap</code>: Allows for mappings to work recursively.</p>
+</li>
+<li><p><code>noremap</code>: Only a single entry. Can NOT be remapped.</p>
+</li>
+<li><p><code>n</code> &amp; <code>v</code> &amp; <code>s</code> &amp; <code>i</code>: prefixes, <code>n</code> stands for Normal mode, <code>v</code> stands for Visual mode, <code>s</code> stands for Select Mode, <code>i</code> stands for Insert Mode. Example:</p>
+<ul>
+<li><code>nnoremap &lt;C-t&gt; :tabnew&lt;CR&gt;</code>: remap <code>Ctrl + t</code> to create a new tab</li>
+<li><code>inoremap &lt;C-t&gt; &lt;Esc&gt;:tabnew&lt;CR&gt;</code>: same as last one, with an escape action additionally.</li>
+</ul>
+</li>
+<li><p><code>&lt;Plug&gt;</code>: in <code>.vimrc</code> file, it has two meanings. First, it’s visible out of the plugin scripts. And the second, use structure <code>&lt;Plug&gt; scriptname mapname</code> to avoid confliction with other plugins. For example: <code>&lt;Plug&gt;TypecorrAdd</code>, <code>Typecorr</code> is the script name, and <code>Add</code> is the function name.</p>
+</li>
+<li><p><code>&lt;SID&gt;</code>: is the script ID and not visible outside. Compare with <code>&lt;Plug&gt;</code>, it’s more like <code>private</code> function to other scrips. So can’t use it out of the script. Example:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">" ,en ,ep to jump between errors</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>! &lt;<span class="title">SID</span>&gt;<span class="title">LocationPrevious</span><span class="params">()</span></span></span><br><span class="line">  <span class="keyword">try</span></span><br><span class="line">      lprev</span><br><span class="line">  <span class="keyword">catch</span> /^Vim\%((\<span class="keyword">a</span>\+)\)\=:E553/</span><br><span class="line">      <span class="keyword">llast</span></span><br><span class="line">  <span class="keyword">endtry</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span>! &lt;<span class="title">SID</span>&gt;<span class="title">LocationNext</span><span class="params">()</span></span></span><br><span class="line">  <span class="keyword">try</span></span><br><span class="line">      <span class="keyword">lnext</span></span><br><span class="line">  <span class="keyword">catch</span> /^Vim\%((\<span class="keyword">a</span>\+)\)\=:E553/</span><br><span class="line">      <span class="keyword">lfirst</span></span><br><span class="line">  <span class="keyword">endtry</span></span><br><span class="line"><span class="keyword">endfunction</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">nnoremap</span> <span class="symbol">&lt;silent&gt;</span> <span class="symbol">&lt;Plug&gt;</span>LocationPrevious :<span class="symbol">&lt;C-u&gt;</span><span class="keyword">exe</span> <span class="string">'call &lt;SID&gt;LocationPrevious()'</span><span class="symbol">&lt;CR&gt;</span></span><br><span class="line"><span class="keyword">nnoremap</span> <span class="symbol">&lt;silent&gt;</span> <span class="symbol">&lt;Plug&gt;</span>LocationNext :<span class="symbol">&lt;C-u&gt;</span><span class="keyword">exe</span> <span class="string">'call &lt;SID&gt;LocationNext()'</span><span class="symbol">&lt;CR&gt;</span></span><br><span class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;silent&gt;</span> <span class="symbol">&lt;Leader&gt;</span>ep <span class="symbol">&lt;Plug&gt;</span>LocationPrevious</span><br><span class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;silent&gt;</span> <span class="symbol">&lt;Leader&gt;</span><span class="keyword">en</span> <span class="symbol">&lt;Plug&gt;</span>LocationNext</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>&lt;silence&gt;</code>:  to make a key mapping can`t be echoed on the command line</p>
+</li>
+<li><p><code>&lt;expr&gt;</code> take the argument as expression. For example: <code>inoremap &lt;expr&gt; &lt;C-L&gt; ListItem()</code>, ListItem is a function which is mapped with <code>Ctrl + L</code>.</p>
+</li>
+</ul>
+<h3 id="unblevable-quick-scope"><a href="#unblevable-quick-scope" class="headerlink" title="unblevable/quick-scope"></a>unblevable/quick-scope</h3><ul>
+<li><p>Github Repo: <a href="https://github.com/unblevable/quick-scope" target="_blank" rel="noopener">unblevable/quick-scope</a></p>
+</li>
+<li><p>Useage: highlights which characters to target for <code>f</code>, <code>F</code> and family.</p>
+</li>
+<li><p>Key Mapping:</p>
+<pre><code>let g:qs_highlight_on_keys = [&apos;f&apos;, &apos;F&apos;, &apos;t&apos;, &apos;T&apos;] //</code></pre></li>
+</ul>
+<h3 id="ntpeters-vim-better-whitespace"><a href="#ntpeters-vim-better-whitespace" class="headerlink" title="ntpeters/vim-better-whitespace"></a>ntpeters/vim-better-whitespace</h3><ul>
+<li><p>Github Repo: <a href="ntpeters/vim-better-whitespace">ntpeters/vim-better-whitespace</a></p>
+</li>
+<li><p>Useage: clean extra whitespace.</p>
+</li>
+<li><p>Key Mapping:</p>
+<pre><code>nnoremap &lt;silent&gt; &lt;Leader&gt;&lt;Space&gt; :StripWhitespace&lt;CR&gt;
+autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre &lt;buffer&gt; StripWhitespace
+let g:better_whitespace_filetypes_blacklist=[&apos;diff&apos;, &apos;gitcommit&apos;, &apos;unite&apos;, &apos;qf&apos;, &apos;help&apos;]</code></pre></li>
+</ul>
+<h3 id="Vim-CtrlSpace"><a href="#Vim-CtrlSpace" class="headerlink" title="Vim-CtrlSpace"></a>Vim-CtrlSpace</h3><ul>
+<li><p>Github Repo: <a href="https://github.com/vim-ctrlspace/vim-ctrlspace" target="_blank" rel="noopener">vim-ctrlspace/vim-ctrlspace</a></p>
+</li>
+<li><p>Useage:</p>
+<ul>
+<li>bookmarks for your favorite projects</li>
+<li>workspaces (sessions)</li>
+<li>tabs / buffers / files management</li>
+<li>fast fuzzy searching powered by Go</li>
+</ul>
+</li>
+<li><p>Shortkeys:</p>
+<ul>
+<li><code>Ctrl + Space</code> : open ctrl space command line</li>
+<li><code>b</code> : bookmark list</li>
+<li><code>w</code> : workspace list in current bookmark</li>
+<li><code>l</code> : tab list in current workspace</li>
+<li><code>o</code> : file list in current workspace</li>
+<li><code>h</code> : buffer list in current workspace, this is default list when you hit ctrl + space</li>
+<li><code>/</code> : Into Search Mode, type it again will close search mode. Aka,  <code>B</code>, <code>W</code>, <code>L</code>, <code>O</code>, <code>H</code> with uppercase will open the same list with Search Mode</li>
+<li><code>i</code> : switch directory (when you on the buffer list)</li>
+<li><code>a</code> : all the files are opend in current workspace</li>
+<li><code>s</code> : save current workspace/bookmark, then <code>&lt;CR&gt;</code> to confirm</li>
+<li><code>d</code> : delete a file from current buffer or file list</li>
+<li><code>j</code>,<code>k</code> : switch items, then <code>&lt;CR&gt;</code> to confirm</li>
+<li><code>m</code> : rename bookmark or workspace(when you on the workspace list or bookmark list)</li>
+</ul>
+</li>
+<li><p>Key Mapping:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="built_in">has</span>(<span class="string">"gui_running"</span>)</span><br><span class="line"><span class="comment">" Settings for MacVim and Inconsolata font</span></span><br><span class="line">  <span class="keyword">let</span> <span class="variable">g:CtrlSpaceSymbols</span> = &#123; <span class="string">"File"</span>: <span class="string">"◯"</span>, <span class="string">"CTab"</span>: <span class="string">"▣"</span>, <span class="string">"Tabs"</span>: <span class="string">"▢"</span> &#125;</span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">executable</span>(<span class="string">"ag"</span>)</span><br><span class="line">  <span class="keyword">let</span> <span class="variable">g:CtrlSpaceGlobCommand</span> = <span class="string">'ag -l --nocolor -g ""'</span></span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:CtrlSpaceSearchTiming</span> = <span class="number">500</span></span><br><span class="line"><span class="keyword">hi</span> link CtrlSpaceNormal   PMenu</span><br><span class="line"><span class="keyword">hi</span> link CtrlSpaceSelected PMenuSel</span><br><span class="line"><span class="keyword">hi</span> link CtrlSpaceSearch   Search</span><br><span class="line"><span class="keyword">hi</span> link CtrlSpaceStatus   StatusLine</span><br><span class="line"><span class="keyword">nnoremap</span> <span class="symbol">&lt;silent&gt;</span><span class="symbol">&lt;C-p&gt;</span> :CtrlSpace O<span class="symbol">&lt;CR&gt;</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:CtrlSpaceLoadLastWorkspaceOnStart</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:CtrlSpaceSaveWorkspaceOnSwitch</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:CtrlSpaceSaveWorkspaceOnExit</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="scrooloose-nerdtree-amp-jistr-vim-nerdtree-tabs"><a href="#scrooloose-nerdtree-amp-jistr-vim-nerdtree-tabs" class="headerlink" title="scrooloose/nerdtree &amp; jistr/vim-nerdtree-tabs"></a>scrooloose/nerdtree &amp; jistr/vim-nerdtree-tabs</h3><ul>
+<li><p>TODO</p>
+</li>
+<li><p>Github Repo: <a href="https://github.com/scrooloose/nerdtree" target="_blank" rel="noopener">scrooloose/nerdtree</a> &amp; <a href="https://github.com/jistr/vim-nerdtree-tabs" target="_blank" rel="noopener">jistr/vim-nerdtree-tabs</a></p>
+</li>
+<li><p>Useage: to explore filesystem and to open files and directories.</p>
+</li>
+<li><p>Key Mapping:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">" nerdtree</span></span><br><span class="line"><span class="keyword">map</span> <span class="symbol">&lt;C-n&gt;</span> :NERDTreeToggle<span class="symbol">&lt;CR&gt;</span></span><br><span class="line"><span class="keyword">let</span> NERDTreeHighlightCursorline=<span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> NERDTreeIgnore=[ <span class="string">'\.pyc$'</span>, <span class="string">'\.pyo$'</span>, <span class="string">'\.obj$'</span>, <span class="string">'\.o$'</span>, <span class="string">'\.so$'</span>, <span class="string">'\.egg$'</span>, <span class="string">'^\.git$'</span>, <span class="string">'^\.svn$'</span>, <span class="string">'^\.hg$'</span> ]</span><br><span class="line"><span class="comment">"close vim if the only window left open is a NERDTree</span></span><br><span class="line"><span class="keyword">autocmd</span> bufenter * <span class="keyword">if</span> (<span class="built_in">winnr</span>(<span class="string">"$"</span>) == <span class="number">1</span> &amp;&amp; <span class="built_in">exists</span>(<span class="string">"b:NERDTreeType"</span>) &amp;&amp; <span class="variable">b:NERDTreeType</span> == <span class="string">"primary"</span>) | q | end</span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:NERDTreeMapOpenSplit</span> = <span class="string">'s'</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:NERDTreeMapOpenVSplit</span> = <span class="string">'v'</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:NERDTreeWinSize</span>=<span class="number">26</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" nerdtreetabs</span></span><br><span class="line"><span class="keyword">map</span> <span class="symbol">&lt;C-n&gt;</span> <span class="symbol">&lt;plug&gt;</span>NERDTreeTabsToggle<span class="symbol">&lt;CR&gt;</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:nerdtree_tabs_synchronize_view</span>=<span class="number">0</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:nerdtree_tabs_synchronize_focus</span>=<span class="number">0</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:nerdtree_tabs_open_on_console_startup</span>=<span class="number">0</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:nerdtree_tabs_open_on_gui_startup</span>=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="syntastic"><a href="#syntastic" class="headerlink" title="syntastic"></a>syntastic</h3><ul>
+<li><p>Github Repo: <a href="https://github.com/vim-syntastic/syntastic#introduction" target="_blank" rel="noopener">vim-syntastic/syntastic</a></p>
+</li>
+<li><p>Useage: a syntax checking plugin</p>
+</li>
+<li><p>Key Mapping:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">execute</span> pathogen#infect()</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:syntastic_error_symbol</span>=<span class="string">'&gt;&gt;'</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:syntastic_warning_symbol</span>=<span class="string">'&gt;'</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:syntastic_check_on_open</span>=<span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:syntastic_check_on_wq</span>=<span class="number">0</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:syntastic_enable_highlighting</span>=<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" checkers</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:syntastic_php_checkers</span> = [<span class="string">'php'</span>, <span class="string">'phpcs'</span>, <span class="string">'phpmd'</span>]</span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:syntastic_python_checkers</span>=[<span class="string">'pyflakes'</span>, <span class="string">'pep8'</span>] <span class="comment">" 使用pyflakes,速度比pylint快</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:syntastic_python_pep8_args</span>=<span class="string">'--ignore=E501,E225,E124,E712'</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:syntastic_javascript_checkers</span> = [<span class="string">'jsl'</span>, <span class="string">'jshint'</span>]</span><br><span class="line"><span class="comment">" let g:syntastic_markdown_checkers = ['proselint']</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:syntastic_html_checkers</span>=[<span class="string">'tidy'</span>, <span class="string">'jshint'</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> statusline+=%#warningmsg#</span><br><span class="line"><span class="keyword">set</span> statusline+=%&#123;SyntasticStatuslineFlag()&#125;</span><br><span class="line"><span class="keyword">set</span> statusline+=%*</span><br><span class="line"></span><br><span class="line"><span class="comment">" to see error location list</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:syntastic_always_populate_loc_list</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:syntastic_enable_signs</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:syntastic_auto_loc_list</span> = <span class="number">0</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:syntastic_auto_jump</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">highlight</span> SyntasticErrorSign guifg=white guibg=black</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="YouCompleteMe"><a href="#YouCompleteMe" class="headerlink" title="YouCompleteMe"></a>YouCompleteMe</h3><ul>
+<li><p>Github Repo: <a href="https://github.com/Valloric/YouCompleteMe" target="_blank" rel="noopener">Valloric/YouCompleteMe</a></p>
+</li>
+<li><p>Useage: code completion</p>
+</li>
+<li><p>Key Mapping:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_key_list_select_completion</span>=[<span class="string">'&lt;C-j&gt;'</span>]</span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_key_list_previous_completion</span>=[<span class="string">'&lt;C-k&gt;'</span>]</span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_complete_in_comments</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_complete_in_strings</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_use_ultisnips_completer</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_collect_identifiers_from_comments_and_strings</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_collect_identifiers_from_tags_files</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_seed_identifiers_with_syntax</span>=<span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_goto_buffer_command</span> = <span class="string">'horizontal-split'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">nnoremap</span> <span class="symbol">&lt;leader&gt;</span>jd :YcmCompleter GoToDefinitionElseDeclaration<span class="symbol">&lt;CR&gt;</span></span><br><span class="line"><span class="keyword">nnoremap</span> <span class="symbol">&lt;leader&gt;</span>gd :YcmCompleter GoToDeclaration<span class="symbol">&lt;CR&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> !empty(<span class="built_in">glob</span>(<span class="string">"~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"</span>))</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">g:ycm_global_ycm_extra_conf</span> = <span class="string">"~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"</span></span><br><span class="line"><span class="keyword">endif</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="vim-easymotion"><a href="#vim-easymotion" class="headerlink" title="vim-easymotion"></a>vim-easymotion</h3><ul>
+<li><p>Github Repo: <a href="https://github.com/easymotion/vim-easymotion" target="_blank" rel="noopener">easymotion/vim-easymotion</a></p>
+</li>
+<li><p>Usage: Provides a much simpler way to use some motions in vim.</p>
+</li>
+<li><p>Keys Mapping:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">g:EasyMotion_smartcase</span> = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" &lt;Leader&gt;f&#123;char&#125; to move to &#123;char&#125;</span></span><br><span class="line"><span class="keyword">map</span>  <span class="symbol">&lt;Leader&gt;</span><span class="symbol">&lt;Leader&gt;</span><span class="keyword">f</span> <span class="symbol">&lt;Plug&gt;</span>(easymotion-<span class="keyword">bd</span>-<span class="keyword">f</span>)</span><br><span class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;Leader&gt;</span><span class="symbol">&lt;Leader&gt;</span><span class="keyword">f</span> <span class="symbol">&lt;Plug&gt;</span>(easymotion-overwin-<span class="keyword">f</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">" s&#123;char&#125;&#123;char&#125; to move to &#123;char&#125;&#123;char&#125;</span></span><br><span class="line"><span class="keyword">nmap</span> s <span class="symbol">&lt;Plug&gt;</span>(easymotion-overwin-f2)</span><br><span class="line"></span><br><span class="line"><span class="comment">" Move to line</span></span><br><span class="line"><span class="keyword">map</span>  <span class="symbol">&lt;Leader&gt;</span><span class="symbol">&lt;Leader&gt;</span><span class="keyword">l</span> <span class="symbol">&lt;Plug&gt;</span>(easymotion-<span class="keyword">bd</span>-jk)</span><br><span class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;Leader&gt;</span><span class="symbol">&lt;Leader&gt;</span><span class="keyword">l</span> <span class="symbol">&lt;Plug&gt;</span>(easymotion-overwin-<span class="built_in">line</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="easyalign"><a href="#easyalign" class="headerlink" title="easyalign"></a>easyalign</h3><ul>
+<li><p>Github Repo: <a href="https://github.com/junegunn/vim-easy-align" target="_blank" rel="noopener">junegunn/vim-easy-align</a></p>
+</li>
+<li><p>Usage: alignment</p>
+</li>
+<li><p>Keys Mapping:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vmap</span> ga <span class="symbol">&lt;Plug&gt;</span>(EasyAlign)</span><br><span class="line"><span class="keyword">nmap</span> ga <span class="symbol">&lt;Plug&gt;</span>(EasyAlign)</span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:easy_align_ignore_groups</span> = [<span class="string">'Comment'</span>, <span class="string">'String'</span>]</span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:easy_align_delimiters</span> = &#123;</span><br><span class="line">   \ <span class="string">'&gt;'</span>: &#123; <span class="string">'pattern'</span>: <span class="string">'&gt;&gt;\|=&gt;\|&gt;'</span> &#125;,</span><br><span class="line">   \ <span class="string">'/'</span>: &#123;</span><br><span class="line">   \     <span class="string">'pattern'</span>:         <span class="string">'//\+\|/\*\|\*/'</span>,</span><br><span class="line">   \     <span class="string">'delimiter_align'</span>: <span class="string">'l'</span>,</span><br><span class="line">   \     <span class="string">'ignore_groups'</span>:   [<span class="string">'!Comment'</span>] &#125;,</span><br><span class="line">   \ <span class="string">']'</span>: &#123;</span><br><span class="line">   \     <span class="string">'pattern'</span>:       <span class="string">'[[\]]'</span>,</span><br><span class="line">   \     <span class="string">'left_margin'</span>:   <span class="number">0</span>,</span><br><span class="line">   \     <span class="string">'right_margin'</span>:  <span class="number">0</span>,</span><br><span class="line">   \     <span class="string">'stick_to_left'</span>: <span class="number">0</span></span><br><span class="line">   \   &#125;,</span><br><span class="line">   \ <span class="string">')'</span>: &#123;</span><br><span class="line">   \     <span class="string">'pattern'</span>:       <span class="string">'[()]'</span>,</span><br><span class="line">   \     <span class="string">'left_margin'</span>:   <span class="number">0</span>,</span><br><span class="line">   \     <span class="string">'right_margin'</span>:  <span class="number">0</span>,</span><br><span class="line">   \     <span class="string">'stick_to_left'</span>: <span class="number">0</span></span><br><span class="line">   \   &#125;,</span><br><span class="line">   \ <span class="string">'d'</span>: &#123;</span><br><span class="line">   \     <span class="string">'pattern'</span>:      <span class="string">' \(\S\+\s*[;=]\)\@='</span>,</span><br><span class="line">   \     <span class="string">'left_margin'</span>:  <span class="number">0</span>,</span><br><span class="line">   \     <span class="string">'right_margin'</span>: <span class="number">0</span></span><br><span class="line">   \   &#125;</span><br><span class="line">   \ &#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="NerdTree"><a href="#NerdTree" class="headerlink" title="NerdTree"></a>NerdTree</h3><ul>
+<li><p>Github Repo: <a href="https://github.com/scrooloose/nerdtree" target="_blank" rel="noopener">scrooloose/nerdtree</a></p>
+</li>
+<li><p>Usage: to explore your filesystem and to open files and directories.</p>
+</li>
+<li><p>Keys Mapping:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">map</span> <span class="symbol">&lt;leader&gt;</span>n :NERDTreeToggle<span class="symbol">&lt;CR&gt;</span></span><br><span class="line"><span class="keyword">let</span> NERDTreeShowBookmarks=<span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> NERDTreeHighlightCursorline=<span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> NERDTreeIgnore=[ <span class="string">'\.pyc$'</span>, <span class="string">'\.pyo$'</span>, <span class="string">'\.obj$'</span>, <span class="string">'\.o$'</span>, <span class="string">'\.so$'</span>, <span class="string">'\.egg$'</span>, <span class="string">'^\.git$'</span>, <span class="string">'^\.svn$'</span>, <span class="string">'^\.hg$'</span> ]</span><br><span class="line"><span class="comment">"close vim if the only window left open is a NERDTree</span></span><br><span class="line"><span class="keyword">autocmd</span> bufenter * <span class="keyword">if</span> (<span class="built_in">winnr</span>(<span class="string">"$"</span>) == <span class="number">1</span> &amp;&amp; <span class="built_in">exists</span>(<span class="string">"b:NERDTreeType"</span>) &amp;&amp; <span class="variable">b:NERDTreeType</span> == <span class="string">"primary"</span>) | q | end</span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:NERDTreeMapOpenSplit</span> = <span class="string">'s'</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:NERDTreeMapOpenVSplit</span> = <span class="string">'v'</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:NERDTreeWinSize</span>=<span class="number">26</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="NERDCommenter"><a href="#NERDCommenter" class="headerlink" title="NERDCommenter"></a>NERDCommenter</h3><ul>
+<li><p>Github Repo: <a href="https://github.com/scrooloose/nerdcommenter" target="_blank" rel="noopener">scrooloose/nerdcommenter</a></p>
+</li>
+<li><p>Usage: to wrangle your code comments.</p>
+</li>
+<li><p>Shortkeys:</p>
+<ul>
+<li><code>[count]&lt;leader&gt;cc</code> : Comment out the current line or text selected in visual mode.</li>
+<li><code>[count]&lt;leader&gt;c&lt;space&gt;</code> : Toggles the comment state of the selected line(s). If the topmost selected line is commented, all selected lines are uncommented and vice versa.</li>
+<li><code>[count]&lt;leader&gt;cs</code> : Comments out the selected lines with a pretty block formatted layout.</li>
+<li><code>[count]&lt;leader&gt;ci</code> : Toggles the comment state of the selected line(s) individually.</li>
+</ul>
+</li>
+<li><p>Keys Mapping:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">" Add spaces after comment delimiters by default</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:NERDSpaceDelims</span> = <span class="number">1</span></span><br><span class="line"><span class="comment">" Use compact syntax for prettified multi-line comments</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:NERDCompactSexyComs</span> = <span class="number">1</span></span><br><span class="line"><span class="comment">" Align line-wise comment delimiters flush left instead of following code indentation</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:NERDDefaultAlign</span> = <span class="string">'left'</span></span><br><span class="line"><span class="comment">" Allow commenting and inverting empty lines (useful when commenting a region)</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:NERDCommentEmptyLines</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="Airline"><a href="#Airline" class="headerlink" title="Airline"></a>Airline</h3><ul>
+<li><p>Github Repo: <a href="https://github.com/vim-airline/vim-airline" target="_blank" rel="noopener">vim-airline/vim-airline</a></p>
+</li>
+<li><p>Usage: rich statusbar.</p>
+</li>
+<li><p>Keys Mapping:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> !exists(<span class="string">'g:airline_symbols'</span>)</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">g:airline_symbols</span> = &#123;&#125;</span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:airline_mode_map</span> = &#123;</span><br><span class="line">    \ <span class="string">'__'</span> : <span class="string">'-'</span>,</span><br><span class="line">    \ <span class="string">'n'</span>  : <span class="string">'N'</span>,</span><br><span class="line">    \ <span class="string">'i'</span>  : <span class="string">'I'</span>,</span><br><span class="line">    \ <span class="string">'R'</span>  : <span class="string">'R'</span>,</span><br><span class="line">    \ <span class="string">'c'</span>  : <span class="string">'C'</span>,</span><br><span class="line">    \ <span class="string">'v'</span>  : <span class="string">'V'</span>,</span><br><span class="line">    \ <span class="string">'V'</span>  : <span class="string">'V'</span>,</span><br><span class="line">    \ <span class="string">''</span> : <span class="string">'V'</span>,</span><br><span class="line">    \ <span class="string">'s'</span>  : <span class="string">'S'</span>,</span><br><span class="line">    \ <span class="string">'S'</span>  : <span class="string">'S'</span>,</span><br><span class="line">    \ <span class="string">''</span> : <span class="string">'S'</span>,</span><br><span class="line">    \ &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:airline_left_sep</span> = <span class="string">'❯'</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:airline_right_sep</span> = <span class="string">'❮'</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:airline_symbols</span>.linenr = <span class="string">'¶'</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:airline_symbols</span>.branch = <span class="string">'⎇'</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<!---
+### a
+* Github Repo: [b](c)
+* Useage: d
+* Key Mapping:
+
+        e
+-->
+
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Mac/"># Mac</a>
+                    
+                        <a href="/tags/VIM/"># VIM</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">首页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2017-02-20-php-advance-3-good-practice.html">好的编程习惯 - PHP进阶 (3)</a>
+            
+            
+            <a class="next" rel="next" href="/2016-12-30-keyboard-conf.html">Mac上配置GH60键盘</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Eric Yang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

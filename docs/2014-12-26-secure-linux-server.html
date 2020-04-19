@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Eric Yang">
+
+
+
+
+
+<title>Linux服务器安全设置 | Eric&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Eric&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Eric&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开</a>
+        <a onclick="go_top()">返回顶部</a>
+        <!-- <a onclick="go_bottom()">底部</a> -->
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "收起"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Linux服务器安全设置</h1>
+            
+                <div class="post-meta">
+                    
+                        <span class="post-time">
+                        2014/12/26
+                        </span>
+                    
+                    
+                        <span class="post-category"> | 发布在 :
+                            
+                                <a href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
+                            
+                        </span>
+                    
+                    
+                        <span class="post-category"> | 标签:
+                            
+                                <a href="/tags/Linux/">Linux</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>翻译自<a href="https://www.linode.com/docs/security/securing-your-server" target="_blank" rel="noopener">Linode: Securing Your Server</a></p>
+<p>以下配置环境为:</p>
+<ul>
+<li>本地: Mac OS X</li>
+<li>服务器: Ubuntu 14.04</li>
+</ul>
+<h2 id="添加用户，并将其加入sudo组"><a href="#添加用户，并将其加入sudo组" class="headerlink" title="添加用户，并将其加入sudo组"></a>添加用户，并将其加入sudo组</h2><p>例如增加webapps用户，并将其加入webapps用户组：</p>
+<ul>
+<li><code>ssh root@&lt;your-service-ip&gt;</code> // 使用root登录服务器</li>
+<li><code>groupadd webapps</code> // 创建webapps用户组</li>
+<li><code>useradd -m -g webapps -s /bin/bash webapps</code><ul>
+<li><code>-m</code> 创建home根目录</li>
+<li><code>-g</code> 指定用户组</li>
+<li><code>-s</code> 指定使用的bash</li>
+</ul>
+</li>
+<li><code>sudo usermod -aG sudo webapps</code><ul>
+<li><code>-G</code> 附加用户组</li>
+</ul>
+</li>
+</ul>
+<h2 id="在本地创建并使用SSH-key认证登录服务器"><a href="#在本地创建并使用SSH-key认证登录服务器" class="headerlink" title="在本地创建并使用SSH key认证登录服务器"></a>在本地创建并使用SSH key认证登录服务器</h2><h3 id="生成密钥"><a href="#生成密钥" class="headerlink" title="生成密钥"></a>生成密钥</h3><ul>
+<li><code>ssh-keygen -t rsa -C &quot;your_email@example.com&quot;</code></li>
+<li>避免在每次登录的时候每次都需要输入passphrase<ul>
+<li><code>eval &quot;$(ssh-agent -s)&quot;</code></li>
+<li><code>ssh-add ~/.ssh/id_rsa</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="上传至服务器"><a href="#上传至服务器" class="headerlink" title="上传至服务器"></a>上传至服务器</h3><ul>
+<li>使用webapps登录服务器，并执行<code>mkdir ~/.ssh &amp;&amp; touch ~/.ssh/authorized_keys</code>创建空文件authorized_keys用于存放公钥</li>
+<li>在本地执行<code>cat ~/.ssh/id_rsa.pub | ssh webapps@&lt;your-server-ip&gt; &#39;cat &gt;&gt; .ssh/authorized_keys&#39;</code></li>
+</ul>
+<h3 id="禁止root用户密码登录"><a href="#禁止root用户密码登录" class="headerlink" title="禁止root用户密码登录"></a>禁止root用户密码登录</h3><ul>
+<li><code>sudo vi /etc/ssh/sshd_config</code><ul>
+<li>修改 <code>PermitRootLogin yes</code> 为 <code>PermitRootLogin without-password</code></li>
+</ul>
+</li>
+<li><code>sudo service ssh restart</code> 重启ssh服务</li>
+</ul>
+<h2 id="创建防火墙"><a href="#创建防火墙" class="headerlink" title="创建防火墙"></a>创建防火墙</h2><h3 id="创建文件-etc-iptables-firewall-rules-用于存放防火墙规则，内容如下："><a href="#创建文件-etc-iptables-firewall-rules-用于存放防火墙规则，内容如下：" class="headerlink" title="创建文件 /etc/iptables.firewall.rules 用于存放防火墙规则，内容如下："></a>创建文件 <code>/etc/iptables.firewall.rules</code> 用于存放防火墙规则，内容如下：</h3><ul>
+<li><p>以下规则仅开放HTTP (80), HTTPS (443), SSH (22)三个端口</p>
+<pre><code>*filter
+
+#  Allow all loopback (lo0) traffic and drop all traffic to 127/8 that doesn&apos;t use lo0
+-A INPUT -i lo -j ACCEPT
+-A INPUT -d 127.0.0.0/8 -j REJECT
+
+#  Accept all established inbound connections
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+#  Allow all outbound traffic - you can modify this to only allow certain traffic
+-A OUTPUT -j ACCEPT
+
+#  Allow HTTP and HTTPS connections from anywhere (the normal ports for websites and SSL).
+-A INPUT -p tcp --dport 80 -j ACCEPT
+-A INPUT -p tcp --dport 443 -j ACCEPT
+
+#  Allow SSH connections
+#
+#  The -dport number should be the same port number you set in sshd_config
+#
+-A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT
+
+#  Allow ping
+-A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+
+#  Log iptables denied calls
+-A INPUT -m limit --limit 5/min -j LOG --log-prefix &quot;iptables denied: &quot; --log-level 7
+
+#  Drop all other inbound - default deny unless explicitly allowed policy
+-A INPUT -j DROP
+-A FORWARD -j DROP
+
+COMMIT</code></pre></li>
+</ul>
+<h3 id="激活防火墙配置"><a href="#激活防火墙配置" class="headerlink" title="激活防火墙配置"></a>激活防火墙配置</h3><ul>
+<li><code>sudo iptables-restore &lt; /etc/iptables.firewall.rules</code></li>
+</ul>
+<h3 id="查看防火墙配置信息"><a href="#查看防火墙配置信息" class="headerlink" title="查看防火墙配置信息"></a>查看防火墙配置信息</h3><ul>
+<li><code>sudo iptables -L</code></li>
+</ul>
+<h3 id="配置启动执行脚本，保证防火墙配置在服务器每次重启后即时生效"><a href="#配置启动执行脚本，保证防火墙配置在服务器每次重启后即时生效" class="headerlink" title="配置启动执行脚本，保证防火墙配置在服务器每次重启后即时生效"></a>配置启动执行脚本，保证防火墙配置在服务器每次重启后即时生效</h3><ul>
+<li><p><code>sudo vi /etc/network/if-pre-up.d/firewall</code> 编辑文件，内容如下：</p>
+<pre><code>#!/bin/sh
+/sbin/iptables-restore &lt; /etc/iptables.firewall.rules</code></pre></li>
+<li><p><code>sudo chmod +x /etc/network/if-pre-up.d/firewall</code> 修改文件权限为可执行</p>
+</li>
+</ul>
+<h2 id="安装配置Fail2Ban"><a href="#安装配置Fail2Ban" class="headerlink" title="安装配置Fail2Ban"></a>安装配置Fail2Ban</h2><p>Fail2Ban可以有效防止同一IP多次失败登录。它会临时创建防火墙规则来阻止攻击。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
+<li><code>sudo apt-get install fail2ban</code></li>
+</ul>
+<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><ul>
+<li><code>bantime</code> 指定阻止保持时长</li>
+<li><code>maxretry</code> 设置IP可以尝试连接的次数</li>
+</ul>
+<h3 id="重启fail2ban服务"><a href="#重启fail2ban服务" class="headerlink" title="重启fail2ban服务"></a>重启fail2ban服务</h3><ul>
+<li><code>sudo service fail2ban restart</code></li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Linux/"># Linux</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">首页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2015-01-13-create-git-server.html">创建GIT服务器</a>
+            
+            
+            <a class="next" rel="next" href="/2014-12-22-how-to-use-linux-screen.html">如何使用Linux的screen命令</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Eric Yang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

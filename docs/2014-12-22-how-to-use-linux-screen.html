@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Eric Yang">
+
+
+
+
+
+<title>如何使用Linux的screen命令 | Eric&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Eric&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Eric&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开</a>
+        <a onclick="go_top()">返回顶部</a>
+        <!-- <a onclick="go_bottom()">底部</a> -->
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "收起"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">如何使用Linux的screen命令</h1>
+            
+                <div class="post-meta">
+                    
+                        <span class="post-time">
+                        2014/12/22
+                        </span>
+                    
+                    
+                        <span class="post-category"> | 发布在 :
+                            
+                                <a href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
+                            
+                        </span>
+                    
+                    
+                        <span class="post-category"> | 标签:
+                            
+                                <a href="/tags/Linux/">Linux</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>摘录自: <a href="http://www.rackaid.com/blog/linux-screen-tutorial-and-how-to/" target="_blank" rel="noopener">http://www.rackaid.com/blog/linux-screen-tutorial-and-how-to/</a></p>
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ul>
+<li>多终端共享一个SSH会话</li>
+<li>能在网络状况不好的状况下保持可用</li>
+<li>从多个地址断开并重新连接终端会话</li>
+<li>在执行耗时任务时无需维持终端会话</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li>CentOS: <code>yum install screen</code></li>
+<li>Ubuntu: <code>apt-get install screen</code></li>
+</ul>
+<h2 id="起始命令"><a href="#起始命令" class="headerlink" title="起始命令"></a>起始命令</h2><ul>
+<li><code>screen</code> 进入screen模式</li>
+</ul>
+<h2 id="控制命令"><a href="#控制命令" class="headerlink" title="控制命令"></a>控制命令</h2><ul>
+<li><code>Ctrl+a</code> screen 使用Ctrl+a快捷键作为命令前缀来发送信号，例如<code>Ctrl+a+?</code>为打开screen帮助页面</li>
+</ul>
+<h2 id="创建窗口"><a href="#创建窗口" class="headerlink" title="创建窗口"></a>创建窗口</h2><ul>
+<li><code>Ctrl+a+c</code> 使用默认视窗创建新的窗口，旧视窗能然可用</li>
+</ul>
+<h2 id="窗口之间切换"><a href="#窗口之间切换" class="headerlink" title="窗口之间切换"></a>窗口之间切换</h2><p>使用screen 向前或向后切换窗口</p>
+<ul>
+<li><code>Ctrl+a+n</code> 下一个窗口</li>
+<li><code>Ctrl+a+p</code> 上一个窗口</li>
+<li>两次<code>Ctrl+a</code> 可以在最近的上一个或下一个窗口中来回切换</li>
+</ul>
+<h2 id="挂起会话"><a href="#挂起会话" class="headerlink" title="挂起会话"></a>挂起会话</h2><p>与当前的screen分离并跳出到原有的shell会话中，并可以使用<code>screen -r</code>重新连上</p>
+<p>对于需要在服务器执行长时间消耗的任务是个非常不错的选择</p>
+<p>PS: 如果当前网络连接中断，screen会自动挂起会话</p>
+<ul>
+<li><code>Ctrl+a+d</code></li>
+</ul>
+<h2 id="恢复会话"><a href="#恢复会话" class="headerlink" title="恢复会话"></a>恢复会话</h2><p>如果你的会话连接由于某种原因中端，可以使用此命令恢复</p>
+<ul>
+<li><code>screen -r</code></li>
+</ul>
+<h2 id="记录screen的输出"><a href="#记录screen的输出" class="headerlink" title="记录screen的输出"></a>记录screen的输出</h2><ul>
+<li><code>Ctrl+a+H</code> 为当前会话创建日志进行追踪</li>
+</ul>
+<p>screen 会跨多个会话进行日志追踪。对于在服务器操作较多的情况，可以有捕捉自己的操作</p>
+<h2 id="获取警告提醒"><a href="#获取警告提醒" class="headerlink" title="获取警告提醒"></a>获取警告提醒</h2><p>screen可以监听会话活动。在下载或者编译等耗时操作时，可用于提醒警告</p>
+<p>当你在等待一个耗时进程的输出时，可使用<code>Ctrl+a+M</code>来监听活动。screen会等输出完成后，在页面底部闪出一条提醒。此时可切换至其他screen进行其他操作，而不需要时而切换回来查看任务是否完成</p>
+<p>或者你在编译程序或下载文件，等待会话无内容输出的情况。可使用<code>Ctrl+a+_</code>来监听当前会话是否已无内容输出</p>
+<h2 id="锁定screen会话"><a href="#锁定screen会话" class="headerlink" title="锁定screen会话"></a>锁定screen会话</h2><p>当你要离开电脑一会儿，可使用<code>Ctrl+a+x</code>加入密码来锁定screen</p>
+<h2 id="停止screen"><a href="#停止screen" class="headerlink" title="停止screen"></a>停止screen</h2><p>当完成任务后，推荐停止screen会话，而非挂起会话</p>
+<ul>
+<li>输入<code>exit</code></li>
+<li><code>Ctrl+a+k</code></li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Linux/"># Linux</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">首页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2014-12-26-secure-linux-server.html">Linux服务器安全设置</a>
+            
+            
+            <a class="next" rel="next" href="/2014-12-18-linux-notes.html">Linux 常用命令笔记</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Eric Yang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

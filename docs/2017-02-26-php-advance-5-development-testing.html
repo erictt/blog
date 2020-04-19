@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Eric Yang">
+
+
+
+
+
+<title>部署和测试工具 - PHP进阶 (5) | Eric&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Eric&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Eric&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开</a>
+        <a onclick="go_top()">返回顶部</a>
+        <!-- <a onclick="go_bottom()">底部</a> -->
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "收起"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">部署和测试工具 - PHP进阶 (5)</h1>
+            
+                <div class="post-meta">
+                    
+                        <span class="post-time">
+                        2017/02/26
+                        </span>
+                    
+                    
+                        <span class="post-category"> | 发布在 :
+                            
+                                <a href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
+                            
+                        </span>
+                    
+                    
+                        <span class="post-category"> | 标签:
+                            
+                                <a href="/tags/PHP/">PHP</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><h4 id="概念分类"><a href="#概念分类" class="headerlink" title="概念分类"></a>概念分类</h4><ul>
+<li>单元测试(Unit Test) - 在项目中独立测试函数、方法、类等。</li>
+<li>TDD(Test-Driven Development) - 项目开始后，先写一部分测试用例，然后实现，然后继续写测试用例，继续实现，不断循环直至项目完成或终止。</li>
+<li>BDD(Behavior-Driven Development) - 基于行为流程来描述程序的实现。类似于单元测试，只是在实现上应用了比较友好的表达方式便于理解。<ul>
+<li>SpecBDD - 面向开发人员。使用编程语言表达。例： <a href="http://www.phpspec.net/en/stable/" target="_blank" rel="noopener">phpspec</a></li>
+<li>StoryBDD - 面向产品经理。基于英语语言表达。例：<a href="http://behat.org/en/latest/" target="_blank" rel="noopener">behat</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="自动化部署工具"><a href="#自动化部署工具" class="headerlink" title="自动化部署工具"></a>自动化部署工具</h3><ul>
+<li><a href="https://github.com/capistrano/capistrano" target="_blank" rel="noopener">capistrano/capistrano</a></li>
+<li><a href="http://magephp.com/" target="_blank" rel="noopener">magephp</a></li>
+<li><a href="http://rocketeer.autopergamene.eu/" target="_blank" rel="noopener">Rocketeer</a></li>
+</ul>
+<h3 id="代码分析工具"><a href="#代码分析工具" class="headerlink" title="代码分析工具"></a>代码分析工具</h3><ul>
+<li><a href="https://xdebug.org/" target="_blank" rel="noopener">Xdebug</a></li>
+<li><a href="https://blackfire.io/" target="_blank" rel="noopener">blackfire</a></li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/PHP/"># PHP</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">首页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2017-03-11-powerset-algorithms.html">排列组合算法[Python]</a>
+            
+            
+            <a class="next" rel="next" href="/2017-02-25-php-advance-4-tuning.html">服务器配置及性能调优 - PHP进阶 (4)</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Eric Yang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

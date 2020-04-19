@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Eric Yang">
+
+
+
+
+
+<title>优化配置 Nginx 和 PHP-FPM | Eric&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Eric&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Eric&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开</a>
+        <a onclick="go_top()">返回顶部</a>
+        <!-- <a onclick="go_bottom()">底部</a> -->
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "收起"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">优化配置 Nginx 和 PHP-FPM</h1>
+            
+                <div class="post-meta">
+                    
+                        <span class="post-time">
+                        2015/09/10
+                        </span>
+                    
+                    
+                        <span class="post-category"> | 发布在 :
+                            
+                                <a href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
+                            
+                        </span>
+                    
+                    
+                        <span class="post-category"> | 标签:
+                            
+                                <a href="/tags/PHP/">PHP</a>
+                            
+                                <a href="/tags/Nginx/">Nginx</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><ul>
+<li><p><code>server_tokens off;</code></p>
+<p>  hide nginx server tokens</p>
+</li>
+<li><p><code>access_log off;</code></p>
+<p>  reduce nginx write to disk times</p>
+</li>
+<li><p><code>worker_processes 1;</code></p>
+<p>  always equals <code>grep processor /proc/cpuinfo | wc -l</code></p>
+</li>
+<li><p><code>worker_connections 4096;</code></p>
+<p>  <code>ulimit -n</code> will echo the max connection of server.</p>
+</li>
+<li><p><code>client_body_buffer_size 32K;</code></p>
+<p>  This handles the client buffer size, meaning any POST actions sent to Nginx.</p>
+</li>
+<li><p><code>client_header_buffer_size 10k;</code></p>
+</li>
+<li><p><code>large_client_header_buffers 4 32k;</code></p>
+</li>
+<li><p><code>client_max_body_size 50m;</code></p>
+</li>
+<li><p>Gzip Compression</p>
+<p>  Gzip can help reduce the amount of network transfer Nginx deals with. However, be careful increasing the gzip_comp_level too high as the server will begin wasting cpu cycles.</p>
+<pre><code>gzip             on;
+gzip_comp_level  2;
+gzip_min_length  1000;
+gzip_proxied     expired no-cache no-store private auth;
+gzip_types       text/plain application/x-javascript text/xml text/css application/xml;</code></pre></li>
+<li><p>Timeouts</p>
+<p>  Timeouts can also drastically improve performance.</p>
+<p>  The <code>client_body_timeout</code> and <code>client_header_timeout</code> directives are responsible for the time a server will wait for a client body or client header to be sent after request. If neither a body or header is sent, the server will issue a 408 error or Request time out.</p>
+<p>  The keepalive_timeout assigns the timeout for keep-alive connections with the client. Simply put, Nginx will close connections with the client after this period of time.</p>
+<p>  Finally, the send_timeout is established not on the entire transfer of answer, but only between two operations of reading; if after this time client will take nothing, then Nginx is shutting down the connection.</p>
+<pre><code>client_body_timeout 12;
+client_header_timeout 12;
+keepalive_timeout 15;
+send_timeout 10;</code></pre></li>
+</ul>
+<h2 id="php-fpm"><a href="#php-fpm" class="headerlink" title="php-fpm"></a>php-fpm</h2><ul>
+<li><p><code>pm.max_spare_servers = 30;</code></p>
+<p>  The desired maximum number of idle server processes.</p>
+</li>
+<li><p><code>pm.max_children = 1024;</code></p>
+<p>  On an average each PHP-FPM process took ~75MB of RAM on my machine.</p>
+<p>  Appropriate value for pm.max_children can be calculated as:</p>
+<p>  pm.max_children = Total RAM dedicated to the web server / Max child process size - in my case it was 85MB</p>
+<p>  The server has 8GB of RAM, so:</p>
+<p>  pm.max_children = 6144MB / 85MB = 72</p>
+<p>  assuming you are devoting 80% of available memory to PHP-FPM, the command below will suggest an approx pm.max_children value for all pools:</p>
+<p>  <code>echo &quot;pm.max_children = $(( $(awk &#39;/MemTotal:/ { printf &quot;%d\n&quot;, ($2*0.80) }&#39; /proc/meminfo) / $(ps --no-headers -o &quot;rss,cmd&quot; -C php-fpm | awk &#39;{ sum+=$1 } END { printf (&quot;%d\n&quot;, sum/NR) }&#39;) ))&quot;</code></p>
+</li>
+<li><p><code>pm.max_requests = 800;</code></p>
+<p>  The number of requests each child process should execute before respawning.</p>
+</li>
+</ul>
+<p>Refers:</p>
+<p><a href="http://myshell.co.uk/blog/2012/07/adjusting-child-processes-for-php-fpm-nginx/" target="_blank" rel="noopener">http://myshell.co.uk/blog/2012/07/adjusting-child-processes-for-php-fpm-nginx/</a></p>
+<p><a href="https://www.digitalocean.com/community/tutorials/how-to-optimize-nginx-configuration" target="_blank" rel="noopener">https://www.digitalocean.com/community/tutorials/how-to-optimize-nginx-configuration</a></p>
+<p><a href="http://www.hjue.me/post/php-fpm-nginx" target="_blank" rel="noopener">http://www.hjue.me/post/php-fpm-nginx</a></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/PHP/"># PHP</a>
+                    
+                        <a href="/tags/Nginx/"># Nginx</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">首页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2016-07-01-jin-gang-jing-note.html">《金刚经说什么》读书笔记</a>
+            
+            
+            <a class="next" rel="next" href="/2015-02-02-popular-js-css-collection.html">收集一些常用的 JS 和 CSS 库</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Eric Yang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

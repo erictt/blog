@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Eric Yang">
+
+
+
+
+
+<title>标签 | Eric&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Eric&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Eric&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            
+
+    <div class="container">
+        <div class="post-wrap tags">
+            <h2 class="post-title">-&nbsp;标签&nbsp;-</h2>
+
+            <div class="tag-cloud-tags">
+                
+                    <a href="/tags/%E5%93%B2%E5%AD%A6/">哲学<small>(1)</small></a>
+                
+                    <a href="/tags/MongoDB/">MongoDB<small>(1)</small></a>
+                
+                    <a href="/tags/Linux/">Linux<small>(5)</small></a>
+                
+                    <a href="/tags/Git/">Git<small>(1)</small></a>
+                
+                    <a href="/tags/PHP/">PHP<small>(7)</small></a>
+                
+                    <a href="/tags/Laravel/">Laravel<small>(1)</small></a>
+                
+                    <a href="/tags/CSS/">CSS<small>(1)</small></a>
+                
+                    <a href="/tags/Javascript/">Javascript<small>(1)</small></a>
+                
+                    <a href="/tags/Nginx/">Nginx<small>(1)</small></a>
+                
+                    <a href="/tags/%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/">编程规范<small>(3)</small></a>
+                
+                    <a href="/tags/Elasticsearch/">Elasticsearch<small>(2)</small></a>
+                
+                    <a href="/tags/Mac/">Mac<small>(2)</small></a>
+                
+                    <a href="/tags/VIM/">VIM<small>(1)</small></a>
+                
+                    <a href="/tags/%E5%8A%A0%E6%8B%BF%E5%A4%A7%E7%A8%8E%E5%8A%A1/">加拿大税务<small>(1)</small></a>
+                
+                    <a href="/tags/The-School-of-Life/">The School of Life<small>(1)</small></a>
+                
+                    <a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/">效率工具<small>(2)</small></a>
+                
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/">笔记<small>(6)</small></a>
+                
+                    <a href="/tags/%E9%94%AE%E7%9B%98/">键盘<small>(1)</small></a>
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95/">算法<small>(1)</small></a>
+                
+                    <a href="/tags/%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88/">排列组合<small>(1)</small></a>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Eric Yang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

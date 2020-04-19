@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Eric Yang">
+
+
+
+
+
+<title>排列组合算法[Python] | Eric&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Eric&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Eric&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开</a>
+        <a onclick="go_top()">返回顶部</a>
+        <!-- <a onclick="go_bottom()">底部</a> -->
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "收起"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">排列组合算法[Python]</h1>
+            
+                <div class="post-meta">
+                    
+                        <span class="post-time">
+                        2017/03/11
+                        </span>
+                    
+                    
+                        <span class="post-category"> | 发布在 :
+                            
+                                <a href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
+                            
+                        </span>
+                    
+                    
+                        <span class="post-category"> | 标签:
+                            
+                                <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+                            
+                                <a href="/tags/%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88/">排列组合</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="两种排列组合算法"><a href="#两种排列组合算法" class="headerlink" title="两种排列组合算法"></a>两种排列组合算法</h1><ul>
+<li>一个是在Edx课上看到的，一个是Python的源码</li>
+</ul>
+<h2 id="通过二进制中“1”所在位置的可能性来确定数组中的索引位置，进而求得所有排列组合"><a href="#通过二进制中“1”所在位置的可能性来确定数组中的索引位置，进而求得所有排列组合" class="headerlink" title="通过二进制中“1”所在位置的可能性来确定数组中的索引位置，进而求得所有排列组合"></a>通过二进制中“1”所在位置的可能性来确定数组中的索引位置，进而求得所有排列组合</h2><ul>
+<li>首先确定组合的数量是2的N次方个，然后循环2^N， 每个数字即代表一种可能。<ul>
+<li>比如数组长度是5的情况下，我们一共有2^5种可能，第 1 种可能 对应的二进制为 <code>0 0 0 0 1</code>，第 5 种 对应的是 <code>0 1 0 0 1</code>.</li>
+</ul>
+</li>
+<li>其次既是如何把对应位置的二进制转化成对应数组的索引位置，比如上例中 第 5 种可能 即为 5 转换的二进制：<code>0 1 0 0 1</code>，那么它对应的数据应该是数组种的 第二位和最后一位<ul>
+<li>算法中，通过 <code>(i &gt;&gt; j) % 2 == 1</code> 来确定 当前二进制位是否为 1，在此就不赘述了。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">powerSet</span><span class="params">(items)</span>:</span></span><br><span class="line">    N = len(items)</span><br><span class="line">    <span class="comment"># enumerate the 2**N possible combinations</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>**N):</span><br><span class="line">        combo = []</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(N):</span><br><span class="line">            <span class="comment"># test bit jth of integer i</span></span><br><span class="line">            <span class="comment"># test bit jth of integer i</span></span><br><span class="line">            <span class="comment"># &gt;&gt;j. move the bit we want to check to the end</span></span><br><span class="line">            <span class="comment"># %2. remove all the other bits execpt the last one</span></span><br><span class="line">            <span class="comment"># check the one we kept if it is 1 not 0,</span></span><br><span class="line">            <span class="comment"># which means we want to keep the item which on the position</span></span><br><span class="line">            <span class="comment"># example:  0 1 1 0 1</span></span><br><span class="line">            <span class="comment"># we want to check the third "1"</span></span><br><span class="line">            <span class="comment"># first move the second bit to the end(&gt;&gt;j), will be "0 0 0 1 1"</span></span><br><span class="line">            <span class="comment"># then remove all the other bits(%2), we got "0 0 0 0 1"</span></span><br><span class="line">            <span class="comment"># compare it with 1, which is true, </span></span><br><span class="line">            <span class="comment"># so we take the item with the position, which will be item[2]</span></span><br><span class="line">            <span class="keyword">if</span> (i &gt;&gt; j) % <span class="number">2</span> == <span class="number">1</span>:</span><br><span class="line">                combo.append(items[j])</span><br><span class="line">        <span class="keyword">yield</span> combo</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用python官方文档提供的combinations"><a href="#使用python官方文档提供的combinations" class="headerlink" title="使用python官方文档提供的combinations:"></a>使用python官方文档提供的<code>combinations</code>:</h2><ul>
+<li>为了更好的理解这个算法，我把它单独拿了出来，并没有导入</li>
+<li>同上一个算法，这个也是遍历找得所有的索引，然后取出数组中对应的数据</li>
+<li>之前很努力的写了英文 不想翻译了，勉强看啦</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> chain</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">powerset_generator</span><span class="params">(sets)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> subset <span class="keyword">in</span> chain.from_iterable(combinations(sets, r) <span class="keyword">for</span> r <span class="keyword">in</span> range(len(sets)+<span class="number">1</span>)):</span><br><span class="line">        <span class="keyword">yield</span> subset</span><br><span class="line">        </span><br><span class="line"><span class="comment"># the logic of this function is </span></span><br><span class="line"><span class="comment">#   set a new array with length r</span></span><br><span class="line"><span class="comment">#   loop the last element's index from i to i+n-r(n is the length of pool, r is the length of subsequence). </span></span><br><span class="line"><span class="comment">#   when hit the maximum which should be n-1, increase the last-1 element's index.</span></span><br><span class="line"><span class="comment">#   loop until the first element's index hit the maximum, </span></span><br><span class="line"><span class="comment">#   then increase the previous index, and set the last index to previous index + 1, </span></span><br><span class="line"><span class="comment">#   then back to the loop until all of the indices hit the maximum</span></span><br><span class="line"><span class="comment"># For example: iterable = [1,2,3,4,5], r = 3</span></span><br><span class="line"><span class="comment">#   (1, 2, 3)</span></span><br><span class="line"><span class="comment">#   (1, 2, 4)</span></span><br><span class="line"><span class="comment">#   (1, 2, 5) &lt;-- the last index hit the maximum</span></span><br><span class="line"><span class="comment">#   (1, 3, 4) &lt;-- increase the previous index, and set every one after to previous index + 1,</span></span><br><span class="line"><span class="comment">#   (1, 3, 5) </span></span><br><span class="line"><span class="comment">#   (1, 4, 5) &lt;-- the (last-1) index hit the maximum</span></span><br><span class="line"><span class="comment">#   (2, 3, 4)</span></span><br><span class="line"><span class="comment">#   (2, 3, 5)</span></span><br><span class="line"><span class="comment">#   (2, 4, 5)</span></span><br><span class="line"><span class="comment">#   (3, 4, 5) &lt;-- the (last-2) index hit the maximum</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">combinations</span><span class="params">(iterable, r)</span>:</span></span><br><span class="line">    </span><br><span class="line">    pool = tuple(iterable)</span><br><span class="line">    </span><br><span class="line">    n = len(pool)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> r &gt; n:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    indices = list(range(r))</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># In the "while" circle, we will start to change the indices by adding 1 consistently.</span></span><br><span class="line">    <span class="comment"># So yield the first permutation before the while start.</span></span><br><span class="line">    <span class="keyword">yield</span> tuple(pool[x] <span class="keyword">for</span> x <span class="keyword">in</span> indices)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    </span><br><span class="line">        <span class="comment"># This 'for' loop is checking whether the index has hit the maximum from the last one to the first one.</span></span><br><span class="line">        <span class="comment"># if it indices[i] &gt;= its maximum, </span></span><br><span class="line">        <span class="comment">#   set i = i-1, check the previous one</span></span><br><span class="line">        <span class="comment"># if all of the indices has hit the maximum, </span></span><br><span class="line">        <span class="comment">#   stop the `while` loop</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> reversed(range(r)):</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># let's take an example to explain why using i + n - r</span></span><br><span class="line">            <span class="comment"># pool indices: [0,1,2,3,4]</span></span><br><span class="line">            <span class="comment"># subsequence indices: [0,1,2]</span></span><br><span class="line">            <span class="comment"># so</span></span><br><span class="line">            <span class="comment">#   indices[2] can be one of [2,3,4],</span></span><br><span class="line">            <span class="comment">#   indices[1] can be one of [1,2,3],</span></span><br><span class="line">            <span class="comment">#   indices[0] can be one of [0,1,2],</span></span><br><span class="line">            <span class="comment"># and the gap of every index is n-r, like here is 5-3=2</span></span><br><span class="line">            <span class="comment"># then</span></span><br><span class="line">            <span class="comment">#   indices[2] &lt; 2+2 = i+2 = i+n-r,</span></span><br><span class="line">            <span class="comment">#   indices[1] &lt; 1+2 = i+2 = i+n-r,</span></span><br><span class="line">            <span class="comment">#   indices[0] &lt; 0+2 = i+2 = i+n-r,</span></span><br><span class="line">            <span class="keyword">if</span> indices[i] &lt; i + n - r:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># loop finished, return</span></span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Add one for current indices[i], </span></span><br><span class="line">        <span class="comment"># (we already yield the first permutation before the loop)</span></span><br><span class="line">        indices[i] += <span class="number">1</span></span><br><span class="line">        <span class="comment"># this for loop increases every indices which is after indices[i].</span></span><br><span class="line">        <span class="comment"># cause, current index has increased, and we need to confirm every one behind is initialized again.</span></span><br><span class="line">        <span class="comment"># For example: current we got i = 2, indices[i]+1 will be 3, </span></span><br><span class="line">        <span class="comment"># so the next loop should start with [1, 3, 4], not [1, 3, 3]</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>, r):</span><br><span class="line">            indices[j] = indices[j<span class="number">-1</span>] + <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">yield</span> tuple(pool[x] <span class="keyword">for</span> x <span class="keyword">in</span> indices)</span><br></pre></td></tr></table></figure>
+
+<h2 id="源地址"><a href="#源地址" class="headerlink" title="源地址"></a>源地址</h2><ul>
+<li><a href="https://cs.ericyy.me/computational-thinking/lecture-2-powerset.html" target="_blank" rel="noopener">https://cs.ericyy.me/computational-thinking/lecture-2-powerset.html</a></li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators" target="_blank" rel="noopener">按位操作符（Bitwise operators）from MDN</a></li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%AE%97%E6%B3%95/"># 算法</a>
+                    
+                        <a href="/tags/%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88/"># 排列组合</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">首页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2017-04-30-the-school-of-life.html">Notes of The School of Life</a>
+            
+            
+            <a class="next" rel="next" href="/2017-02-26-php-advance-5-development-testing.html">部署和测试工具 - PHP进阶 (5)</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Eric Yang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

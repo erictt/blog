@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "11488199",
+      "name": "Daytime mode",
+      "font_class": "-daytime-mode",
+      "unicode": "e771",
+      "unicode_decimal": 59249
+    },
+    {
+      "icon_id": "11488205",
+      "name": "night mode",
+      "font_class": "-night-mode",
+      "unicode": "e773",
+      "unicode_decimal": 59251
+    },
+    {
       "icon_id": "13253771",
       "name": "github",
       "font_class": "-github",

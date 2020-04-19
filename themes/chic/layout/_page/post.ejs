@@ -28,7 +28,7 @@
                         | <span class="post-category">
                             <i class="iconfont icon-tags"></i>
                             <% page.tags.forEach(item=>{ %>
-                                <a href="<%- url_for(item.path) %>"><%- item.name %></a>
+                                <a href="<%- url_for(item.path) %>">#<%- item.name %></a>
                             <% }) %>
                         </span>
                     <% } %>

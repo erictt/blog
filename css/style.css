@@ -675,7 +675,7 @@ header label {
   color: #fff;
 }
 .post-wrap .post-meta > span {
-  padding-right: 10px;
+  padding: 0 5px;
 }
 .post-wrap .iconfont {
   font-size: 14px;

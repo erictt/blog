@@ -12,18 +12,21 @@
                 <div class="post-meta">
                     <% if(page.date && theme.post_date_enable){ %>
                         <span class="post-time">
-                        <%- date(page.date, theme.date_format)  %>
+                          <i class="iconfont icon-calendar"></i>
+                          <%- date(page.date, theme.date_format)  %>
                         </span>
                     <% } %>
                     <% if(page.categories.length!==0 && theme.post_category_enable){ %>
-                        <span class="post-category"> | 发布在 :
+                        <span class="post-category">
+                            <i class="iconfont icon-category"></i>
                             <% page.categories.forEach(item=>{ %>
                                 <a href="<%- url_for(item.path) %>"><%- item.name %></a>
                             <% }) %>
                         </span>
                     <% } %>
                     <% if(page.tags.length!==0 && theme.post_category_enable){ %>
-                        <span class="post-category"> | 标签:
+                        <span class="post-category">
+                            <i class="iconfont icon-tags"></i>
                             <% page.tags.forEach(item=>{ %>
                                 <a href="<%- url_for(item.path) %>"><%- item.name %></a>
                             <% }) %>

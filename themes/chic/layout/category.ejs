@@ -38,7 +38,7 @@ how to add a category page:
                                     <%- category_item.name %>
                                 </h3>
                             </a>
-                            <% category_item.posts.forEach((post_item, index = 0)=>{ %>
+                            <% category_item.posts.reverse().forEach((post_item, index = 0)=>{ %>
                                 <%# console.log(index) %>
                                 <% if(++index <= 5){ %>
                                     <article class="archive-item">
@@ -48,7 +48,9 @@ how to add a category page:
                                 <% } %>
                             <% }) %>
                             <% if(category_item.posts.length > 5){ %>
-                                <a class="more-post-link" href="<%- url_for(category_item.path) %>">更多 >></a>
+                                <article class="archive-item">
+                                    <a class="more-post-link" href="<%- url_for(category_item.path) %>">更多 >></a>
+                                </article>
                             <% } %>
                         </div>
                     </div>

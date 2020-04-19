@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "68291",
+      "name": "dot1",
+      "font_class": "-dot",
+      "unicode": "e654",
+      "unicode_decimal": 58964
+    },
+    {
       "icon_id": "11488199",
       "name": "Daytime mode",
       "font_class": "-daytime-mode",

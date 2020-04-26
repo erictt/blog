@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ericyy.me/"/>
-  <updated>2020-04-19T03:31:08.709Z</updated>
+  <updated>2020-04-26T19:41:53.135Z</updated>
   <id>https://ericyy.me/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用GTD时间管理方法管理自己的生活和工作</title>
+    <link href="https://ericyy.me/gtd-plan.html"/>
+    <id>https://ericyy.me/gtd-plan.html</id>
+    <published>2020-04-26T00:00:00.000Z</published>
+    <updated>2020-04-26T19:41:53.135Z</updated>
+    
+    <content type="html"><![CDATA[<p>工具：OmniFocus + 日历</p><h2 id="设计的初衷"><a href="#设计的初衷" class="headerlink" title="设计的初衷"></a>设计的初衷</h2><ul><li>用工具管理起来所有时间。</li><li>如果任务需要特定的时间/地点完成，放到日历里。其余任务都记录在OmniFocus对应的项目里</li><li>OmniFocus里的任务按照以下维度切分：<ul><li>项目类别 – 生活日常、想学的、必须学的、英语考试、工作日常</li><li>精力需求指数 – 高、中、低</li><li>优先级 – 高、低</li></ul></li><li>这是我的OmniFocus打开后的默认界面：<ul><li><img src="https://i.imgur.com/DduHiyP.jpg" alt=""></li></ul></li><li>每天早晨起来后打开OmniFocus 查看 <code>Next</code> 即可知道接下来需要做的事情。</li></ul><h2 id="流程规划"><a href="#流程规划" class="headerlink" title="流程规划"></a>流程规划</h2><ul><li>首先收集所有想要做和需要做的事情。按照类别放到不同的项目分类下。</li><li>每天早上查看<code>Next</code>透视图，然后安排这一天的时间。有Flag的任务是优先级高的事情，应该考虑优先完成。没有Flag即为优先级低的任务。这些可以考虑在时间宽松的时候做。</li><li>在日常生活工作中，会遇到三类任务：1）已经规划好的任务；2）突然出现的任务；3）新的任务。<ul><li>正常情况下按计划好的时间安排进行即可。</li><li>当有突然出现的任务时，考虑其紧急程度和需要完成的时间。如果2分钟内可完成，马上去做。如果不能，那么分析任务的复杂程度，将其拆分放到OmniFocus中管理起来，用标签管理起来。如果是未来某天需要做的事情，放到日历里。</li><li>当有新的任务出现时，放到<code>Inbox</code>里，等到时间允许时进行分类整理。</li></ul></li><li>每周进行review。review的时候，将接下来计划做的事情加上<code>Picked</code>标签。 这样当天能做的任务，会出现在<code>Next</code>透视图里。接下来能做的事情会出现在<code>Waiting</code>透视图里。</li></ul><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="透视图"><a href="#透视图" class="headerlink" title="透视图"></a>透视图</h3><ul><li>除了OmniFocus自带的 Inbox、Projects、Tags、Forecast、Flagged、Review和Completed外，我创建了<code>Next</code>和<code>Waiting</code>两个自定义的透视图。</li><li><code>Next</code> 是用来查看今天接下来能做的事情。<ul><li>配置很简单： 只选择First Available就够了。</li></ul></li><li><code>Waiting</code> 是用来记录接下来一段时间内选择做的事情。在每周review的时候把所有希望接下来做的事情都加上<code>Picked</code>的标签。<ul><li><img src="https://i.imgur.com/8nyvah0.jpg" style="width: 300px" /></li></ul></li></ul><h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><ul><li><img src="https://i.imgur.com/apDElAV.jpg" style="width: 200px" /></li><li>我给每个标签都加上emoji，这样所有任务看起来更直观一点。比如<code>High Energy</code> 是🐝， <code>Low Energy</code> 是🐢。</li></ul><h3 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h3><ul><li><img src="https://i.imgur.com/ha7KFfW.jpg" style="width: 300px" /></li><li>项目本身是包含了短期和长期目标以及整体规划的地方。我现在是软件工程师，未来的目标是成为机器学习工程师，然后还希望能够培养弹钢琴和阅读的爱好。那么<ul><li>我<code>想学的</code>就是钢琴、哲学和阅读感兴趣的书,</li><li><code>必须学的</code>就是机器学习相关的课程以及工作相关的知识。 </li><li><code>工作日常</code>包含了我工作中的所有事情。</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      记录自己如何使用GTD的方法
+    
+    </summary>
+    
+    
+      <category term="生活随想" scheme="https://ericyy.me/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E6%83%B3/"/>
+    
+    
+      <category term="GTD" scheme="https://ericyy.me/tags/GTD/"/>
+    
+  </entry>
   
   <entry>
     <title>加拿大个税以及注册退休金计划(RRSP)和免税储蓄账户(TFSA)</title>
@@ -474,36 +497,6 @@
     
     
       <category term="笔记" scheme="https://ericyy.me/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>优化配置 Nginx 和 PHP-FPM</title>
-    <link href="https://ericyy.me/2015-09-10-optimize-nginx-and-php-fpm-configuration.html"/>
-    <id>https://ericyy.me/2015-09-10-optimize-nginx-and-php-fpm-configuration.html</id>
-    <published>2015-09-10T04:00:00.000Z</published>
-    <updated>2020-04-19T02:45:59.962Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><ul><li><p><code>server_tokens off;</code></p><p>  hide nginx server tokens</p></li><li><p><code>access_log off;</code></p><p>  reduce nginx write to disk times</p></li><li><p><code>worker_processes 1;</code></p><p>  always equals <code>grep processor /proc/cpuinfo | wc -l</code></p></li><li><p><code>worker_connections 4096;</code></p><p>  <code>ulimit -n</code> will echo the max connection of server.</p></li><li><p><code>client_body_buffer_size 32K;</code></p><p>  This handles the client buffer size, meaning any POST actions sent to Nginx.</p></li><li><p><code>client_header_buffer_size 10k;</code></p></li><li><p><code>large_client_header_buffers 4 32k;</code></p></li><li><p><code>client_max_body_size 50m;</code></p></li><li><p>Gzip Compression</p><p>  Gzip can help reduce the amount of network transfer Nginx deals with. However, be careful increasing the gzip_comp_level too high as the server will begin wasting cpu cycles.</p><pre><code>gzip             on;gzip_comp_level  2;gzip_min_length  1000;gzip_proxied     expired no-cache no-store private auth;gzip_types       text/plain application/x-javascript text/xml text/css application/xml;</code></pre></li><li><p>Timeouts</p><p>  Timeouts can also drastically improve performance.</p><p>  The <code>client_body_timeout</code> and <code>client_header_timeout</code> directives are responsible for the time a server will wait for a client body or client header to be sent after request. If neither a body or header is sent, the server will issue a 408 error or Request time out.</p><p>  The keepalive_timeout assigns the timeout for keep-alive connections with the client. Simply put, Nginx will close connections with the client after this period of time.</p><p>  Finally, the send_timeout is established not on the entire transfer of answer, but only between two operations of reading; if after this time client will take nothing, then Nginx is shutting down the connection.</p><pre><code>client_body_timeout 12;client_header_timeout 12;keepalive_timeout 15;send_timeout 10;</code></pre></li></ul><h2 id="php-fpm"><a href="#php-fpm" class="headerlink" title="php-fpm"></a>php-fpm</h2><ul><li><p><code>pm.max_spare_servers = 30;</code></p><p>  The desired maximum number of idle server processes.</p></li><li><p><code>pm.max_children = 1024;</code></p><p>  On an average each PHP-FPM process took ~75MB of RAM on my machine.</p><p>  Appropriate value for pm.max_children can be calculated as:</p><p>  pm.max_children = Total RAM dedicated to the web server / Max child process size - in my case it was 85MB</p><p>  The server has 8GB of RAM, so:</p><p>  pm.max_children = 6144MB / 85MB = 72</p><p>  assuming you are devoting 80% of available memory to PHP-FPM, the command below will suggest an approx pm.max_children value for all pools:</p><p>  <code>echo &quot;pm.max_children = $(( $(awk &#39;/MemTotal:/ { printf &quot;%d\n&quot;, ($2*0.80) }&#39; /proc/meminfo) / $(ps --no-headers -o &quot;rss,cmd&quot; -C php-fpm | awk &#39;{ sum+=$1 } END { printf (&quot;%d\n&quot;, sum/NR) }&#39;) ))&quot;</code></p></li><li><p><code>pm.max_requests = 800;</code></p><p>  The number of requests each child process should execute before respawning.</p></li></ul><p>Refers:</p><p><a href="http://myshell.co.uk/blog/2012/07/adjusting-child-processes-for-php-fpm-nginx/" target="_blank" rel="noopener">http://myshell.co.uk/blog/2012/07/adjusting-child-processes-for-php-fpm-nginx/</a></p><p><a href="https://www.digitalocean.com/community/tutorials/how-to-optimize-nginx-configuration" target="_blank" rel="noopener">https://www.digitalocean.com/community/tutorials/how-to-optimize-nginx-configuration</a></p><p><a href="http://www.hjue.me/post/php-fpm-nginx" target="_blank" rel="noopener">http://www.hjue.me/post/php-fpm-nginx</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;nginx&quot;&gt;&lt;a href=&quot;#nginx&quot; class=&quot;headerlink&quot; title=&quot;nginx&quot;&gt;&lt;/a&gt;nginx&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;server_tokens off;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;  hide ngi
-      
-    
-    </summary>
-    
-    
-      <category term="编程学习" scheme="https://ericyy.me/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="PHP" scheme="https://ericyy.me/tags/PHP/"/>
-    
-      <category term="Nginx" scheme="https://ericyy.me/tags/Nginx/"/>
     
   </entry>
   

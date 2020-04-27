@@ -60,13 +60,13 @@ keywords: VIM, Plugin, CtrlSpace, 基本命令, 插件配置
     * `3fa` → to the third `a`
     * `F`, `T` → same as `f`, `t` with reverse direction
 
-        ![line_moves](/public/img/media/line_moves-1.jpg)
+        ![line_moves](https://i.imgur.com/mb7T4yD.jpg)
 
 * manipulate a text block `<C-v>`, for example:
 
     * add prefixes to multi lines
 
-        ![rectangular-blocks](/public/img/media/rectangular-blocks.gif)
+        ![rectangular-blocks](https://i.imgur.com/CpuySci.gif)
 `
         * `^` → to the head of the line
         * `<C-v>` → Start to select a block of text
@@ -76,7 +76,7 @@ keywords: VIM, Plugin, CtrlSpace, 基本命令, 插件配置
 
     * append text to multi lines
 
-        ![append-to-many-lines](/public/img/media/append-to-many-lines.gif)
+        ![append-to-many-lines](https://i.imgur.com/Lpxw0LC.gif)
 
         * `<C-v>` → Choose lines (You can also use `j`, `<C-d>`, `/pattern`, `%`, etc.
         * `$` → move cursor to the end
@@ -84,7 +84,7 @@ keywords: VIM, Plugin, CtrlSpace, 基本命令, 插件配置
 
     * indentation
 
-        ![autoindent](/public/img/media/autoindent.gif)
+        ![autoindent](https://i.imgur.com/0W9g5UD.gif)
 
         * `J` → convert multi lines to single line
         * `<` `>` → indent to left or right
@@ -96,7 +96,7 @@ keywords: VIM, Plugin, CtrlSpace, 基本命令, 插件配置
     * `<object>` can be `w`(a word), `W`(a phrase), `s`(a sentance), `p`(a paragraph), or a special symbol like `"`, `'`, `)`, `}`, `]`.
     * For example:
 
-       ![textobjects](/public/img/media/textobjects.png)
+       ![textobjects](https://i.imgur.com/zSC9HrJ.png)
 
         * `vi"` → foo
         * `va"` → "foo"
@@ -113,7 +113,7 @@ keywords: VIM, Plugin, CtrlSpace, 基本命令, 插件配置
     * `@@` : to replay the latest register
     * For example:
 
-        ![macros](/public/img/media/macros.gif)
+        ![macros](https://i.imgur.com/8nCWZLj.gif)
 
         * In this text file, only have "1" in it, start to input: `qaYp<C-a>q`
 

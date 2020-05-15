@@ -549,7 +549,7 @@ header label {
   width: 100%;
   max-width: 780px;
   margin: 0 auto;
-  padding-top: 2rem;
+  padding-top: 1.5rem;
 }
 .post-wrap .archive-item {
   margin-left: 2rem;
@@ -975,7 +975,7 @@ header label {
 .post-nav a.prev,
 .post-nav a.next {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
   transition-property: transform;
   transition-timing-function: ease-out;
   transition-duration: 0.3s;
@@ -1076,7 +1076,7 @@ header label {
   .navbar-mobile .container {
     padding: 0;
     margin: 0;
-    line-height: 5.5em;
+    line-height: 3.5em;
     background: #fff;
   }
   .navbar-mobile .container .navbar-header {
@@ -1091,7 +1091,7 @@ header label {
   }
   .navbar-mobile .container .navbar-header .menu-toggle {
     cursor: pointer;
-    line-height: 5.5em;
+    line-height: 3.5em;
     padding: auto 2em;
   }
   .navbar-mobile .container .navbar-header .menu-toggle span {

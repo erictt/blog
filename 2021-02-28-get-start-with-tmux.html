@@ -288,10 +288,11 @@
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># easily toggle synchronization (mnemonic: e is for echo)</span><br><span class="line"># sends input to all panes in a given window.</span><br><span class="line">bind e setw synchronize-panes on</span><br><span class="line">bind E setw synchronize-panes off</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>&lt;prefix&gt; + v</code> 垂直切分窗口，<code>&lt;prefix&gt; + s</code> 水平切分窗口</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    # Create splits and vertical splits</span><br><span class="line">    bind-key v split-window -h -p 50 -c &quot;#&#123;pane_current_path&#125;&quot;</span><br><span class="line">    bind-key ^V split-window -h -p 50 -c &quot;#&#123;pane_current_path&#125;&quot;</span><br><span class="line">    bind-key s split-window -p 50 -c &quot;#&#123;pane_current_path&#125;&quot;</span><br><span class="line">    bind-key ^S split-window -p 50 -c &quot;#&#123;pane_current_path&#125;&quot;</span><br><span class="line">    &#96;&#96;&#96;    </span><br><span class="line"></span><br><span class="line">* 用鼠标来调整窗口大小、切换window&#x2F;pane</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h1 id="mouse-behavior"><a href="#mouse-behavior" class="headerlink" title="mouse behavior"></a>mouse behavior</h1><p>  set-window-option -g mouse on</p>
-<h1 id="Using-set-gq-instead-of-set-g-will-silence-the-unknown-option-error-while-still-setting-it-on-old-versions-of-tmux"><a href="#Using-set-gq-instead-of-set-g-will-silence-the-unknown-option-error-while-still-setting-it-on-old-versions-of-tmux" class="headerlink" title="Using set -gq instead of set -g will silence the unknown option error, while still setting it on old versions of tmux"></a>Using set -gq instead of set -g will silence the unknown option error, while still setting it on old versions of tmux</h1><p>  setw -gq mode-mouse on<br>  set -gq mouse-select-pane on<br>  set -gq mouse-resize-pane on<br>  set -gq mouse-select-window on</p>
-<pre><code></code></pre></li>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Create splits and vertical splits</span><br><span class="line">bind-key v split-window -h -p 50 -c &quot;#&#123;pane_current_path&#125;&quot;</span><br><span class="line">bind-key ^V split-window -h -p 50 -c &quot;#&#123;pane_current_path&#125;&quot;</span><br><span class="line">bind-key s split-window -p 50 -c &quot;#&#123;pane_current_path&#125;&quot;</span><br><span class="line">bind-key ^S split-window -p 50 -c &quot;#&#123;pane_current_path&#125;&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用鼠标来调整窗口大小、切换window/pane</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># mouse behavior</span><br><span class="line">set-window-option -g mouse on</span><br><span class="line"># Using set -gq instead of set -g will silence the unknown option error, while still setting it on old versions of tmux</span><br><span class="line">setw -gq mode-mouse on</span><br><span class="line">set -gq mouse-select-pane on</span><br><span class="line">set -gq mouse-resize-pane on</span><br><span class="line">set -gq mouse-select-window on</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>插件 <code>christoomey/vim-tmux-navigator</code>。可以直接使用快捷键<code>Ctrl + hjkl</code> 来切换pane</p>
 </li>
 </ul>
@@ -333,6 +334,7 @@
             
         </section>
 
+        <!--
         <section class="comments">
         <div id="disqus_thread"></div>
 <script>
@@ -350,13 +352,14 @@ s.setAttribute('data-timestamp', +new Date());
 </script>
 
         </section>
+        -->
     </article>
 </div>
 
         </div>
         <footer id="footer" class="footer">
     <div class="copyright">
-        <span>© Eric Yang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        <span>© Eric Yang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>, <span>Hosted on GitHub Pages</span>
     </div>
 </footer>
 

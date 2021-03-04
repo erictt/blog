@@ -86,7 +86,7 @@ Tmux 是终端的多窗口工具，跟 screen 的功能差不多，能够将当�
     bind-key ^V split-window -h -p 50 -c "#{pane_current_path}"
     bind-key s split-window -p 50 -c "#{pane_current_path}"
     bind-key ^S split-window -p 50 -c "#{pane_current_path}"
-    ```    
+    ```
 
 * 用鼠标来调整窗口大小、切换window/pane
 

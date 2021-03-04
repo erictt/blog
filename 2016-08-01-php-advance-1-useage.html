@@ -47,7 +47,7 @@
     
 
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
 </head>
 <body>
     <div class="wrapper">
@@ -59,7 +59,7 @@
                 
                     <a class="menu-item" href="/archives">归档</a>
                 
-                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
                 
                     <a class="menu-item" href="/category">分类</a>
                 
@@ -67,7 +67,7 @@
                 
                     <a class="menu-item" href="/about">关于</a>
                 
-                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
                 
                 <input id="switch_default" type="checkbox" class="switch_default">
                 <label for="switch_default" class="toggleBtn"></label>
@@ -92,7 +92,7 @@
                 
                     <a class="menu-item" href="/archives">归档</a>
                 
-                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
                 
                     <a class="menu-item" href="/category">分类</a>
                 
@@ -100,7 +100,7 @@
                 
                     <a class="menu-item" href="/about">关于</a>
                 
-                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
                 
             </div>
         </div>
@@ -251,9 +251,9 @@ use function My\Full\functionName;
 
 // 别名
 use function My\Full\functionName as func;</code></pre><h3 id="Constant"><a href="#Constant" class="headerlink" title="Constant"></a>Constant</h3><pre><code>// 引用
-use const My\Full\CONSTANT;</code></pre><h3 id="PHP-7-code"><a href="#PHP-7-code" class="headerlink" title="PHP 7+ code"></a>PHP 7+ code</h3><pre><code>use some\namespace\{ClassA, ClassB, ClassC as C};
-use function some\namespace\{fn_a, fn_b, fn_c};
-use const some\namespace\{ConstA, ConstB, ConstC};</code></pre><h3 id="全局命名空间"><a href="#全局命名空间" class="headerlink" title="全局命名空间"></a>全局命名空间</h3><ul>
+use const My\Full\CONSTANT;</code></pre><h3 id="PHP-7-code"><a href="#PHP-7-code" class="headerlink" title="PHP 7+ code"></a>PHP 7+ code</h3><pre><code>use some\namespace\&#123;ClassA, ClassB, ClassC as C&#125;;
+use function some\namespace\&#123;fn_a, fn_b, fn_c&#125;;
+use const some\namespace\&#123;ConstA, ConstB, ConstC&#125;;</code></pre><h3 id="全局命名空间"><a href="#全局命名空间" class="headerlink" title="全局命名空间"></a>全局命名空间</h3><ul>
 <li><p>引用时不加入命名空间，程序默认为与当前命名空间相同</p>
 </li>
 <li><p>没有命名空间的程序，默认在global下，例如Exception。使用时需要在前边加上”/“：</p>
@@ -261,93 +261,93 @@ use const some\namespace\{ConstA, ConstB, ConstC};</code></pre><h3 id="全局命
 namespace My\App;
 
 class Foo
-{
+&#123;
     public function doSomething()
-    {
+    &#123;
         $exception = new \Exception();
-    }
-}</code></pre></li>
+    &#125;
+&#125;</code></pre></li>
 </ul>
 <h3 id="代码设计接口化"><a href="#代码设计接口化" class="headerlink" title="代码设计接口化"></a>代码设计接口化</h3><ul>
 <li>面向对象思维中的典型应用，在开发组件时尽可能的使用接口来统一功能，能为复用者或者后继开发人员节省非常多的时间</li>
 </ul>
 <pre><code>// 实例来自PHP官方文档
 interface iTemplate
-{
+&#123;
     public function setVariable($name, $var);
     public function getHtml($template);
-}
+&#125;
 
 // Implement the interface
 class Template implements iTemplate
-{
+&#123;
     private $vars = array();
 
     public function setVariable($name, $var)
-    {
+    &#123;
         $this-&gt;vars[$name] = $var;
-    }
+    &#125;
 
     public function getHtml($template)
-    {
-        foreach($this-&gt;vars as $name =&gt; $value) {
-            $template = str_replace(&apos;{&apos; . $name . &apos;}&apos;, $value, $template);
-        }
+    &#123;
+        foreach($this-&gt;vars as $name =&gt; $value) &#123;
+            $template = str_replace(&apos;&#123;&apos; . $name . &apos;&#125;&apos;, $value, $template);
+        &#125;
 
         return $template;
-    }
-}</code></pre><h3 id="Traits-PHP-5-4"><a href="#Traits-PHP-5-4" class="headerlink" title="Traits (PHP 5.4+)"></a>Traits (PHP 5.4+)</h3><ul>
+    &#125;
+&#125;</code></pre><h3 id="Traits-PHP-5-4"><a href="#Traits-PHP-5-4" class="headerlink" title="Traits (PHP 5.4+)"></a>Traits (PHP 5.4+)</h3><ul>
 <li><p>大部分编程语言都是采用继承(extend)来实现类的扩展，Traits存在的目的是注入代码片段。</p>
 </li>
 <li><p>简单的理解就是一段需要复用的代码，我们不再复制粘贴到各个文件当中，而仅仅是使用traits的方式来引入。</p>
 </li>
 <li><p>其实include好像也可以实现同样的功能？</p>
 <pre><code>&lt;?php
-trait SayWorld {
-    public function sayHello() {
+trait SayWorld &#123;
+    public function sayHello() &#123;
         echo &apos;Hello World!&apos;;
-    }
-}
+    &#125;
+&#125;
 
-class MyHelloWorld {
+class MyHelloWorld &#123;
     use SayWorld;
-}</code></pre></li>
+&#125;</code></pre></li>
 </ul>
 <h3 id="生成器-Generator-PHP-5-5"><a href="#生成器-Generator-PHP-5-5" class="headerlink" title="生成器 (Generator) (PHP 5.5+)"></a>生成器 (Generator) (PHP 5.5+)</h3><ul>
 <li><p>不同于JS中的Generator，PHP更单纯的是个迭代器，封装了自己的状态。目的是节省性能以及降低代码复杂度。</p>
 <pre><code>&lt;?php 
 // 如下代码在执行的时候会依次输出三个值
 function myGenerator()
-{
+&#123;
     yield &apos;value1&apos;;
     yield &apos;value2&apos;;
     yield &apos;value3&apos;;
-}</code></pre></li>
+&#125;</code></pre></li>
 <li><p>常与foreach循环一起连用。使用场景如逐行读取文件，重复的计算等</p>
 <pre><code>&lt;?php
-function getLines($file) {
+function getLines($file) &#123;
     $f = fopen($file, &apos;r&apos;);
-    try {
-        while ($line = fgets($f)) {
+    try &#123;
+        while ($line = fgets($f)) &#123;
             yield $line;
-        }
-    } finally {
+        &#125;
+    &#125; finally &#123;
         fclose($f);
-    }
-}
+    &#125;
+&#125;
 
-foreach (getLines(&quot;file.txt&quot;) as $n =&gt; $line) {
+foreach (getLines(&quot;file.txt&quot;) as $n =&gt; $line) &#123;
     if ($n &gt; 5) break;
     echo $line;
-}</code></pre></li>
+&#125;</code></pre></li>
 </ul>
 <h3 id="闭包-Closures-PHP-5-3"><a href="#闭包-Closures-PHP-5-3" class="headerlink" title="闭包(Closures) (PHP 5.3+)"></a>闭包(Closures) (PHP 5.3+)</h3><ul>
 <li><p>通常会用在需要回调函数时，比如array_map()和preg_replace_callback()。</p>
 <pre><code>&lt;?php
 function cube($n)
-{
+&#123;
     return($n * $n * $n);
-}
+&#125;
 
 $a = array(1, 2, 3, 4, 5);
 $b = array_map(&quot;cube&quot;, $a);
@@ -356,49 +356,49 @@ print_r($b);</code></pre></li>
 <ul>
 <li><p>低级用法</p>
 <pre><code>&lt;?php
-function enclosePerson($name) {
-    return function ($doCommand) use ($name) {
+function enclosePerson($name) &#123;
+    return function ($doCommand) use ($name) &#123;
         return sprintf(&apos;%s, %s&apos;, $name, $doCommand);
-    };
-}
+    &#125;;
+&#125;
 // 在闭包函数中封装了字符串&apos;Clay&apos;
 $clay = enclosePerson(&apos;Clay&apos;);
 echo $clay(&apos;get me sweet tea!&apos;);</code></pre></li>
 <li><p>高级用法</p>
 <pre><code>&lt;?php
 class App
-{
+&#123;
     protected $routes = [];
     protected $responseStatus = &apos;200 OK&apos;;
     protected $responseContentType = &apos;text/html&apos;;
     protected $responseBody = &apos;Hello world&apos;;
     public function addRoute($routePath, $routeCallback)
-    {
+    &#123;
         // bindTo 将routeCallback函数追加给当前的app对象，然后将其赋值给$routePath键
         // __CLASS__ 为当前类名，并包含当前声明的命名空间，使用在此处，意为$routeCallback的作用域在当前类，
         // 想了解更多作用域相关信息请移步：http://php.net/manual/zh/closure.bindto.php#119410
         $this-&gt;routes[$routePath] = $routeCallback-&gt;bindTo($this, __CLASS__);
-    }
+    &#125;
     public function dispatch($currentPath)
-    {
-        foreach ($this-&gt;routes as $routePath =&gt; $callback) {
-            if ($routePath === $currentPath) {
+    &#123;
+        foreach ($this-&gt;routes as $routePath =&gt; $callback) &#123;
+            if ($routePath === $currentPath) &#123;
                 // 该函数是在addRoute函数执行时被追加
                 // 执行了回调函数后，赋值了responseContentType和responseBody
                 $callback();
-            }
-        }
+            &#125;
+        &#125;
         header(&apos;HTTP/1.1 &apos; . $this-&gt;responseStatus);
         header(&apos;Content-type: &apos; . $this-&gt;responseContentType);
         header(&apos;Content-length: &apos; . mb_strlen($this-&gt;responseBody));
         echo $this-&gt;responseBody;
-    }
-}
+    &#125;
+&#125;
 $app = new App();
-$app-&gt;addRoute(&apos;/users/josh&apos;, function () {
+$app-&gt;addRoute(&apos;/users/josh&apos;, function () &#123;
     $this-&gt;responseContentType = &apos;application/json;charset=utf8&apos;;
-    $this-&gt;responseBody = &apos;{&quot;name&quot;: &quot;Josh&quot;}&apos;;
-});
+    $this-&gt;responseBody = &apos;&#123;&quot;name&quot;: &quot;Josh&quot;&#125;&apos;;
+&#125;);
 $app-&gt;dispatch(&apos;/users/josh&apos;);</code></pre></li>
 </ul>
 </li>

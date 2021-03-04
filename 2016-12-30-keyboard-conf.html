@@ -47,7 +47,7 @@
     
 
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
 </head>
 <body>
     <div class="wrapper">
@@ -59,7 +59,7 @@
                 
                     <a class="menu-item" href="/archives">归档</a>
                 
-                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
                 
                     <a class="menu-item" href="/category">分类</a>
                 
@@ -67,7 +67,7 @@
                 
                     <a class="menu-item" href="/about">关于</a>
                 
-                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
                 
                 <input id="switch_default" type="checkbox" class="switch_default">
                 <label for="switch_default" class="toggleBtn"></label>
@@ -92,7 +92,7 @@
                 
                     <a class="menu-item" href="/archives">归档</a>
                 
-                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
                 
                     <a class="menu-item" href="/category">分类</a>
                 
@@ -100,7 +100,7 @@
                 
                     <a class="menu-item" href="/about">关于</a>
                 
-                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
                 
             </div>
         </div>
@@ -284,11 +284,11 @@ export $PATH</code></pre></li>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Creating load file for Flash: gh60_lufa.hex</span><br><span class="line">avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature gh60_lufa.elf gh60_lufa.hex</span><br><span class="line">dfu-programmer atmega32u4 erase --force</span><br><span class="line">Erasing flash...  Success</span><br><span class="line">Checking memory from 0x0 to 0x6FFF...  Empty.</span><br><span class="line">dfu-programmer atmega32u4 flash gh60_lufa.hex</span><br><span class="line">Checking memory from 0x0 to 0x61FF...  Empty.</span><br><span class="line">0%                            100%  Programming 0x6200 bytes...</span><br><span class="line">[&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;]  Success</span><br><span class="line">0%                            100%  Reading 0x7000 bytes...</span><br><span class="line">[&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;]  Success</span><br><span class="line">Validating...  Success</span><br><span class="line">0x6200 bytes written into 0x7000 bytes memory (87.50%).</span><br><span class="line">dfu-programmer atmega32u4 reset</span><br></pre></td></tr></table></figure>
 
 <h3 id="开始制作自己的layout"><a href="#开始制作自己的layout" class="headerlink" title="开始制作自己的layout"></a>开始制作自己的layout</h3><ul>
-<li><p><a href="http://www.keyboard-layout-editor.com/" target="_blank" rel="noopener">http://www.keyboard-layout-editor.com/</a> 生成raw data</p>
+<li><p><a target="_blank" rel="noopener" href="http://www.keyboard-layout-editor.com/">http://www.keyboard-layout-editor.com/</a> 生成raw data</p>
 </li>
-<li><p><a href="https://yang.hging.net/tkg/" target="_blank" rel="noopener">https://yang.hging.net/tkg/</a> 把raw data生成<code>.c</code>文件</p>
+<li><p><a target="_blank" rel="noopener" href="https://yang.hging.net/tkg/">https://yang.hging.net/tkg/</a> 把raw data生成<code>.c</code>文件</p>
 </li>
-<li><p>参考<a href="http://blog.dm4.tw/blog/2015/03/17/build-gh60-revchn-on-mac/" target="_blank" rel="noopener">dm4</a>设计的layout，觉得不错稍加改了下:</p>
+<li><p>参考<a target="_blank" rel="noopener" href="http://blog.dm4.tw/blog/2015/03/17/build-gh60-revchn-on-mac/">dm4</a>设计的layout，觉得不错稍加改了下:</p>
 <ul>
 <li><p>Layer 0 (Default)</p>
 <pre><code>http://www.keyboard-layout-editor.com/#/gists/907d4f327ee92188cb929044ec186c39</code></pre></li>
@@ -316,8 +316,8 @@ Fn - Layer action &gt; Momentary layer 1</code></pre></li>
 <li>`Fn+RCommand+Delete 连按几下会导致 Command 键按下事件，每次再按其他键的时候都成了Command+键的效果。现在的解决方案就是重新多按几个那个组合。。。。</li>
 </ul>
 <h3 id="Refer-to"><a href="#Refer-to" class="headerlink" title="Refer to"></a>Refer to</h3><ul>
-<li><a href="http://blog.dm4.tw/blog/2015/03/17/build-gh60-revchn-on-mac/" target="_blank" rel="noopener">http://blog.dm4.tw/blog/2015/03/17/build-gh60-revchn-on-mac/</a></li>
-<li><a href="https://www.ptt.cc/bbs/Key_Mou_Pad/M.1430970988.A.4D9.html" target="_blank" rel="noopener">https://www.ptt.cc/bbs/Key_Mou_Pad/M.1430970988.A.4D9.html</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.dm4.tw/blog/2015/03/17/build-gh60-revchn-on-mac/">http://blog.dm4.tw/blog/2015/03/17/build-gh60-revchn-on-mac/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ptt.cc/bbs/Key_Mou_Pad/M.1430970988.A.4D9.html">https://www.ptt.cc/bbs/Key_Mou_Pad/M.1430970988.A.4D9.html</a></li>
 </ul>
 
         </div>

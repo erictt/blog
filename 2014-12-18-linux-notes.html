@@ -47,7 +47,7 @@
     
 
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
 </head>
 <body>
     <div class="wrapper">
@@ -59,7 +59,7 @@
                 
                     <a class="menu-item" href="/archives">归档</a>
                 
-                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
                 
                     <a class="menu-item" href="/category">分类</a>
                 
@@ -67,7 +67,7 @@
                 
                     <a class="menu-item" href="/about">关于</a>
                 
-                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
                 
                 <input id="switch_default" type="checkbox" class="switch_default">
                 <label for="switch_default" class="toggleBtn"></label>
@@ -92,7 +92,7 @@
                 
                     <a class="menu-item" href="/archives">归档</a>
                 
-                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
                 
                     <a class="menu-item" href="/category">分类</a>
                 
@@ -100,7 +100,7 @@
                 
                     <a class="menu-item" href="/about">关于</a>
                 
-                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
                 
             </div>
         </div>
@@ -253,7 +253,7 @@
 <li><code>ssh-add ~/.ssh/id_rsa</code></li>
 </ul>
 </li>
-<li>[Auto-launching ssh-agent on msysgit] (<a href="https://help.github.com/articles/working-with-ssh-key-passphrases/#auto-launching-ssh-agent-on-msysgit" target="_blank" rel="noopener">https://help.github.com/articles/working-with-ssh-key-passphrases/#auto-launching-ssh-agent-on-msysgit</a>)</li>
+<li>[Auto-launching ssh-agent on msysgit] (<a target="_blank" rel="noopener" href="https://help.github.com/articles/working-with-ssh-key-passphrases/#auto-launching-ssh-agent-on-msysgit">https://help.github.com/articles/working-with-ssh-key-passphrases/#auto-launching-ssh-agent-on-msysgit</a>)</li>
 </ul>
 </li>
 </ul>
@@ -332,23 +332,23 @@ UserKnownHostsFile=/dev/null</code></pre></li>
 <li>Note: On OS X, have to do it separately in two commands: <code>sudo chmod -R -x * &amp;&amp; sudo chmod -R +X *</code></li>
 </ul>
 </li>
-<li><p><code>find . -type f -exec chmod -x {} \;</code></p>
+<li><p><code>find . -type f -exec chmod -x &#123;&#125; \;</code></p>
 </li>
 <li><p><code>chmod -x $(find . -type f)</code></p>
 </li>
 </ul>
 <h2 id="Batch-replace-text-inside-text-file"><a href="#Batch-replace-text-inside-text-file" class="headerlink" title="Batch replace text inside text file"></a>Batch replace text inside text file</h2><ul>
-<li><p><code>find . -type f -name \*.txt -exec sed -i.bak &#39;s|http://|rtmp://|g&#39; {} +</code></p>
+<li><p><code>find . -type f -name \*.txt -exec sed -i.bak &#39;s|http://|rtmp://|g&#39; &#123;&#125; +</code></p>
 <ul>
 <li>This will create backups of each file. I suggest you check a few to make sure it did what you want, then you can delete them using <code>find . -name \*.bak -delete</code></li>
 </ul>
 </li>
 </ul>
 <h2 id="Find-and-remove-files"><a href="#Find-and-remove-files" class="headerlink" title="Find and remove files"></a>Find and remove files</h2><ul>
-<li><p><code>find . -type f -name &quot;FILE-TO-FIND&quot; -exec rm -f {} \;</code></p>
+<li><p><code>find . -type f -name &quot;FILE-TO-FIND&quot; -exec rm -f &#123;&#125; \;</code></p>
 <ul>
 <li><code>-name &quot;FILE-TO-FIND&quot;</code> : File pattern.</li>
-<li><code>-exec rm -rf {} \;</code> : Delete all files matched by file pattern.</li>
+<li><code>-exec rm -rf &#123;&#125; \;</code> : Delete all files matched by file pattern.</li>
 <li><code>-type f</code> : Only match files and do not include directory names.</li>
 </ul>
 </li>
@@ -371,7 +371,7 @@ UserKnownHostsFile=/dev/null</code></pre></li>
 <li>Memory: <code>cat /proc/meminfo</code></li>
 </ul>
 <h2 id="Kill-all-the-process"><a href="#Kill-all-the-process" class="headerlink" title="Kill all the process"></a>Kill all the process</h2><ul>
-<li><code>ps aux | grep procname | awk &#39;{print $2}&#39; | xargs kill -9</code></li>
+<li><code>ps aux | grep procname | awk &#39;&#123;print $2&#125;&#39; | xargs kill -9</code></li>
 </ul>
 <h2 id="Git-Related"><a href="#Git-Related" class="headerlink" title="Git Related"></a>Git Related</h2><ul>
 <li>Delete remote tags.<ul>

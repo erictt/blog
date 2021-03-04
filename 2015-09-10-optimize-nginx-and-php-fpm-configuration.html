@@ -45,7 +45,7 @@
     
 
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
 </head>
 <body>
     <div class="wrapper">
@@ -57,7 +57,7 @@
                 
                     <a class="menu-item" href="/archives">归档</a>
                 
-                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
                 
                     <a class="menu-item" href="/category">分类</a>
                 
@@ -65,7 +65,7 @@
                 
                     <a class="menu-item" href="/about">关于</a>
                 
-                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
                 
                 <input id="switch_default" type="checkbox" class="switch_default">
                 <label for="switch_default" class="toggleBtn"></label>
@@ -90,7 +90,7 @@
                 
                     <a class="menu-item" href="/archives">归档</a>
                 
-                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
                 
                     <a class="menu-item" href="/category">分类</a>
                 
@@ -98,7 +98,7 @@
                 
                     <a class="menu-item" href="/about">关于</a>
                 
-                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
                 
             </div>
         </div>
@@ -273,16 +273,16 @@ send_timeout 10;</code></pre></li>
 <p>  The server has 8GB of RAM, so:</p>
 <p>  pm.max_children = 6144MB / 85MB = 72</p>
 <p>  assuming you are devoting 80% of available memory to PHP-FPM, the command below will suggest an approx pm.max_children value for all pools:</p>
-<p>  <code>echo &quot;pm.max_children = $(( $(awk &#39;/MemTotal:/ { printf &quot;%d\n&quot;, ($2*0.80) }&#39; /proc/meminfo) / $(ps --no-headers -o &quot;rss,cmd&quot; -C php-fpm | awk &#39;{ sum+=$1 } END { printf (&quot;%d\n&quot;, sum/NR) }&#39;) ))&quot;</code></p>
+<p>  <code>echo &quot;pm.max_children = $(( $(awk &#39;/MemTotal:/ &#123; printf &quot;%d\n&quot;, ($2*0.80) &#125;&#39; /proc/meminfo) / $(ps --no-headers -o &quot;rss,cmd&quot; -C php-fpm | awk &#39;&#123; sum+=$1 &#125; END &#123; printf (&quot;%d\n&quot;, sum/NR) &#125;&#39;) ))&quot;</code></p>
 </li>
 <li><p><code>pm.max_requests = 800;</code></p>
 <p>  The number of requests each child process should execute before respawning.</p>
 </li>
 </ul>
 <p>Refers:</p>
-<p><a href="http://myshell.co.uk/blog/2012/07/adjusting-child-processes-for-php-fpm-nginx/" target="_blank" rel="noopener">http://myshell.co.uk/blog/2012/07/adjusting-child-processes-for-php-fpm-nginx/</a></p>
-<p><a href="https://www.digitalocean.com/community/tutorials/how-to-optimize-nginx-configuration" target="_blank" rel="noopener">https://www.digitalocean.com/community/tutorials/how-to-optimize-nginx-configuration</a></p>
-<p><a href="http://www.hjue.me/post/php-fpm-nginx" target="_blank" rel="noopener">http://www.hjue.me/post/php-fpm-nginx</a></p>
+<p><a target="_blank" rel="noopener" href="http://myshell.co.uk/blog/2012/07/adjusting-child-processes-for-php-fpm-nginx/">http://myshell.co.uk/blog/2012/07/adjusting-child-processes-for-php-fpm-nginx/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-optimize-nginx-configuration">https://www.digitalocean.com/community/tutorials/how-to-optimize-nginx-configuration</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.hjue.me/post/php-fpm-nginx">http://www.hjue.me/post/php-fpm-nginx</a></p>
 
         </div>
 

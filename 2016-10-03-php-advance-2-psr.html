@@ -47,7 +47,7 @@
     
 
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
 </head>
 <body>
     <div class="wrapper">
@@ -59,7 +59,7 @@
                 
                     <a class="menu-item" href="/archives">归档</a>
                 
-                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
                 
                     <a class="menu-item" href="/category">分类</a>
                 
@@ -67,7 +67,7 @@
                 
                     <a class="menu-item" href="/about">关于</a>
                 
-                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
                 
                 <input id="switch_default" type="checkbox" class="switch_default">
                 <label for="switch_default" class="toggleBtn"></label>
@@ -92,7 +92,7 @@
                 
                     <a class="menu-item" href="/archives">归档</a>
                 
-                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
                 
                     <a class="menu-item" href="/category">分类</a>
                 
@@ -100,7 +100,7 @@
                 
                     <a class="menu-item" href="/about">关于</a>
                 
-                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
                 
             </div>
         </div>
@@ -251,19 +251,19 @@
 <h4 id="加载器的实现示例："><a href="#加载器的实现示例：" class="headerlink" title="加载器的实现示例："></a>加载器的实现示例：</h4><pre><code>&lt;?php
 
 function autoload($className)
-{
+&#123;
     $className = ltrim($className, &apos;\\&apos;);
     $fileName  = &apos;&apos;;
     $namespace = &apos;&apos;;
-    if ($lastNsPos = strrpos($className, &apos;\\&apos;)) {
+    if ($lastNsPos = strrpos($className, &apos;\\&apos;)) &#123;
         $namespace = substr($className, 0, $lastNsPos);
         $className = substr($className, $lastNsPos + 1);
         $fileName  = str_replace(&apos;\\&apos;, DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
-    }
+    &#125;
     $fileName .= str_replace(&apos;_&apos;, DIRECTORY_SEPARATOR, $className) . &apos;.php&apos;;
 
     require $fileName;
-}
+&#125;
 spl_autoload_register(&apos;autoload&apos;);</code></pre><h3 id="PSR-1-基本代码样式"><a href="#PSR-1-基本代码样式" class="headerlink" title="PSR-1 基本代码样式"></a>PSR-1 基本代码样式</h3><ul>
 <li><p>标签 (PHP tags)</p>
 <p>  代码必须包含在<?php ?> 或者 <?= ?>中</p>
@@ -310,30 +310,30 @@ use Symfony\Components\HttpFoundation\Request;
 use Symfony\Components\HttpFoundation\Response;
 
 class App
-{
+&#123;
     // Class defination body
-}</code></pre></li>
+&#125;</code></pre></li>
 <li><p>类 (Classes)</p>
 <p>  定义类时使用的大括号必须在新的一行。在使用<code>extends</code>或<code>implements</code>时保证在同一行</p>
 <pre><code>&lt;?php
 namespace MY\Component;
 
 class App extends YourApp
-{
+&#123;
     // Class defination body
-}</code></pre></li>
+&#125;</code></pre></li>
 <li><p>方法 (Methods)</p>
 <p>  大括号同样另起一行。参数以一个逗号加空格隔开，结尾不能有多余的空格。</p>
 <pre><code>&lt;?php
 namespace MY\Component;
 
 class App extends YourApp
-{
+&#123;
     public function doSomething($firstParam = true, $secondParam = 2)
-    {
+    &#123;
         // Method defination body
-    }
-}</code></pre></li>
+    &#125;
+&#125;</code></pre></li>
 <li><p>方法的可见行 (Visibility)</p>
 <p>  使用关键词<code>public</code>、<code>protected</code>、<code>private</code>代替之前经常使用的<code>var</code>，或者变量以下划线开始来表示私有的方式。</p>
 <p>  在定义方法为<code>abstract</code>或者<code>final</code>时，可见行关键词必须在前。</p>
@@ -341,34 +341,34 @@ class App extends YourApp
 namespace MY\Component;
 
 class App extends YourApp
-{
+&#123;
     // Static property with visibility
     public static $numberOfBirds = 0;
 
     // Method with visibility    
     public function __construct()
-    {
+    &#123;
         static::$numberOfBirds++;
-    }
-}</code></pre></li>
+    &#125;
+&#125;</code></pre></li>
 <li><p>控制结构 (Control structures)</p>
 <p>  所有的控制结构类关键词必须跟一个空格。例：<code>if</code>、<code>elseif</code>、<code>else</code>、<code>while</code>、<code>case</code>、<code>switch</code>、<code>do</code>、<code>for</code>、<code>foreach</code>、<code>try</code>、<code>catch</code>。</p>
 <pre><code>&lt;?php
 $gorilla = new \Animal\Gorilla;
 $ibis = new \Animal\StawNeckedIbis;
 
-if ($gorilla-&gt;isAwake() === true) {
-    do {
+if ($gorilla-&gt;isAwake() === true) &#123;
+    do &#123;
         $gorilla-&gt;beatChest();
-    } while($ibis-&gt;isAsleep() === true);
+    &#125; while($ibis-&gt;isAsleep() === true);
 
     $ibis-&gt;flyAway();
-}</code></pre></li>
+&#125;</code></pre></li>
 </ul>
 <h3 id="PSR-3-日志接口"><a href="#PSR-3-日志接口" class="headerlink" title="PSR-3 日志接口"></a>PSR-3 日志接口</h3><ul>
 <li><p>PSR-1和PSR-2是编码规范， PSR-3是接口定义，它定义了PHP的日志组件的一系列接口信息。</p>
 </li>
-<li><p>一个PHP的日志组件应该实现了<code>Psr\Log\LoggerInterface</code>接口的所有方法。该接口的定义参照了系统日志协议RFC5424。具体内容可参照： <a href="https://github.com/php-fig/log/blob/master/Psr/Log/LoggerInterface.php" target="_blank" rel="noopener">LoggerInterface.php</a>定义。</p>
+<li><p>一个PHP的日志组件应该实现了<code>Psr\Log\LoggerInterface</code>接口的所有方法。该接口的定义参照了系统日志协议RFC5424。具体内容可参照： <a target="_blank" rel="noopener" href="https://github.com/php-fig/log/blob/master/Psr/Log/LoggerInterface.php">LoggerInterface.php</a>定义。</p>
 </li>
 </ul>
 <h3 id="PSR-4-自动加载器"><a href="#PSR-4-自动加载器" class="headerlink" title="PSR-4 自动加载器"></a>PSR-4 自动加载器</h3><ul>

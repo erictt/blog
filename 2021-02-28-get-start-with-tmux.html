@@ -47,7 +47,7 @@
     
 
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
 </head>
 <body>
     <div class="wrapper">
@@ -59,7 +59,7 @@
                 
                     <a class="menu-item" href="/archives">归档</a>
                 
-                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
                 
                     <a class="menu-item" href="/category">分类</a>
                 
@@ -67,7 +67,7 @@
                 
                     <a class="menu-item" href="/about">关于</a>
                 
-                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
                 
                 <input id="switch_default" type="checkbox" class="switch_default">
                 <label for="switch_default" class="toggleBtn"></label>
@@ -92,7 +92,7 @@
                 
                     <a class="menu-item" href="/archives">归档</a>
                 
-                    <a class="menu-item" href="https://cs.ericyy.me" target="_blank" rel="noopener">学习笔记</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
                 
                     <a class="menu-item" href="/category">分类</a>
                 
@@ -100,7 +100,7 @@
                 
                     <a class="menu-item" href="/about">关于</a>
                 
-                    <a class="menu-item" href="https://github.com/erictt" target="_blank" rel="noopener">Github</a>
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
                 
             </div>
         </div>
@@ -231,7 +231,7 @@
 <li>Ubuntu &amp; Debian: <code>sudo apt install tmux</code></li>
 <li>CentOS: <code>sudo yum install tmux</code></li>
 <li>macOS: <code>brew install tmux</code><ul>
-<li>需要先安装 <a href="https://brew.sh/index_zh-cn" target="_blank" rel="noopener">HomeBrew</a></li>
+<li>需要先安装 <a target="_blank" rel="noopener" href="https://brew.sh/index_zh-cn">HomeBrew</a></li>
 </ul>
 </li>
 </ul>
@@ -277,7 +277,7 @@
 <li><code>&lt;prefix&gt; x</code>: 关闭当前面板</li>
 </ul>
 <p>说实话，我并没有记住所有的快捷键。对我来说，这些快捷键都太奇怪了。所以我做了很多自定义配置。</p>
-<h2 id="其他更有趣的用法"><a href="#其他更有趣的用法" class="headerlink" title="其他更有趣的用法"></a>其他更有趣的用法</h2><p><code>.tmux.conf</code> 是tmux的配置文件，默认放在<code>~</code>目录下。Github上有很多人分享自己的配置。我大概搜了下做了下调整，写了个自己的：<a href="https://github.com/erictt/dotfiles/blob/master/tmux/.tmux.conf" target="_blank" rel="noopener">https://github.com/erictt/dotfiles/blob/master/tmux/.tmux.conf</a></p>
+<h2 id="其他更有趣的用法"><a href="#其他更有趣的用法" class="headerlink" title="其他更有趣的用法"></a>其他更有趣的用法</h2><p><code>.tmux.conf</code> 是tmux的配置文件，默认放在<code>~</code>目录下。Github上有很多人分享自己的配置。我大概搜了下做了下调整，写了个自己的：<a target="_blank" rel="noopener" href="https://github.com/erictt/dotfiles/blob/master/tmux/.tmux.conf">https://github.com/erictt/dotfiles/blob/master/tmux/.tmux.conf</a></p>
 <ul>
 <li><p>激活快捷键修改成了<code>Ctrl+a</code></p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">unbind C-b</span><br><span class="line">set -g prefix C-a</span><br><span class="line">bind a send-prefix</span><br></pre></td></tr></table></figure></li>
@@ -288,7 +288,7 @@
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># easily toggle synchronization (mnemonic: e is for echo)</span><br><span class="line"># sends input to all panes in a given window.</span><br><span class="line">bind e setw synchronize-panes on</span><br><span class="line">bind E setw synchronize-panes off</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>&lt;prefix&gt; + v</code> 垂直切分窗口，<code>&lt;prefix&gt; + s</code> 水平切分窗口</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    # Create splits and vertical splits</span><br><span class="line">    bind-key v split-window -h -p 50 -c &quot;#&#123;pane_current_path&#125;&quot;</span><br><span class="line">    bind-key ^V split-window -h -p 50 -c &quot;#&#123;pane_current_path&#125;&quot;</span><br><span class="line">    bind-key s split-window -p 50 -c &quot;#&#123;pane_current_path&#125;&quot;</span><br><span class="line">    bind-key ^S split-window -p 50 -c &quot;#&#123;pane_current_path&#125;&quot;</span><br><span class="line">    &#96;&#96;&#96;    </span><br><span class="line"></span><br><span class="line">* 用鼠标来调整窗口大小、切换window&#x2F;pane</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    # Create splits and vertical splits</span><br><span class="line">    bind-key v split-window -h -p 50 -c &quot;#&#123;pane_current_path&#125;&quot;</span><br><span class="line">    bind-key ^V split-window -h -p 50 -c &quot;#&#123;pane_current_path&#125;&quot;</span><br><span class="line">    bind-key s split-window -p 50 -c &quot;#&#123;pane_current_path&#125;&quot;</span><br><span class="line">    bind-key ^S split-window -p 50 -c &quot;#&#123;pane_current_path&#125;&quot;</span><br><span class="line">    &#96;&#96;&#96;    </span><br><span class="line"></span><br><span class="line">* 用鼠标来调整窗口大小、切换window&#x2F;pane</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h1 id="mouse-behavior"><a href="#mouse-behavior" class="headerlink" title="mouse behavior"></a>mouse behavior</h1><p>  set-window-option -g mouse on</p>
 <h1 id="Using-set-gq-instead-of-set-g-will-silence-the-unknown-option-error-while-still-setting-it-on-old-versions-of-tmux"><a href="#Using-set-gq-instead-of-set-g-will-silence-the-unknown-option-error-while-still-setting-it-on-old-versions-of-tmux" class="headerlink" title="Using set -gq instead of set -g will silence the unknown option error, while still setting it on old versions of tmux"></a>Using set -gq instead of set -g will silence the unknown option error, while still setting it on old versions of tmux</h1><p>  setw -gq mode-mouse on<br>  set -gq mouse-select-pane on<br>  set -gq mouse-resize-pane on<br>  set -gq mouse-select-window on</p>
 <pre><code></code></pre></li>
@@ -297,11 +297,11 @@
 </ul>
 <h2 id="CheatSheet"><a href="#CheatSheet" class="headerlink" title="CheatSheet"></a>CheatSheet</h2><p>忘记按键的话，可以在这个网站上搜索。</p>
 <ul>
-<li><a href="https://tmuxcheatsheet.com/" target="_blank" rel="noopener">https://tmuxcheatsheet.com/</a></li>
+<li><a target="_blank" rel="noopener" href="https://tmuxcheatsheet.com/">https://tmuxcheatsheet.com/</a></li>
 </ul>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://github.com/tmux/tmux/wiki/Getting-Started" target="_blank" rel="noopener">https://github.com/tmux/tmux/wiki/Getting-Started</a></li>
-<li><a href="https://linuxize.com/post/getting-started-with-tmux/" target="_blank" rel="noopener">https://linuxize.com/post/getting-started-with-tmux/</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/tmux/tmux/wiki/Getting-Started">https://github.com/tmux/tmux/wiki/Getting-Started</a></li>
+<li><a target="_blank" rel="noopener" href="https://linuxize.com/post/getting-started-with-tmux/">https://linuxize.com/post/getting-started-with-tmux/</a></li>
 </ul>
 
         </div>

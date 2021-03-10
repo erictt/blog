@@ -4,8 +4,8 @@ title: Linux 常用命令(2) - 重定向输出和输入, 查看网络端口, 压
 category: 编程学习
 tags: [Linux, stdin, stdout, stderr, netcat, tar, gzip]
 date: 2021-03-10
-description: Linux 常用命令, tcpdump, netcat, tar, gzip
-keywords: tcpdump, netcat, tar, gzip, stdout, stdin, stderr
+description: Linux 常用命令, netcat, tar, gzip
+keywords: netcat, tar, gzip, stdout, stdin, stderr
 ---
 
 ## 重定向输出和输入

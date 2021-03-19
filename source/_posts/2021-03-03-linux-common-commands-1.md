@@ -2,10 +2,10 @@
 layout: post
 title: Linux 常用命令(1) - 检查本地端口, 查看进程, 文件
 category: 编程学习
-tags: [Linux, ps, netstat, ss, lsof, less, cat, kill]
+tags: [Linux, ps, netstat, ss, lsof, less, cat, kill, tee]
 date: 2021-03-03
-description: Linux 常用命令, ps, netstat, ss, lsof, less, cat, kill
-keywords: ps, netstat, ss, lsof, less, cat, kill
+description: Linux 常用命令, ps, netstat, ss, lsof, less, cat, kill, tee
+keywords: ps, netstat, ss, lsof, less, cat, kill, tee
 ---
 
 ## 检查本地端口
@@ -138,10 +138,14 @@ keywords: ps, netstat, ss, lsof, less, cat, kill
 
 ### 查看进程 - ps
 
-* `ps aux`
+* `ps aux` - BSD风格，没有 `-`
     * `a` - 显示所有用户的所有的进程
-    * `u` - 提供更多细节
-    * `x` - 显示所有程序，不以终端来区分
+    * `u` - 提供更多细节，包括进程所属用户，以及内存使用
+    * `x` - 显示所有程序，包括没有 attacth 终端的
+
+* `ps -elf` - UNIX风格，一个 `-`。（其实还有GNU风格，是两个`-`）
+    * `-l` / `-f` - 类似于`u`，显示更多细节，只是侧重不同。两个参数都包含了PPID(父进程ID)
+    * `-e` - 类似于 `x`，显示所有程序
     
 * 示例：
 
@@ -168,7 +172,7 @@ keywords: ps, netstat, ss, lsof, less, cat, kill
     * `STAT` - 进程状态 Z (僵死), S (中断), R (运行), T (停止), D (不可中断)
     * `START` - 进程开始运行时间
 
-### 重启/杀死进程 - kill
+### 重启/杀死进程 - kill / pkill
 
 * `kill [OPTIONS] [PID]...`
 * 常用参数：
@@ -183,6 +187,7 @@ keywords: ps, netstat, ss, lsof, less, cat, kill
 * 复合用法：
     * `kill -9 $(pidof mongod)`
         * `pidof mongod` 会输出 mongod的PID, 作为变量传递给 kill命令
+* 更多信号： https://en.wikipedia.org/wiki/Signal_(IPC)
 
 ## 查看文件
 
@@ -205,6 +210,30 @@ keywords: ps, netstat, ss, lsof, less, cat, kill
 * 常用：
     * `cat -n /var/log/auth.log` 显示行数
     * `cat -b /var/log/auth.log` 过滤空行后，显示行数。会覆盖 `-n`
+
+## 写入文件
+
+### echo
+
+应该是最简单的输出命令了。类似java/python的print方法。
+
+* `echo "hello world" > file.txt`
+
+### tee
+
+从标准输入流中读取并同时写入多个文件。
+
+常用参数：
+
+* `-a` - 以追加的方式写入，不覆盖文件已有文本。
+
+常用命令：
+
+* `command | tee file1.out file2.out file3.out`
+
+一个特殊的使用场景：
+
+当使用 `echo` 输入文本到 没有权限的文件时：`sudo echo "text" >> /etc/hello.conf` 是会失败的。因为重定向 `>` 不是 sudo 执行的。这个时候可以使用 `tee` 解决： `echo "text" | sudo tee -a /etc/hello.conf`
 
 ## 其他
 

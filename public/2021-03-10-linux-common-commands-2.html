@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Eric Yang">
+
+
+
+    <meta name="keywords" content="Linux 常用命令, netcat, tar, gzip">
+
+
+    <meta name="keywords" content="netcat, tar, gzip, stdout, stdin, stderr">
+
+
+<title>Linux 常用命令(2) - 重定向输出和输入, 查看网络端口, 压缩和解压缩 | Eric&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Eric&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Eric&#39;s Blog</a>
+                    <i class='iconfont icon-dot'></i>
+                    <a id="mobile-toggle-theme"><i class='iconfont icon-daytime-mode'></i></a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <i class="iconfont icon-menu"></i>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开</a>
+        <a onclick="go_top()">返回顶部</a>
+        <!-- <a onclick="go_bottom()">底部</a> -->
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+            expand_toc()
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "收起"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Linux 常用命令(2) - 重定向输出和输入, 查看网络端口, 压缩和解压缩</h1>
+            
+                <div class="post-meta">
+                    
+                        <span class="post-time">
+                          <i class="iconfont icon-calendar"></i>
+                          2021/03/10
+                        </span>
+                    
+                    
+                        | <span class="post-category">
+                            <i class="iconfont icon-category"></i>
+                            
+                                <a href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
+                            
+                        </span>
+                    
+                    
+                        | <span class="post-category">
+                            <i class="iconfont icon-tags"></i>
+                            
+                                <a href="/tags/Linux/">#Linux</a>
+                            
+                                <a href="/tags/stdin/">#stdin</a>
+                            
+                                <a href="/tags/stdout/">#stdout</a>
+                            
+                                <a href="/tags/stderr/">#stderr</a>
+                            
+                                <a href="/tags/netcat/">#netcat</a>
+                            
+                                <a href="/tags/tar/">#tar</a>
+                            
+                                <a href="/tags/gzip/">#gzip</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="重定向输出和输入"><a href="#重定向输出和输入" class="headerlink" title="重定向输出和输入"></a>重定向输出和输入</h2><p>在 Bash 或者其他Linux shell里，标准的I&#x2F;O流分为：</p>
+<ul>
+<li><code>0</code> - <code>stdin</code> 标准输入</li>
+<li><code>1</code> - <code>stdout</code> 标准输出</li>
+<li><code>2</code> - <code>stderr</code> 标准错误</li>
+</ul>
+<p>从标准输出开始。标准输出是程序正常输出的内容。默认情况下，所有信息都会输出到屏幕上。重定向输出就是捕获程序的输出然后重定向到另一个程序或者文件中。一般用 <code>n&gt;</code> 来实现。<code>n</code> 可以是 <code>0</code>, <code>1</code>, 或者 <code>2</code>。 省略<code>n</code> 默认为 <code>1</code> 即标准输出。</p>
+<p>举个例子， <code>command &gt; file</code> 就是将命令 <code>command</code> 执行的结果输出到文件 <code>file</code> 里。 这个命令也等同于 <code>command 1&gt; file</code>。 同理，<code>command 2&gt; file</code> 就是将命令执行输出到错误重定向到文件里。 如果希望过滤输出，可以重定向到 <code>/dev/null</code> 来实现。比如， <code>command 2&gt; /dev/null</code>，命令执行结果中的错误信息就会被过滤掉。</p>
+<p>那么如何将标准输出和标准错误重定向到一个文件里呢？ <code>command &amp;&gt; file</code>，<code>&amp;</code> 表示同时将 <code>1</code> 和 <code>2</code> 输出到文件里。 还有一种方式可以实现同样的效果：<code>command &gt; file 2&gt;&amp;1</code>，追加 <code>2&gt;&amp;1</code> 是将命令中的输出错误重定向到标准输出中。</p>
+<p>在日常使用中，我们也经常碰到 <code>&gt;&gt;</code> 。不同于 <code>&gt; file</code> 每次执行都会覆盖整个文件， <code>&gt;&gt;</code> 会以追加的方式输出内容到文件。</p>
+<p>最后来说说标准输入 <code>&lt;</code>。用法：<code>command &lt; input-file</code>，是将 <code>input-file</code> 中的内容作为输入提供给 <code>command</code>。这个命令等同于 <code>command 0&lt; input-file</code>。举个例子，<code>grep &quot;ERROR&quot; &lt; /var/log/messages</code>，将文件 <code>/var/log/messages</code> 作为命令 <code>grep</code> 的输入。其效果类似于 <code>cat /var/log/message | grep &quot;ERROR&quot;</code>。</p>
+<h2 id="查看网络端口"><a href="#查看网络端口" class="headerlink" title="查看网络端口"></a>查看网络端口</h2><h3 id="netcat-nc"><a href="#netcat-nc" class="headerlink" title="netcat(nc)"></a>netcat(nc)</h3><p>netcat 是一个使用TCP或者UDP协议读写数据的工具。可以用来检测IP地址或域名端口是否开放。</p>
+<ul>
+<li><p><code>nc -z -v 10.10.8.8 20-80</code></p>
+<ul>
+<li>扫描 10.10.8.8 的TCP端口 20-80，查看哪些是开放的。</li>
+<li><code>-v</code> verbose，输出更多的信息</li>
+<li><code>-z</code> 仅检测开放端口</li>
+</ul>
+</li>
+<li><p><code>nc -z -v 10.10.8.8 20-80 2&gt;&amp;1 | grep succeeded</code></p>
+<ul>
+<li>2&gt;&amp;1 重定向标准输出的错误信息到标准输出中。</li>
+<li>然后通过 grep succeeded来过滤失败的信息。</li>
+</ul>
+</li>
+<li><p><code>nc -z -v -u 10.10.8.8 80</code></p>
+<ul>
+<li><code>-u</code> 仅检测UDP协议</li>
+</ul>
+</li>
+</ul>
+<h2 id="压缩和解压缩"><a href="#压缩和解压缩" class="headerlink" title="压缩和解压缩"></a>压缩和解压缩</h2><h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3><ul>
+<li>压缩<ul>
+<li><code>tar -czf archive-name.tar.gz file1 file2 dir1...</code><ul>
+<li><code>-c</code> - 表明创建压缩文件</li>
+<li><code>-z</code> - 压缩方式为 gzip</li>
+<li><code>-f</code> - 指定压缩包文件名</li>
+<li><code>file1 file2 dir1...</code> - 被压缩的文件列表或文件目录</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>解压缩<ul>
+<li><code>tar -xvf archive.tar.gz -C /home/linuxize/files</code><ul>
+<li><code>-x</code> - 表明解压缩</li>
+<li><code>-v</code> - 打印更多的详细信息</li>
+<li><code>-f archive.tar.gz</code> - 压缩包文件名</li>
+<li><code>-C /home/linuxize/files</code> - 解压到指定目录</li>
+</ul>
+</li>
+<li><code>tar -xf archive.tar.gz file1 file2</code><ul>
+<li>仅解压文件 file1 和file2</li>
+</ul>
+</li>
+<li><code>tar -xf archive.tar.gz --wildcards &#39;*.js&#39;</code><ul>
+<li>用通配符来需要指定解压的文件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>列出压缩包里的文件名<ul>
+<li><code>tar -tf archive.tar.gz</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="gzip"><a href="#gzip" class="headerlink" title="gzip"></a>gzip</h3><ul>
+<li><code>gzip -d file.gz</code><ul>
+<li>解压到当前目录，并删掉压缩包</li>
+<li>指定 <code>-k</code> 可以避免压缩包被删除</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://linuxize.com/post/bash-redirect-stderr-stdout/">https://linuxize.com/post/bash-redirect-stderr-stdout/</a></li>
+<li><a target="_blank" rel="noopener" href="https://tldp.org/LDP/abs/html/io-redirection.html">https://tldp.org/LDP/abs/html/io-redirection.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://linuxize.com/post/tcpdump-command-in-linux/">https://linuxize.com/post/tcpdump-command-in-linux/</a></li>
+<li><a target="_blank" rel="noopener" href="https://linuxize.com/post/how-to-create-tar-gz-file/">https://linuxize.com/post/how-to-create-tar-gz-file/</a></li>
+<li><a target="_blank" rel="noopener" href="https://linuxize.com/post/netcat-nc-command-with-examples/">https://linuxize.com/post/netcat-nc-command-with-examples/</a></li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Linux/"># Linux</a>
+                    
+                        <a href="/tags/stdin/"># stdin</a>
+                    
+                        <a href="/tags/stdout/"># stdout</a>
+                    
+                        <a href="/tags/stderr/"># stderr</a>
+                    
+                        <a href="/tags/netcat/"># netcat</a>
+                    
+                        <a href="/tags/tar/"># tar</a>
+                    
+                        <a href="/tags/gzip/"># gzip</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">首页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021-03-18-linux-common-commands-3.html">Linux 常用命令(3) - 检查网络流量</a>
+            
+            
+            <a class="next" rel="next" href="/2021-03-03-linux-common-commands-1.html">Linux 常用命令(1) - 检查本地端口, 查看进程, 文件</a>
+            
+        </section>
+
+        <!--
+        <section class="comments">
+        <div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+    this.page.url = 'https://ericyy.me/2021-03-10-linux-common-commands-2.html';
+    this.page.identifier = '2021-03-10-linux-common-commands-2.html';
+    this.page.title = 'Linux 常用命令(2) - 重定向输出和输入, 查看网络端口, 压缩和解压缩';
+};
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://ericyy.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+        </section>
+        -->
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Eric Yang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>, <span>Hosted on GitHub Pages</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

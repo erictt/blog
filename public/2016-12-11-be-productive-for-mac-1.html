@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Eric Yang">
+
+
+
+
+    <meta name="keywords" content="Alfred 3, Flycut, Flycut, f.lux, Spectacle, CheatSheets, Homebrew, Aria2, Sublime Text 3, iTerm2, Charles, Dash">
+
+
+<title>提升生产效率的工具集锦(APP) | Eric&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Eric&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Eric&#39;s Blog</a>
+                    <i class='iconfont icon-dot'></i>
+                    <a id="mobile-toggle-theme"><i class='iconfont icon-daytime-mode'></i></a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <i class="iconfont icon-menu"></i>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开</a>
+        <a onclick="go_top()">返回顶部</a>
+        <!-- <a onclick="go_bottom()">底部</a> -->
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+            expand_toc()
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "收起"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">提升生产效率的工具集锦(APP)</h1>
+            
+                <div class="post-meta">
+                    
+                        <span class="post-time">
+                          <i class="iconfont icon-calendar"></i>
+                          2016/12/11
+                        </span>
+                    
+                    
+                        | <span class="post-category">
+                            <i class="iconfont icon-category"></i>
+                            
+                                <a href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E6%83%B3/">生活随想</a>
+                            
+                        </span>
+                    
+                    
+                        | <span class="post-category">
+                            <i class="iconfont icon-tags"></i>
+                            
+                                <a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/">#效率工具</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="按键说明"><a href="#按键说明" class="headerlink" title="按键说明"></a>按键说明</h2><ul>
+<li>⌘ – Command Key</li>
+<li>⇥ – Tab Key</li>
+<li>⌃ – Control Key</li>
+<li>⌥ – Option Key</li>
+<li>⇧ – Shift Key</li>
+<li>⏎ – Return Key</li>
+<li>← Left Arrow Key</li>
+<li>→ Right Arrow Key</li>
+</ul>
+<h2 id="APPS"><a href="#APPS" class="headerlink" title="APPS"></a>APPS</h2><h3 id="Alfred-3"><a href="#Alfred-3" class="headerlink" title="Alfred 3"></a>Alfred 3</h3><p>强大的启动器, 拥有各种快捷入口, 不仅仅是用来代替Spotlight。增强的workflow更让繁琐的操作变得简单起来。</p>
+<ul>
+<li>下载: <a target="_blank" rel="noopener" href="https://www.alfredapp.com/">官网</a></li>
+<li>Powerpack 需要付费, £19起</li>
+<li>可设置启动命令, 本人使用 <code>⌥+⌘</code>, 好像是默认的。</li>
+<li>本人会禁用掉Spotlight及其索引功能来提升性能:<ul>
+<li>打开 系统设置 - Spotlight</li>
+<li>取消掉所有在Spotlight中的搜索结果，以及建议查找的功能</li>
+<li>左下角选择键盘快捷键, 取消两个已选中两个搜索</li>
+</ul>
+</li>
+</ul>
+<h3 id="Flycut"><a href="#Flycut" class="headerlink" title="Flycut"></a>Flycut</h3><p>剪切板管理器</p>
+<ul>
+<li>下载: <a target="_blank" rel="noopener" href="http://itunes.apple.com/us/app/flycut-clipboard-manager/id442160987?mt=12">App Store</a> &#x2F; <a target="_blank" rel="noopener" href="https://github.com/TermiT/Flycut">Github</a></li>
+<li>快捷键：<code>⇧+⌘+p</code>, 可以不停地按<code>p</code>来切换，或者使用<code>← →</code>方向键</li>
+<li>注：Alfred 3也提供了剪切板的功能，个人觉得不够便捷，在使用Flycut的时候，可以考虑给关了。</li>
+<li>可设置为开机启动</li>
+</ul>
+<h3 id="f-lux"><a href="#f-lux" class="headerlink" title="f.lux"></a>f.lux</h3><p>护眼神器。根据一天的时间来调节屏幕的亮度，在晚上屏幕会变成暖色调。</p>
+<ul>
+<li>下载： <a target="_blank" rel="noopener" href="https://justgetflux.com/">官网</a></li>
+<li>可设置为开机启动</li>
+</ul>
+<h3 id="Spectacle"><a href="#Spectacle" class="headerlink" title="Spectacle"></a>Spectacle</h3><p>快捷键调节窗口大小，比如: <code>⌥+⌘+F</code>全屏, <code>⌃+⌘+←</code> 左三分之一屏</p>
+<ul>
+<li>下载: <a target="_blank" rel="noopener" href="https://www.spectacleapp.com/">官网</a></li>
+<li>可设置为开机启动</li>
+</ul>
+<h3 id="CheatSheets"><a href="#CheatSheets" class="headerlink" title="CheatSheets"></a>CheatSheets</h3><p>按住<code>⌘</code>显示当前应用的所有快捷键</p>
+<ul>
+<li>下载: <a target="_blank" rel="noopener" href="https://cheatsheetapp.com/CheatSheet/?lang=en">官网</a></li>
+</ul>
+<h3 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h3><p>快速安装软件的管理器</p>
+<ul>
+<li>下载: <a target="_blank" rel="noopener" href="http://brew.sh/">官网</a></li>
+<li>安装: <code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code></li>
+</ul>
+<h3 id="Aria2"><a href="#Aria2" class="headerlink" title="Aria2"></a>Aria2</h3><p>实现百度云, 115, 迅雷离线等满速下载。Aria2是个命令行管理工作，所以默认安装后需要做一些配置才能运行。不想折腾的可直接下载<a target="_blank" rel="noopener" href="https://github.com/yangshun1029">yangshun1029</a>封装好的<a target="_blank" rel="noopener" href="https://github.com/yangshun1029/aria2gui">Aria2gui</a>.</p>
+<p>以下是各种折腾的方案。</p>
+<ul>
+<li><p>下载: <a target="_blank" rel="noopener" href="https://aria2.github.io/">官网</a> ／ 安装: <code>brew install aria2</code></p>
+</li>
+<li><p>使用方法有三种。命令行、Web+命令行、Alfred Workflow。</p>
+<ul>
+<li>命令行方面使用可见<a target="_blank" rel="noopener" href="https://aria2.github.io/">官方文档 </a></li>
+<li>Web和Alfred Workflow管理见下文介绍</li>
+</ul>
+</li>
+<li><p>嵌入式 Chrome 插件: <a target="_blank" rel="noopener" href="https://github.com/acgotaku/115"><code>115</code></a>, <a target="_blank" rel="noopener" href="https://github.com/acgotaku/BaiduExporter"><code>百度云</code></a>。 这两个由<a target="_blank" rel="noopener" href="https://github.com/acgotaku/"><code>雪月秋水君</code></a>开发的插件可以直接嵌入百度云和115网盘网页内，实现点击即可转到Aria2下载，非常方便。</p>
+</li>
+<li><p>Web 管理界面:</p>
+<ol>
+<li>首先命令行启动 <code>aria2c --enable-rpc --rpc-listen-all</code></li>
+<li><a target="_blank" rel="noopener" href="http://binux.github.io/yaaw/demo/">http://binux.github.io/yaaw/demo/</a><ul>
+<li>需要设置JSON-RPC Path: <code>http://localhost:6800/jsonrpc</code></li>
+</ul>
+</li>
+<li>使用<a target="_blank" rel="noopener" href="https://github.com/acgotaku/"><code>雪月秋水君</code></a>开发的Chrome插件: <a target="_blank" rel="noopener" href="https://github.com/acgotaku/YAAW-for-Chrome">YAAW</a></li>
+</ol>
+</li>
+<li><p>Workflow for Alfred: <a target="_blank" rel="noopener" href="https://github.com/Wildog/Ariafred">https://github.com/Wildog/Ariafred</a></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://wil.dog/ariafred/">官方文档</a></li>
+<li>注: Workflow 属于powerpack付费功能</li>
+<li>常用命令:<ul>
+<li>添加任务: 输入 <code>add</code> 然后追加任务地址<ul>
+<li>BT种子任务需要执行文件动作，然后选择&#96;Add BT do…load to Aria2</li>
+</ul>
+</li>
+<li>移除任务: 输入 <code>rm</code> 然后选择任务后 <code>回车</code></li>
+<li>暂停&#x2F;恢复任务: 输入 <code>pause</code>&#x2F;<code>resume</code> 然后选择任务后 <code>回车</code></li>
+<li>清除所有任务: 输入<code>clear</code> 然后 <code>回车</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>配置</p>
+<ul>
+<li><p>个人觉得本地运行没必要搞太复杂就不再多写了。有兴趣的可参照<a target="_blank" rel="noopener" href="https://github.com/acgotaku/"><code>雪月秋水君</code></a>提供的<code>aria2.conf</code>:</p>
+<pre><code>  #用户名
+  #rpc-user=user
+  #密码
+  #rpc-passwd=passwd
+  #上面的认证方式不建议使用,建议使用下面的token方式
+  #设置加密的密钥
+  #rpc-secret=token
+  #允许rpc
+  enable-rpc=true
+  #允许所有来源, web界面跨域权限需要
+  rpc-allow-origin-all=true
+  #允许外部访问，false的话只监听本地端口
+  rpc-listen-all=true
+  #RPC端口, 仅当默认端口被占用时修改
+  #rpc-listen-port=6800
+  #最大同时下载数(任务数), 路由建议值: 3
+  max-concurrent-downloads=5
+  #断点续传
+  continue=true
+  #同服务器连接数
+  max-connection-per-server=5
+  #最小文件分片大小, 下载线程数上限取决于能分出多少片, 对于小文件重要
+  min-split-size=10M
+  #单文件最大线程数, 路由建议值: 5
+  split=10
+  #下载速度限制
+  max-overall-download-limit=0
+  #单文件速度限制
+  max-download-limit=0
+  #上传速度限制
+  max-overall-upload-limit=0
+  #单文件速度限制
+  max-upload-limit=0
+  #断开速度过慢的连接
+  #lowest-speed-limit=0
+  #验证用，需要1.16.1之后的release版本
+  #referer=*
+  #文件保存路径, 默认为当前启动位置
+  dir=/Users/xxx/Downloads
+  #文件缓存, 使用内置的文件缓存, 如果你不相信Linux内核文件缓存和磁盘内置缓存时使用, 需要1.16及以上版本
+  #disk-cache=0
+  #另一种Linux文件缓存方式, 使用前确保您使用的内核支持此选项, 需要1.15及以上版本(?)
+  #enable-mmap=true
+  #文件预分配, 能有效降低文件碎片, 提高磁盘性能. 缺点是预分配时间较长
+  #所需时间 none &lt; falloc ? trunc « prealloc, falloc和trunc需要文件系统和内核支持
+  file-allocation=prealloc
+</code></pre>
+</li>
+<li><p>在启动Aria2的时候别忘了加上配置的绝对路径，例: <code>aria2c --conf-path=&quot;/Users/username/aria2.conf&quot;</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li>1Password - 最好用的密码管理软件</li>
+<li>PDF Expert - PDF编辑阅读器</li>
+<li>Fantisical2 - 增强版日历，集成了提醒事项</li>
+<li>MWeb - markdown编辑软件，可实时预览，且支持保存到evernote，导出为pdf、docx等格式。此外还支持直接在Wordpress、Mediun等网站发布。</li>
+<li>Typora - 超简洁等markdown编辑软件，单一窗口，实时预览。</li>
+<li>OmniFocus 2 - 最强大的GTD管理工具</li>
+<li>Pandoc -  命令行文件格式互转工具，格式包括docx,markdown, epub, pdf等，官网：<a target="_blank" rel="noopener" href="http://pandoc.org/">http://pandoc.org/</a></li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/"># 效率工具</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">首页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2016-12-30-keyboard-conf.html">Mac上配置GH60键盘</a>
+            
+            
+            <a class="next" rel="next" href="/2016-11-17-elasticsearch-01-getstart.html">Get Start - Elasticsearch 学习实践 (1)</a>
+            
+        </section>
+
+        <!--
+        <section class="comments">
+        <div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+    this.page.url = 'https://ericyy.me/2016-12-11-be-productive-for-mac-1.html';
+    this.page.identifier = '2016-12-11-be-productive-for-mac-1.html';
+    this.page.title = '提升生产效率的工具集锦(APP)';
+};
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://ericyy.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+        </section>
+        -->
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Eric Yang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>, <span>Hosted on GitHub Pages</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Eric Yang">
+
+
+
+    <meta name="keywords" content="心即理：阳明心学的逻辑起点，知行合一：阳明心学的实践品格 格物致知：知识论域的实践转向 本体与主体性的自我建立 本心的自我开显与自我表达 心外无物：生命境界的无限圆融 天泉证道“四句教”阳明学派的分化 心体的自我澄明与价值实现">
+
+
+    <meta name="keywords" content="王阳明, 心学, 心即理, 知行合一, 格物致知">
+
+
+<title>浙江大学公开课：王阳明心学[董平] 笔记 | Eric&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Eric&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Eric&#39;s Blog</a>
+                    <i class='iconfont icon-dot'></i>
+                    <a id="mobile-toggle-theme"><i class='iconfont icon-daytime-mode'></i></a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <i class="iconfont icon-menu"></i>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开</a>
+        <a onclick="go_top()">返回顶部</a>
+        <!-- <a onclick="go_bottom()">底部</a> -->
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+            expand_toc()
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "收起"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">浙江大学公开课：王阳明心学[董平] 笔记</h1>
+            
+                <div class="post-meta">
+                    
+                        <span class="post-time">
+                          <i class="iconfont icon-calendar"></i>
+                          2017/09/10
+                        </span>
+                    
+                    
+                        | <span class="post-category">
+                            <i class="iconfont icon-category"></i>
+                            
+                                <a href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                            
+                        </span>
+                    
+                    
+                        | <span class="post-category">
+                            <i class="iconfont icon-tags"></i>
+                            
+                                <a href="/tags/%E7%AC%94%E8%AE%B0/">#笔记</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="第二课-心即理：阳明心学的逻辑起点"><a href="#第二课-心即理：阳明心学的逻辑起点" class="headerlink" title="第二课 心即理：阳明心学的逻辑起点"></a>第二课 心即理：阳明心学的逻辑起点</h2><ul>
+<li>宋代理学的发生<ul>
+<li>陆九渊(象山)提出</li>
+<li>最早可追溯到唐朝韩愈，他提出了道统问题<ul>
+<li>佛教过度繁荣使他感到本土文化忧虑</li>
+<li>提出 焚其书 庐其居 人其人</li>
+</ul>
+</li>
+<li>到了宋朝，北宋五子耗费大量时间研究并领会了佛教和道教的精髓后，对先秦的思想进行了重新构建<ul>
+<li>理学 可以说是对儒家思想的重新构建</li>
+<li>突出了很多原本在儒家思想中不突出的观点<ul>
+<li>比如对人性的探讨</li>
+</ul>
+</li>
+<li>理学 借鉴了一些佛教和道教的思想<ul>
+<li>比如 静坐 -&gt; 打坐</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>南宋(朱熹 乾淳之际)<ul>
+<li>理学 思想基本形成</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>理学的三个基本思想形态<ul>
+<li>朱熹一派 主要来自于程颐的思想<ul>
+<li>理 是思想的最高范畴<ul>
+<li>一本之理<ul>
+<li>最根本的是 对理要有终极体认，才能优入圣域</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>理 是可以达到的目的</li>
+</ul>
+</li>
+<li>陆象山<ul>
+<li>心即理<ul>
+<li>圣人之学 心学也</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>浙东学派 吕祖谦 陈亮<ul>
+<li>理 在人类的日常生活当中 在历史中</li>
+<li>把道的追寻贯彻到人类的生活当中</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>朱陆之争<ul>
+<li>他们的争论是对最高实在本身存在性的终极预设发生了歧义</li>
+</ul>
+</li>
+<li>阳明对陆学的基本观点<ul>
+<li>大段也是 只是粗了</li>
+<li>并没有很细致的论述</li>
+</ul>
+</li>
+<li>“心即理”在阳明心学结构中的地位和作用<ul>
+<li>在龙场的艰难困苦生活中 他提出 如果圣人处在这种环境下 圣人会怎么做</li>
+<li><strong>圣人之道 吾性具足</strong> </li>
+<li>思想境界的升华 意味着世界的改变 </li>
+<li>人在社会中生活，行为是受我们的思想和观念主导 观点改变 感觉也就改变了</li>
+<li>龙场悟道最重要一点就是对“心即理”的体悟</li>
+<li>“本心” 心之本体 是我们的意识 我们的精神 主宰身体的视听言动</li>
+<li>让心回到它本身的主宰地位 我们的行为就会按照它原本的样子呈现 我们的境界自然高尚</li>
+<li><strong>心之本体 就是至善</strong></li>
+<li>宇宙的最高真理与我们的本心是纯然一致的 所以人要大其心</li>
+<li>唯有明白了自身的本质和天道原本是一致的 人的本质原本就是天道在人这个层面的实在状态 这叫做本质上的天人合一</li>
+<li>要成为圣人 最重要的是开显本心 使我们的原本与最高之理相符合的本心 以它原本的样子显现出来 一旦达到那个境界 既是人道和天道的最高实现</li>
+<li>所以要<strong>去私欲 心明既是理明</strong> 既是道明 如镜子般 如实地去反映事物 那就是圣人事业的现实开括</li>
+</ul>
+</li>
+<li>总结<ul>
+<li>本质上 人的本质和天道的本质是同一的 这就为人道(人的现实生活)转进于圣人境界造成了理论前提</li>
+</ul>
+</li>
+</ul>
+<h2 id="第三课-知行合一：阳明心学的实践品格"><a href="#第三课-知行合一：阳明心学的实践品格" class="headerlink" title="第三课 知行合一：阳明心学的实践品格"></a>第三课 知行合一：阳明心学的实践品格</h2><ul>
+<li>“知” 、“行” 关系问题<ul>
+<li>《尚书·说命》：知之非艰 行之惟艰</li>
+<li>孔子《论语》：<ul>
+<li>学而时习之不亦乐乎</li>
+<li>不知而行之者 吾无是业： 知是重要行的重要前提</li>
+<li>吾欲托之空言 不如见之行事之深切著明也：实践才是把只是呈现出来 转换价值的根本途径</li>
+</ul>
+</li>
+<li>《大学》：<ul>
+<li>未有学养子而后嫁者也： 亲子之爱是天生的 对子女的慈爱是自然流露的</li>
+</ul>
+</li>
+<li>佛教 天台宗：<ul>
+<li>止观双修 定慧均等修止观</li>
+<li>四明知礼（北宋）：智为行本则行借智生 行能成智则智借行成</li>
+</ul>
+</li>
+<li>朱熹：<ul>
+<li>知行长相须（依附） 强调知与行的并列关系</li>
+<li>知之俞明则行之俞笃 行之俞笃则知之俞明</li>
+</ul>
+</li>
+<li>吕祖谦：<ul>
+<li>致知力行不是两截</li>
+<li>禅宗：磨镜所以明镜</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>“知行合一”的思想渊源<ul>
+<li>朱熹：真知必能行</li>
+<li>王阳明：真知既是行：合二为一</li>
+</ul>
+</li>
+<li>“知行合一”的具体观点（知就是行 行就是知）<ul>
+<li>两个层面<ul>
+<li>知识层面<ul>
+<li>在事物当中获得知识</li>
+<li>如何了解？<ul>
+<li>比如 孝敬父母。知道如何做 然后做是获得知识的过程 也是表达知识的过程</li>
+<li><strong>知和行是同一个完整的过程</strong><ul>
+<li>知是行的起点 行是知的完成</li>
+<li>知识的最后形态 是生活的实践</li>
+</ul>
+</li>
+<li>（个人注记：突然想到业内的 talk is cheap, show me the code)<ul>
+<li>比如数学是机器学习的基础 但实践要在学理论的同时进行 而不是数学学完后就行</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>一念发动处便既是行了<ul>
+<li>意识的流动本身就是行</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>良知学说层面<ul>
+<li>王阳明经常从 知-&gt;良知 的层面上讲</li>
+<li>良知的自知 自己对自己的领悟</li>
+<li>表达自知 通过行来表达</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>知之真切笃实处既是行 行之明觉精察处既是知 知行功夫本不可离</strong><ul>
+<li>当对知的了解层度达到真切笃实处便是行 把知作为一个过程</li>
+<li>当行为达到明觉精察 一定是真实只是的直接表达</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对所谓明阳“以知代行”说的批评<ul>
+<li>王阳明强调知识的过程必定是通过一个实践的过程体现的</li>
+<li>最终的实践才是知识价值获得实现的最后境界</li>
+</ul>
+</li>
+</ul>
+<h2 id="第四课-格物致知：知识论域的实践转向"><a href="#第四课-格物致知：知识论域的实践转向" class="headerlink" title="第四课 格物致知：知识论域的实践转向"></a>第四课 格物致知：知识论域的实践转向</h2><ul>
+<li>“格物致知”问题的来源<ul>
+<li>来源于《大学》<ul>
+<li>三纲：大学之道 在明明德 在亲民 在止于至善</li>
+<li>八条目： 格物 致知 诚意 正心 修身 齐家 治国 平天下</li>
+<li>起点是：格物 致知</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>朱熹对“格物致知”的理解<ul>
+<li>接着二程夫子来讲<ul>
+<li>天下任何事物，宏观地看，有天理在 最高的一本之道</li>
+<li>任何事物有它的独特之理 分殊之理</li>
+<li>分殊之理是从一本之理中获得</li>
+<li>一本之理作为大一是完满的 分殊之理为小一也是完满的</li>
+<li>分殊之理的不断地“格”、还原 达到一定状态 才可能获得一本之理把握的前提</li>
+</ul>
+</li>
+<li>强调 格物致知是还原具体事物之理 既物而穷理</li>
+<li>格物是致知的前提</li>
+<li>理存在于具体事务当中</li>
+</ul>
+</li>
+<li>王阳明的“格物致知”之说<ul>
+<li>如果理在事物当中 那与我的诚意正心有何关系？</li>
+<li>物着事也 格者正也<ul>
+<li>格君心之非 -&gt; 正君心之非</li>
+<li>“物” 作为一个独立的个体存在</li>
+<li>“事” 体现了一个过程 与我这个主题相关</li>
+</ul>
+</li>
+<li>事物之理不在事物本身 在心中</li>
+<li>强调 我作为实践的主题 如何在事物当中正其心<ul>
+<li>“正” 标准， 是否合乎本心<ul>
+<li>合乎本心 既是 合乎正理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>强调 格物和致知是统一的整体</li>
+<li>致知： 致良知<ul>
+<li>格物既是正心</li>
+<li>格物致知：致吾心之良知于事事物物 事事物物各得齐正</li>
+</ul>
+</li>
+<li>意之所在便是物 意在于事亲则事亲为一物</li>
+</ul>
+</li>
+</ul>
+<h2 id="第五课-本体与主体性的自我建立"><a href="#第五课-本体与主体性的自我建立" class="headerlink" title="第五课 本体与主体性的自我建立"></a>第五课 本体与主体性的自我建立</h2><ul>
+<li>孟子的“良知良能”<ul>
+<li>人不学而能谓之良能 不学而知着谓之良知<ul>
+<li>凡人皆有恻隐、羞恶、是非、辞让之心 是不学而知的 是我原本就固有的</li>
+<li>恻隐之心 作为人之端 在人本身存在着固有性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>张载对“德性”、“闻见”之知的区别<ul>
+<li>德性之知不源于见闻 <ul>
+<li>德行：天德良知 超经验的</li>
+<li>但是德性之知是要通过经验表达的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>王阳明的“良知”说<ul>
+<li>正德十五年 平定朱宸濠之后结合自己的生活经验提出</li>
+<li>与前两位不近相同</li>
+<li>良知： 心之本体（存在本体、德行本体、理性本体）<ul>
+<li>是生活中经验知识活动之所以可能的根据</li>
+<li>是知识本身的本体 是理性的根据</li>
+<li>原本就能知是非 是心体自然</li>
+<li>原本就是至善 知善恶的 是德行之本</li>
+<li>天命之所谓性</li>
+</ul>
+</li>
+<li>正是因为良知的存在 我们才具备存在和德行的本质，以及获得和展现知识的能力</li>
+<li>心的良知是人作为主体的本质依据<ul>
+<li>唯有实现了自我建立的人才能称为主体</li>
+<li>通过个体内在的自觉 在自我中建立起来</li>
+</ul>
+</li>
+<li>良知是为人之本</li>
+<li>人的存在的本质 就是他的德行本质<ul>
+<li>生活中 人是如何表达自己？ <ul>
+<li>道德实践才能彰显个体的存在</li>
+</ul>
+</li>
+<li>道德的内在自觉<ul>
+<li>因为合乎本性的 所以才去做</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>每个个体存在性的表达 是要通过自觉的道德的建立来实现的<ul>
+<li>如此 个体的存在 才不仅仅是自然本身状态的 同时是合乎天道的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>存在本体、德行本体、理性本体<ul>
+<li>理性本源 是一切只是活动之所以可能的根据 是经验生活中是非判断的根据<ul>
+<li>是非 不仅仅是对错之分 还有善恶之分</li>
+<li>泯灭良知 是指 良知没有获得表达和体现 在表现的层面上讲 泯灭良知</li>
+</ul>
+</li>
+<li>德行本源 是道德所以存在的依据</li>
+<li>存在本源 是人的存在本质和最高的天道本质实现同一 并且这种同一性是作为本源的</li>
+</ul>
+</li>
+</ul>
+<h2 id="第六课-本心的自我开显与自我表达"><a href="#第六课-本心的自我开显与自我表达" class="headerlink" title="第六课 本心的自我开显与自我表达"></a>第六课 本心的自我开显与自我表达</h2><ul>
+<li>致良知的现实必要性 阳明对生命现状的忧虑<ul>
+<li>人们在利益的追逐当中丧失自我 遮蔽了自我的良知 所以要致良知</li>
+<li>孟子： 求放心 放逸之心</li>
+<li>安身立命的基础</li>
+<li>对与人道相违背的生活现象的反思和批评</li>
+</ul>
+</li>
+<li>致良知的双向展开<ul>
+<li>良知的“自知”、“自明”<ul>
+<li>呼唤自己的良知 良知才会以原本的状态出现</li>
+<li><strong>反思</strong> 对自我在生活中的观点、意识、行为进行思索、内省</li>
+<li>只有经过自我反思 我们的<strong>主体性才得以建立</strong></li>
+<li>用王阳明的话来讲 合乎良知叫”诚意“ 也既是”正心“</li>
+<li>”自知“、”自明“ 才能表达自我的主体性建立 必须通过自我实现</li>
+<li>如何对经验现象的实行确切无误的判断<ul>
+<li>有境才有心动 心动才会有善恶是非</li>
+<li>动念之际去为善去恶</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>“致吾心之良知于事事物物”<ul>
+<li>良知的自我展开 在事物的处理过程表现出来</li>
+<li>明明德于天下</li>
+<li>任何事物都应该在良知下进行 物得其正 我们存在性的自我表达</li>
+<li>身 心 意 知 物 融为一体</li>
+<li>人只有实践才能把主体的内在世界和客观世界连在一起</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>致良知于个体意义世界的宏观构建<ul>
+<li>对于物质的欲望 本能的具有扩张性 它具有向恶的转化的可能 欲本身即是越界</li>
+<li>孔子讲以礼来节制自我的情感<ul>
+<li>这种节制在道德上是好的 更符合公共生活</li>
+<li>良知的恰当表达是具有公共性的</li>
+</ul>
+</li>
+<li>在自我与他人的事物观察中 人们更多的是用私欲的权衡 而非对他人客观 对自己混沌<ul>
+<li>良知首先是在自我中呈现 随之才能对其他事物有正确的理解</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第七课-心外无物：生命境界的无限圆融"><a href="#第七课-心外无物：生命境界的无限圆融" class="headerlink" title="第七课 心外无物：生命境界的无限圆融"></a>第七课 心外无物：生命境界的无限圆融</h2><ul>
+<li>“心”与“物”的关系<ul>
+<li>“物”是“事”，“事”是介入了主体活动过程的</li>
+<li>事物的两种存在状态： **“寂”与“显”</li>
+</ul>
+</li>
+</ul>
+<p>**<br>        * 山中之花自开自落 没看到花的时候 你和花同归于“寂”，当你看到时是“显”<br>        * <strong>“寂“并非无，而是事物存在的一种状态</strong><br>            * 是王阳明确认的事物的客观存在性<br>        * <strong>”显“ 当你看到花时 在你心中 一时分明起来</strong><br>            * <strong>看到 是”寂“到”显“的转换</strong><br>    * 心的本体的存在 原本是”寂“、是不动的，但却包含着向”显“转换的无限可能，反之亦然 这叫做”寂感神应“ 没前后之分<br>    * 看到花时 它由静转化为动，成为主题的对象，关系情景构成<br>        * 体用一源 现为无间 无前无后无中间<br>        * 任何事物的客观存在状态 只有在特定的情景中 客观物才以它原本的样式显现<br>    * 任何客观物 当它以一种纯粹的客观存在时 包含”寂“和”显“两种状态 只不过呈现给主题的状态不同<br>    * <strong>王阳明的讨论并不涉及 事物是否可以脱离人的主观意识而存在 也就是并不涉及唯心主义讨论的问题</strong></p>
+<ul>
+<li>“心外无物”作为一种生命境界<ul>
+<li>心不在焉 -&gt; 听而不闻 视而不见 食而不知其味</li>
+<li>“关心”<ul>
+<li>一个事物在成为我的对象之前 它的存在跟我是不“关心”的 它的存在对我是无意义的</li>
+<li>王阳明讲的一个真正的仁人是与天下事相关心的 是把世界万物容纳到个人的主体当中</li>
+</ul>
+</li>
+<li>致良知 通过主体的生活、道德实践 尽可能扩展我们的心灵世界 使一切万物都能够到达、进入的我的主体世界 如此我的心便是和天下万物相关 最后的圆融境界叫“无心外之物”</li>
+<li>做不到 可以<strong>心向往之</strong></li>
+<li>“心外无物” 是仁人的境界<ul>
+<li>把“物”作为个人主体的一部分</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>“心外无物”与主题价值世界的构建<ul>
+<li>个人主体世界的构建完全取决于我们主体自我的实践及其方式</li>
+<li>个人要尽可能扩充、表达我们的良知 努力进行生活实践 并将实践纳入个人的主体世界<ul>
+<li>我们的意义世界 便是在实践当中不断的建立和扩张<ul>
+<li>主体的世界和客观世界不断的链接起来后 个人的主体世界也越来越宏达</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>“心外无物”是生命的最高境界，是人生自我价值不断扩展和实现</li>
+</ul>
+</li>
+<li>（个人注记：你的主体世界便是你人生的价值。想到了精致的利己主义。利己没有什么错误，但致良知能够极大的丰富我们的主体世界，无论是从哪个角度的丰富，都会让其更加丰富多彩。即便我们的人生价值是丰富自己的体验或者收获更多的物质，那么致良知也是对其有很大的帮助的。比如丰富了对看待事物的视角，体验自然也就丰富了。如此来讲即便只谈利己也不必排斥“心外无物”。心向往之，实践前行。）</li>
+</ul>
+<h2 id="第八课-天泉证道“四句教”阳明学派的分化"><a href="#第八课-天泉证道“四句教”阳明学派的分化" class="headerlink" title="第八课 天泉证道“四句教”阳明学派的分化"></a>第八课 天泉证道“四句教”阳明学派的分化</h2><ul>
+<li>“天泉证道”的背景 “四句教”问题<ul>
+<li>“四句教” 仅出现在《传习录》下卷和年谱中 未出现在王阳明自己的作品中<ul>
+<li>无善无恶心之本</li>
+<li>有善有恶意之动</li>
+<li>知善知恶是良知</li>
+<li>为善去恶是格物</li>
+</ul>
+</li>
+<li>弟子钱德洪和王畿是在天泉桥向王阳明请教这四句话的意思的 所以叫做“天泉证道”</li>
+</ul>
+</li>
+<li>钱德洪关于“四句教”的理解<ul>
+<li>认为是王门宗旨 是究竟之说</li>
+<li>良知原本是无善无恶的 对圣人如此 但普通人不免有习心在 不免有私欲 所以 意之动就会有善有恶 于是要求我们在一念发动之动给克制住</li>
+<li>是非善恶良知本是知道的 所以要为善去恶</li>
+</ul>
+</li>
+<li>王畿(jī)（龙溪）关于“四句教”的理解<ul>
+<li>认为是权宜之说</li>
+<li>认为<ul>
+<li>无心之心则藏秘</li>
+<li>无意之意则应圆</li>
+<li>无知之知则体寂</li>
+<li>无物之物则用神</li>
+</ul>
+</li>
+<li>认为 心如果是无善无恶的 那么 意、知、物都应该是无善无恶的 不可能突然冒出来有善有恶的意</li>
+</ul>
+</li>
+<li>“四句教”与王学分化的关系<ul>
+<li>“天泉证道”，王阳明认为 人非利根和钝根之人<ul>
+<li>利根之人 聪慧 一点就透<ul>
+<li>一悟本体既是工夫</li>
+<li>便是王畿所讲</li>
+<li>但此般根基之人很少</li>
+</ul>
+</li>
+<li>钝根之人 愚笨 需要慢慢学慢慢习<ul>
+<li>对于普通人还是要讲为善去恶</li>
+<li>钱德洪之说</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>黄宗羲对王钱二人的评价<ul>
+<li>因其二人而风行 也因此二人而渐失其传</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>“四句教”的具体分析<ul>
+<li>无善无恶心之本<ul>
+<li>无善无恶是为至善 </li>
+<li>讲的是本心自身的实在的状态 是未发之中 是无法判断的<ul>
+<li>因为善恶是基于经验世界检验价值的相对判断</li>
+<li>而<strong>至善是超经验的 是绝对的价值原点 由此才能对事物进行判断</strong><ul>
+<li>比如称用于权衡他物 眼睛是无色的才可以分辨颜色 镜子本无一物才能照出来事物本身</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>有善有恶意之动<ul>
+<li>意 是心之动的主动状态 是有境，有原因的<ul>
+<li>所以是一种经验状态</li>
+<li>没有对物、境构成关系之前 本体归于本相之寂</li>
+<li>所以它一定会落于某个方面 才有善恶之分</li>
+<li>价值只能在经验的世界当中显现它自己</li>
+</ul>
+</li>
+<li>心之动合理的方面是讲 心之动是合乎本体 是合乎心本来状态的 所以这样的一动 在价值上会落于善的方面</li>
+</ul>
+</li>
+<li>知善知恶是良知<ul>
+<li>良知本身是自知自明 知善知恶的 心体向经验转换时 它是可以判断善恶的</li>
+</ul>
+</li>
+<li>为善去恶是格物<ul>
+<li>当良知判断出事物的善恶之后 人应该朝着善的方向去做</li>
+<li>而这个过程便是 诚意正心</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第九课-心体的自我澄明与价值实现"><a href="#第九课-心体的自我澄明与价值实现" class="headerlink" title="第九课 心体的自我澄明与价值实现"></a>第九课 心体的自我澄明与价值实现</h2><ul>
+<li>四句教是否存在内在“逻辑”关系<ul>
+<li>不存在内在逻辑关系</li>
+<li>就四个不同层面来讲的</li>
+</ul>
+</li>
+<li>“良知现成”与思相解放<ul>
+<li>王龙溪一派虽偏离了王阳明的思想 但是却带来了思想了解放</li>
+<li>正因为人人都诉诸自己的良知 任何事物在经由良知的审慎之前都是值得怀疑的 所以它要求我们对生活进行审查 我们的价值也在这个过程中建立</li>
+<li>未经理性审查的生活是不值得过的 – 苏格拉底</li>
+<li>但是当我们过度强调良知的审查 就会变成自我的率性而为 陷入以意见为真理的谬误的状态</li>
+</ul>
+</li>
+<li>本体与工夫的关系<ul>
+<li>良知是心之本体 如何显现？ 如何到达？</li>
+<li>工夫 相当于方法论<ul>
+<li>钱德洪：为善去恶既是工夫 在事上磨炼<ul>
+<li>工夫总是相对于本体而言 并且总是相对于本体的开显而言的</li>
+</ul>
+</li>
+<li>王龙溪：工夫是需要的 但不需要为善去恶 不需要在事上磨炼<ul>
+<li>当下悟出无山无恶心之本 即本体工夫</li>
+<li>如果你真正明白这个道理 不需要那么复杂 良知现成</li>
+<li>现成既是本体也是工夫</li>
+<li>良知本顺 致之则逆 不需要致良知</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>王阳明还是非常强调事情的磨炼的</li>
+</ul>
+</li>
+<li>董平老师的观点<ul>
+<li>良知作为价值原点 是超经验的 在生活中的表达是有可能发生问题的</li>
+<li>心之动发为意 是有善有恶的</li>
+<li>生活中充满各种欲望 我们往往容易偏离自我的心灵指导</li>
+<li>所以反思是很重要的</li>
+<li>人需要了解到自我的良知是浩渺的可以容纳世间万物 可以判断世间一切美丑善恶 这样我们才能在天地间堂堂正正的做人</li>
+<li>王阳明遗言：此心光明 亦复何言<ul>
+<li>领会到这点 我们就能对生活稍微超然疏离一点 这样的行为能让我们的精神世界高尚一点</li>
+<li>这种超然和疏离是对欲望的疏离 对利益的看淡 使我们变得高尚</li>
+<li>使我们变得高尚的 不是我们的本能 是我们的德行、良知</li>
+<li>一个懂得致良知的人才会享有崇高的思想境界</li>
+</ul>
+</li>
+<li>客观事物是脱离自我存在的 但只有进入我的世界 才会对我有意义</li>
+</ul>
+</li>
+</ul>
+<h2 id="我的理解"><a href="#我的理解" class="headerlink" title="我的理解"></a>我的理解</h2><ul>
+<li>心学里的良知和禅学里边讲到的对绝对价值的追求很相似。<ul>
+<li>林木大拙讲到禅是超越逻辑的。相对来讲，心学的良知学也是超经验范畴的，讲的也是绝对价值。</li>
+<li>另一方面，禅讲的平常心也对应的“为善去恶”的观念在里边。</li>
+</ul>
+</li>
+<li>而“知行合一”和禅学也都一直在强调思维的一贯性。</li>
+</ul>
+<h2 id="注记："><a href="#注记：" class="headerlink" title="注记："></a>注记：</h2><ul>
+<li>以上皆为董平老师的观点 由于他提到“这是我个人的观点”的次数太多，我基本全给省略了。所以作为对阳明心学的一个思考角度来看。在今后读过《传习录》、《大学问》等王阳明的著作之后对比来看更有收获。</li>
+<li>课程地址: <a target="_blank" rel="noopener" href="http://open.163.com/special/cuvocw/wangyangming.html">http://open.163.com/special/cuvocw/wangyangming.html</a></li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%AC%94%E8%AE%B0/"># 笔记</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">首页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2017-09-12-chan-xue-ru-men-lin-mu-da-zhuo.html">《禅学入门》 林木大拙 读书笔记</a>
+            
+            
+            <a class="next" rel="next" href="/2017-04-30-the-school-of-life.html">Notes of The School of Life</a>
+            
+        </section>
+
+        <!--
+        <section class="comments">
+        <div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+    this.page.url = 'https://ericyy.me/2017-09-10-wang-yangming.html';
+    this.page.identifier = '2017-09-10-wang-yangming.html';
+    this.page.title = '浙江大学公开课：王阳明心学[董平] 笔记';
+};
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://ericyy.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+        </section>
+        -->
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Eric Yang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>, <span>Hosted on GitHub Pages</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

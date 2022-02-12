@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Eric Yang">
+
+
+
+    <meta name="keywords" content="PHP 好的编程习惯">
+
+
+    <meta name="keywords" content="Modern PHP, PHP, Note">
+
+
+<title>好的编程习惯 - PHP进阶 (3) | Eric&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Eric&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Eric&#39;s Blog</a>
+                    <i class='iconfont icon-dot'></i>
+                    <a id="mobile-toggle-theme"><i class='iconfont icon-daytime-mode'></i></a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <i class="iconfont icon-menu"></i>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开</a>
+        <a onclick="go_top()">返回顶部</a>
+        <!-- <a onclick="go_bottom()">底部</a> -->
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+            expand_toc()
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "收起"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">好的编程习惯 - PHP进阶 (3)</h1>
+            
+                <div class="post-meta">
+                    
+                        <span class="post-time">
+                          <i class="iconfont icon-calendar"></i>
+                          2017/02/20
+                        </span>
+                    
+                    
+                        | <span class="post-category">
+                            <i class="iconfont icon-category"></i>
+                            
+                                <a href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
+                            
+                        </span>
+                    
+                    
+                        | <span class="post-category">
+                            <i class="iconfont icon-tags"></i>
+                            
+                                <a href="/tags/PHP/">#PHP</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="净化、验证、转义输入输出"><a href="#净化、验证、转义输入输出" class="headerlink" title="净化、验证、转义输入输出"></a>净化、验证、转义输入输出</h3><h4 id="需要注意的几个外部数据源"><a href="#需要注意的几个外部数据源" class="headerlink" title="需要注意的几个外部数据源"></a>需要注意的几个外部数据源</h4><ul>
+<li>$_GET</li>
+<li>$_POST</li>
+<li>$_REQUEST</li>
+<li>$_COOKIE</li>
+<li>$argv</li>
+<li>php:&#x2F;&#x2F;stdin</li>
+<li>php:&#x2F;&#x2F;input</li>
+<li>file_get_contents()</li>
+<li>远程数据库</li>
+<li>远程 APIs</li>
+<li>远程客户端获取的数据</li>
+</ul>
+<h4 id="净化输入"><a href="#净化输入" class="headerlink" title="净化输入"></a>净化输入</h4><ul>
+<li>HTML <ul>
+<li><p>在接触存储层之前，使用 htmlentities() 来净化 HTML 的特殊字符:</p>
+<pre><code>  &lt;?php $input = &#39;&lt;p&gt;&lt;script&gt;alert(&quot;You won the Nigerian lottery!&quot;);&lt;/script&gt;&lt;/p&gt;&#39;; 
+  echo htmlentities($input, ENT_QUOTES, &#39;UTF-8&#39;);
+  
+</code></pre>
+</li>
+<li><p>避免使用 preg_replace(), preg_replace_all() 和 preg_replace_callback() 等正则函数在HTML代码里。</p>
+</li>
+</ul>
+</li>
+<li>SQL 查询<ul>
+<li>使用 PDO prepared statement 的形式，避免SQL注入等问题。</li>
+</ul>
+</li>
+<li>用户信息收集<ul>
+<li><p>使用 filter_var() 和 filter_input() 来净化用户信息数据，如 emails, URL-encoded strings, integers, floats, HTML characters, URLs 等，例：</p>
+<pre><code>  &lt;?php $email = &#39;john@example.com&#39;; 
+  $emailSafe = filter_var($email, FILTER_SANITIZE_EMAIL);
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="验证数据"><a href="#验证数据" class="headerlink" title="验证数据"></a>验证数据</h4><ul>
+<li><p>可以使用内置函数 filter_var() 来做简单的验证：</p>
+<pre><code>  &lt;?php 
+  $input = &#39;john@example.com&#39;; 
+  $isEmail = filter_var($input, FILTER_VALIDATE_EMAIL); 
+  if ($isEmail !== false) &#123;
+      echo &quot;Success&quot;; 
+  &#125; else &#123;
+      echo &quot;Fail&quot;; 
+  &#125;
+  
+</code></pre>
+</li>
+<li><p>几个推荐的扩展库</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://packagist.org/packages/aura/filter">aura&#x2F;filter</a></li>
+<li><a target="_blank" rel="noopener" href="https://packagist.org/packages/respect/validation">respect&#x2F;validation</a></li>
+<li><a target="_blank" rel="noopener" href="https://packagist.org/packages/symfony/validator">symfony&#x2F;validator</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="转义输出"><a href="#转义输出" class="headerlink" title="转义输出"></a>转义输出</h4><ul>
+<li><p>使用 htmlentities() ：</p>
+<pre><code>  &lt;?php 
+  $output = &#39;&lt;p&gt;&lt;script&gt;alert(&quot;NSA backdoor installed&quot;);&lt;/script&gt;&#39;; 
+  echo htmlentities($output, ENT_QUOTES, &#39;UTF-8&#39;);
+  
+</code></pre>
+</li>
+<li><p>使用模板引擎，比如：</p>
+<p>  <a target="_blank" rel="noopener" href="https://packagist.org/packages/twig/twig">twig&#x2F;twig</a></p>
+</li>
+</ul>
+<h3 id="密码"><a href="#密码" class="headerlink" title="密码"></a>密码</h3><h4 id="几个重要的准则"><a href="#几个重要的准则" class="headerlink" title="几个重要的准则"></a>几个重要的准则</h4><ul>
+<li><p>不要记录用户的密码</p>
+</li>
+<li><p>不要过多限制用户的密码，仅推荐限制长度即可</p>
+</li>
+<li><p>不要通过邮件发送用户密码</p>
+</li>
+<li><p>使用 bcrypt 函数单向加密用户密码，个人推荐 <a target="_blank" rel="noopener" href="http://www.openwall.com/phpass/">phpass</a> 第三方扩展</p>
+</li>
+<li><p>用户注册和登录示例</p>
+<ul>
+<li><p>注册时使用 password_hash() 来加密用户密码, 源代码: <a target="_blank" rel="noopener" href="https://github.com/codeguy/modern-php/blob/master/05-good-practices/passwords/register.php">codeguy&#x2F;modern-php</a></p>
+</li>
+<li><p>注：CRYPT_BLOWFISH 加密方式的salt的组成依次是：</p>
+<ul>
+<li><p>(“$2a$”, “$2x$” 或者 “$2y$”) + “xx”(04&lt;xx&lt;31) + “$” + “22个字符”(“.&#x2F;0-9A-Za-z”)， </p>
+</li>
+<li><p>例如：”$2a$07$usesomesillystringfor”</p>
+</li>
+<li><p>PHP 5.3.7 之后应使用”$2y$”作为前缀</p>
+<pre><code>  &lt;?php
+  try &#123;
+      // Validate email
+      $email = filter_input(INPUT_POST, &#39;email&#39;, FILTER_VALIDATE_EMAIL);
+      if (!$email) &#123;
+          throw new Exception(&#39;Invalid email&#39;);
+      &#125;
+      
+      // Validate password
+      $password = filter_input(INPUT_POST, &#39;password&#39;);
+      if (!$password || mb_strlen($password) &lt; 8) &#123;
+          throw new Exception(&#39;Password must contain 8+ characters&#39;);
+      &#125;
+      
+      // Create password hash
+      $passwordHash = password_hash(
+         $password,
+         CRYPT_BLOWFISH, // 加密方式
+         [&#39;cost&#39; =&gt; 12] // 递归次数
+      );
+      if ($passwordHash === false) &#123;
+          throw new Exception(&#39;Password hash failed&#39;);
+      &#125;
+      
+      // Create user account (THIS IS PSUEDO-CODE)
+      // $user = new User();
+      // $user-&gt;email = $email;
+      // $user-&gt;password_hash = $passwordHash;
+      // $user-&gt;save();
+      // Redirect to login page
+      
+      header(&#39;HTTP/1.1 302 Redirect&#39;);
+      header(&#39;Location: /login.php&#39;);
+  &#125; catch (Exception $e) &#123;
+      // Report error
+      header(&#39;HTTP/1.1 400 Bad request&#39;);
+      echo $e-&gt;getMessage();
+  &#125;
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>登录，不要忘了 rehash password ，源代码: <a target="_blank" rel="noopener" href="https://github.com/codeguy/modern-php/blob/master/05-good-practices/passwords/login.php">codeguy&#x2F;modern-php</a></p>
+<pre><code>  &lt;?php
+  session_start();
+  try &#123;
+      // Get email address from request body
+      $email = filter_input(INPUT_POST, &#39;email&#39;);
+      
+      // Get password from request body
+      $password = filter_input(INPUT_POST, &#39;password&#39;);
+      
+      // Find account with email address (THIS IS PSUEDO-CODE)
+      $user = User::findByEmail($email);
+      
+      // Verify password with account password hash
+      if (password_verify($password, $user-&gt;password_hash) === false) &#123;
+          throw new Exception(&#39;Invalid password&#39;);
+      &#125;
+      
+      // Re-hash password if necessary (see note below)
+      $currentHashAlgorithm = CRYPT_BLOWFISH;
+      $currentHashOptions = array(&#39;cost&#39; =&gt; 15);
+      $passwordNeedsRehash = password_needs_rehash(
+          $user-&gt;password_hash,
+          $currentHashAlgorithm,
+          $currentHashOptions
+      );
+      if ($passwordNeedsRehash === true) &#123;
+      
+          // Save new password hash (THIS IS PSUEDO-CODE)
+          $user-&gt;password_hash = password_hash(
+              $password,
+              $currentHashAlgorithm,
+              $currentHashOptions
+          );
+          $user-&gt;save();
+      &#125;
+      
+      // Save login status to session
+      $_SESSION[&#39;user_logged_in&#39;] = &#39;yes&#39;;
+      $_SESSION[&#39;user_email&#39;] = $email;
+      
+      // Redirect to profile page
+      header(&#39;HTTP/1.1 302 Redirect&#39;);
+      header(&#39;Location: /user-profile.php&#39;);
+  &#125; catch (Exception $e) &#123;
+      header(&#39;HTTP/1.1 401 Unauthorized&#39;);
+      echo $e-&gt;getMessage();
+  &#125;
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="流"><a href="#流" class="headerlink" title="流"></a>流</h3><ul>
+<li>在源与目的地之间传输数据。源和目的地可以是文件、内存、命令行、标准输入输入等。</li>
+</ul>
+<h4 id="封装器"><a href="#封装器" class="headerlink" title="封装器"></a>封装器</h4><ul>
+<li>每个流都有协议和目标，格式为<code>&lt;scheme&gt;://&lt;target&gt;</code>，协议<scheme>即为封装器，目标<target>为数据源。常用的封装器有：<ul>
+<li><code>file://</code>. 我们常用的函数如 <code>file_get_contents()</code>, <code>fopen()</code>, <code>fwrite()</code>, <code>fclose()</code> 都是流的封装器。</li>
+<li><code>php://</code>. 标准输入输出的封装器。比如：<code>php://stdin</code>, <code>php://stdout</code>, <code>php://memory</code>, <code>php://temp</code>(类似<code>php://memory</code>, 只是这个写入的是临时文件)。</li>
+</ul>
+</li>
+</ul>
+<h4 id="上下文"><a href="#上下文" class="headerlink" title="上下文"></a>上下文</h4><ul>
+<li><p>用于定义流的行为。比如使用<code>stream_context_create()</code>可以让<code>file_get_contents()</code>发送 POST 请求：</p>
+<pre><code>  &lt;?php
+  $requestBody = &#39;&#123;&quot;username&quot;:&quot;josh&quot;&#125;&#39;; 
+  $context = stream_context_create(array(
+      &#39;http&#39; =&gt; array( 
+          &#39;method&#39; =&gt; &#39;POST&#39;, 
+              &#39;header&#39; =&gt; &quot;Content-Type: application/json;charset=utf-8;\r\n&quot; . 
+                          &quot;Content-Length: &quot; . mb_strlen($requestBody), 
+              &#39;content&#39; =&gt; $requestBody
+         )
+  )); 
+  $response = file_get_contents(&#39;https://my-api.com/users&#39;, false, $context);
+</code></pre>
+</li>
+</ul>
+<h4 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h4><ul>
+<li><p>在传输的过程中进行过滤、转换、增加、删除操作。</p>
+</li>
+<li><p>简单的例子，将传输过来的数据全都大写化：</p>
+<pre><code>  &lt;?php 
+  $handle = fopen(&#39;data.txt&#39;, &#39;rb&#39;); 
+  stream_filter_append($handle, &#39;string.toupper&#39;); 
+  while(feof($handle) !== true) &#123; 
+      echo fgets($handle); // &lt;-- Outputs all uppercase characters 
+  &#125; 
+  fclose($handle);
+</code></pre>
+</li>
+<li><p>另一个例子：</p>
+<pre><code>  &lt;?php 
+  $handle = fopen(&#39;php://filter/read=string.toupper/resource=data.txt&#39;, &#39;rb&#39;);
+  while(feof($handle) !== true) &#123; 
+      echo fgets($handle); // &lt;-- Outputs all uppercase characters 
+  &#125; 
+  fclose($handle);
+  
+</code></pre>
+<ul>
+<li>过滤器写在<code>php://</code>的流封装器里，其标准格式为：<code>filter/read=&lt;filter_name&gt;/resource=&lt;scheme&gt;://&lt;target&gt;</code></li>
+</ul>
+</li>
+<li><p>例子3, 使用bzip分开压缩过去30天的日志文件，每天一个压缩包:</p>
+<pre><code>  &lt;?php
+  $dateStart = new \DateTime();
+  $dateInterval = \DateInterval::createFromDateString(&#39;-1 day&#39;);
+  $datePeriod = new \DatePeriod($dateStart, $dateInterval, 30);
+  foreach ($datePeriod as $date) &#123;
+      $file = &#39;sftp://USER:PASS@rsync.net/&#39; . $date-&gt;format(&#39;Y-m-d&#39;) . &#39;.log.bz2&#39;;
+      if (file_exists($file)) &#123;
+          $handle = fopen($file, &#39;rb&#39;);
+          stream_filter_append($handle, &#39;bzip2.decompress&#39;);
+          while (feof($handle) !== true) &#123;
+              $line = fgets($handle);
+              if (strpos($line, &#39;www.example.com&#39;) !== false) &#123;
+                  fwrite(STDOUT, $line);
+             &#125;
+          &#125;
+          fclose($handle);
+      &#125;
+  &#125;
+</code></pre>
+</li>
+<li><p>自定义过滤器。需完成以下三点：(参考实例：<a target="_blank" rel="noopener" href="https://github.com/codeguy/modern-php/blob/master/05-good-practices/streams/DirtyWordsFilter.php">DirtyWordsFilter.php</a>)</p>
+<ul>
+<li>继承内置类<code>php_user_filter</code></li>
+<li>实现<code>filter()</code>, <code>onCreate()</code>, <code>onClose()</code>三个方法</li>
+<li>使用<code>stream_filter_register()</code>注册自定义的过滤器</li>
+</ul>
+</li>
+</ul>
+<h3 id="错误和异常处理"><a href="#错误和异常处理" class="headerlink" title="错误和异常处理"></a>错误和异常处理</h3><h4 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h4><ul>
+<li><p>设置全局性的异常捕获来保证程序中未捕获的异常最后都会被记录下来。</p>
+<pre><code>  &lt;?php // Register your exception handler 
+  set_exception_handler(function (Exception $e) &#123; 
+      // Handle and log exception 
+  &#125;); 
+ 
+  // Your code goes here...
+
+  // Restore previous exception handler 
+  restore_exception_handler();
+  
+</code></pre>
+</li>
+<li><p>在开发环境中使用异常捕获以及日志来显示所有的DEBUG信息，在生产环境使用用户友好的提示信息。</p>
+</li>
+</ul>
+<h4 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h4><ul>
+<li><p>四个准则</p>
+<ul>
+<li>打开错误报告</li>
+<li>在测试环境中显示错误信息</li>
+<li>不在生产环境中显示错误信息</li>
+<li>无论生产还是开发都应该在日志中记录错误</li>
+</ul>
+</li>
+<li><p>生产环境<code>php.ini</code>示例：</p>
+<pre><code>  ; DO NOT display errors 
+  display_startup_errors = Off    
+  display_errors = Off
+
+  ; Report all errors EXCEPT notices 
+  error_reporting = E_ALL &amp; ~E_NOTICE
+
+  ; Turn on error logging 
+  log_errors = On
+  
+</code></pre>
+</li>
+<li><p>开发环境示例：</p>
+<pre><code>  ; Display errors 
+  display_startup_errors = On 
+  display_errors = On
+
+  ; Report all errors 
+  error_reporting = -1
+
+  ; Turn on error logging 
+  log_errors = On
+</code></pre>
+</li>
+</ul>
+<h4 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h4><ul>
+<li><p>等同于异常处理，错误也是可以被捕获的。如果只是临时使用错误捕获，一定不要忘了在自己的代码完成后恢复：</p>
+<pre><code>  &lt;?php // Register error handler 
+  set_error_handler(function ($errno, $errstr, $errfile, $errline) &#123; 
+      if (!(error_reporting() &amp; $errno)) &#123; 
+          // Error is not specified in the error_reporting 
+          // setting, so we ignore it.
+          return; 
+      &#125;
+      throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
+  &#125;);
+
+  // Your code goes here...
+
+  // Restore previous error handler 
+  restore_error_handler();
+</code></pre>
+</li>
+</ul>
+<h4 id="第三方扩展推荐"><a href="#第三方扩展推荐" class="headerlink" title="第三方扩展推荐"></a>第三方扩展推荐</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/filp/whoops">filp&#x2F;whoops</a> 是一个错误处理框架，提供一个优雅的错误界面帮助DEBUG。目前很多主流的框架比如Laraval 5, CakePHP 3等都已经内置了。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Seldaek/monolog">Seldaek&#x2F;monolog</a> 记录日志的插件</li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/PHP/"># PHP</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">首页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2017-02-25-php-advance-4-tuning.html">服务器配置及性能调优 - PHP进阶 (4)</a>
+            
+            
+            <a class="next" rel="next" href="/2017-01-04-vim-configuration.html">VIM的基本命令使用以及插件配置</a>
+            
+        </section>
+
+        <!--
+        <section class="comments">
+        <div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+    this.page.url = 'https://ericyy.me/2017-02-20-php-advance-3-good-practice.html';
+    this.page.identifier = '2017-02-20-php-advance-3-good-practice.html';
+    this.page.title = '好的编程习惯 - PHP进阶 (3)';
+};
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://ericyy.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+        </section>
+        -->
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Eric Yang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>, <span>Hosted on GitHub Pages</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

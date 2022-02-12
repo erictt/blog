@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Eric Yang">
+
+
+
+    <meta name="keywords" content="PSR标准解读">
+
+
+    <meta name="keywords" content="Modern PHP, PHP, Note, PSR, PHP-FIG">
+
+
+<title>PSR标准解读 - PHP进阶 (2) | Eric&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Eric&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Eric&#39;s Blog</a>
+                    <i class='iconfont icon-dot'></i>
+                    <a id="mobile-toggle-theme"><i class='iconfont icon-daytime-mode'></i></a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <i class="iconfont icon-menu"></i>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开</a>
+        <a onclick="go_top()">返回顶部</a>
+        <!-- <a onclick="go_bottom()">底部</a> -->
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+            expand_toc()
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "收起"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">PSR标准解读 - PHP进阶 (2)</h1>
+            
+                <div class="post-meta">
+                    
+                        <span class="post-time">
+                          <i class="iconfont icon-calendar"></i>
+                          2016/10/03
+                        </span>
+                    
+                    
+                        | <span class="post-category">
+                            <i class="iconfont icon-category"></i>
+                            
+                                <a href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
+                            
+                        </span>
+                    
+                    
+                        | <span class="post-category">
+                            <i class="iconfont icon-tags"></i>
+                            
+                                <a href="/tags/PHP/">#PHP</a>
+                            
+                                <a href="/tags/%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/">#编程规范</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="PSR-0-自动加载的标准结构-虽然已不被推荐使用，但composer还在支持"><a href="#PSR-0-自动加载的标准结构-虽然已不被推荐使用，但composer还在支持" class="headerlink" title="PSR-0 自动加载的标准结构 (虽然已不被推荐使用，但composer还在支持)"></a><em>PSR-0 自动加载的标准结构 (虽然已不被推荐使用，但composer还在支持)</em></h3><h4 id="要点："><a href="#要点：" class="headerlink" title="要点："></a>要点：</h4><ul>
+<li><p>结构： <code>\&lt;Vendor Name&gt;\(&lt;Namespace&gt;\)*&lt;Class Name&gt;</code></p>
+</li>
+<li><p>第一层级的命名为开发人员的标识</p>
+</li>
+<li><p>完整的命名空间可包含多个层级</p>
+</li>
+<li><p>在加载文件的时候，命名空间的分隔符<code>\</code>会被<code>DIRECTORY_SEPARATOR</code>替换</p>
+</li>
+<li><p>类名中的<code>_</code>会被<code>DIRECTORY_SEPARATOR</code>替换，所以<code>_</code>无任何意义</p>
+</li>
+<li><p>在加载文件的时候，命名空间会补全<code>.php</code>后缀</p>
+</li>
+<li><p>命名空间及类命名可以大小写随意</p>
+</li>
+<li><p>示例：</p>
+<pre><code>  \Symfony\Core\Request =&gt; /path/to/project/lib/vendor/Symfony/Core/Request.php
+
+  \namespace\package_name\Class_Name =&gt; /path/to/project/lib/vendor/namespace/package_name/Class/Name.php
+</code></pre>
+<ul>
+<li>需要注意的是，层级目录会重复vendor和namespace。</li>
+</ul>
+</li>
+</ul>
+<h4 id="加载器的实现示例："><a href="#加载器的实现示例：" class="headerlink" title="加载器的实现示例："></a>加载器的实现示例：</h4><pre><code>&lt;?php
+
+function autoload($className)
+&#123;
+    $className = ltrim($className, &#39;\\&#39;);
+    $fileName  = &#39;&#39;;
+    $namespace = &#39;&#39;;
+    if ($lastNsPos = strrpos($className, &#39;\\&#39;)) &#123;
+        $namespace = substr($className, 0, $lastNsPos);
+        $className = substr($className, $lastNsPos + 1);
+        $fileName  = str_replace(&#39;\\&#39;, DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+    &#125;
+    $fileName .= str_replace(&#39;_&#39;, DIRECTORY_SEPARATOR, $className) . &#39;.php&#39;;
+
+    require $fileName;
+&#125;
+spl_autoload_register(&#39;autoload&#39;);
+</code></pre>
+<h3 id="PSR-1-基本代码样式"><a href="#PSR-1-基本代码样式" class="headerlink" title="PSR-1 基本代码样式"></a>PSR-1 基本代码样式</h3><ul>
+<li><p>标签 (PHP tags)</p>
+<p>  代码必须包含在<?php ?> 或者 <?= ?>中</p>
+</li>
+<li><p>编码 (Encoding)</p>
+<p>  必须使用带BOM的UTF-8</p>
+</li>
+<li><p>对象化 (Objective)</p>
+<p>  单个PHP文件只负责一件事。定义类、trait、function、常量或者执行一系列的动作。不应该同时包含定义和执行代码。</p>
+</li>
+<li><p>自动加载 (Autoloading)</p>
+<p>  命名空间和类必须支持PSR-4标准。</p>
+</li>
+<li><p>类名 (Class names)</p>
+<p>  使用驼峰格式，首字母大写。例：CoffeeBean、TitleCase。</p>
+</li>
+<li><p>常量名 (Constant names)</p>
+<p>  必须全大写，并以下划线切分单词。例：PROJECT_NAME。</p>
+</li>
+<li><p>方法命名 (Method names)</p>
+<p>  使用驼峰格式，首字母小写。例：testCode。</p>
+</li>
+</ul>
+<h3 id="PSR-2-严格代码样式"><a href="#PSR-2-严格代码样式" class="headerlink" title="PSR-2 严格代码样式"></a>PSR-2 严格代码样式</h3><ul>
+<li><p>包含PSR-1中的所有要求</p>
+</li>
+<li><p>首行缩进 (Indentation)</p>
+<p>  使用4个空格 (鄙人也是这个阵营的)</p>
+</li>
+<li><p>文件和行 (Files and lines)</p>
+<p>  PHP文件必须使用Unix格式的换行结尾，最后必须多一个空行。必须省略”?&gt;”结尾标签。</p>
+<p>  单行字符最好不超过80，最多不能大于120.</p>
+<p>  每行最后不能有多余的空格。</p>
+</li>
+<li><p>PHP关键词 (Keywords)</p>
+<p>  所有PHP的关键词使用小写。<code>true</code>、 <code>false</code>、 <code>null</code>等。</p>
+</li>
+<li><p>命名空间 (Namespaces)</p>
+<p>  每个命名空间的声明必须跟着一空行。同理在使用<code>use</code>关键词的时候后边也需要跟一空行。</p>
+<pre><code>  &lt;?php
+  namespace MY\Component;
+
+  use Symfony\Components\HttpFoundation\Request;
+  use Symfony\Components\HttpFoundation\Response;
+
+  class App
+  &#123;
+      // Class defination body
+  &#125;
+</code></pre>
+</li>
+<li><p>类 (Classes)</p>
+<p>  定义类时使用的大括号必须在新的一行。在使用<code>extends</code>或<code>implements</code>时保证在同一行</p>
+<pre><code>  &lt;?php
+  namespace MY\Component;
+
+  class App extends YourApp
+  &#123;
+      // Class defination body
+  &#125;
+</code></pre>
+</li>
+<li><p>方法 (Methods)</p>
+<p>  大括号同样另起一行。参数以一个逗号加空格隔开，结尾不能有多余的空格。</p>
+<pre><code>  &lt;?php
+  namespace MY\Component;
+
+  class App extends YourApp
+  &#123;
+      public function doSomething($firstParam = true, $secondParam = 2)
+      &#123;
+          // Method defination body
+      &#125;
+  &#125;
+</code></pre>
+</li>
+<li><p>方法的可见行 (Visibility)</p>
+<p>  使用关键词<code>public</code>、<code>protected</code>、<code>private</code>代替之前经常使用的<code>var</code>，或者变量以下划线开始来表示私有的方式。</p>
+<p>  在定义方法为<code>abstract</code>或者<code>final</code>时，可见行关键词必须在前。</p>
+<pre><code>  &lt;?php
+  namespace MY\Component;
+
+  class App extends YourApp
+  &#123;
+      // Static property with visibility
+      public static $numberOfBirds = 0;
+
+      // Method with visibility    
+      public function __construct()
+      &#123;
+          static::$numberOfBirds++;
+      &#125;
+  &#125;
+</code></pre>
+</li>
+<li><p>控制结构 (Control structures)</p>
+<p>  所有的控制结构类关键词必须跟一个空格。例：<code>if</code>、<code>elseif</code>、<code>else</code>、<code>while</code>、<code>case</code>、<code>switch</code>、<code>do</code>、<code>for</code>、<code>foreach</code>、<code>try</code>、<code>catch</code>。</p>
+<pre><code>  &lt;?php
+  $gorilla = new \Animal\Gorilla;
+  $ibis = new \Animal\StawNeckedIbis;
+
+  if ($gorilla-&gt;isAwake() === true) &#123;
+      do &#123;
+          $gorilla-&gt;beatChest();
+      &#125; while($ibis-&gt;isAsleep() === true);
+
+      $ibis-&gt;flyAway();
+  &#125;
+</code></pre>
+</li>
+</ul>
+<h3 id="PSR-3-日志接口"><a href="#PSR-3-日志接口" class="headerlink" title="PSR-3 日志接口"></a>PSR-3 日志接口</h3><ul>
+<li><p>PSR-1和PSR-2是编码规范， PSR-3是接口定义，它定义了PHP的日志组件的一系列接口信息。</p>
+</li>
+<li><p>一个PHP的日志组件应该实现了<code>Psr\Log\LoggerInterface</code>接口的所有方法。该接口的定义参照了系统日志协议RFC5424。具体内容可参照： <a target="_blank" rel="noopener" href="https://github.com/php-fig/log/blob/master/Psr/Log/LoggerInterface.php">LoggerInterface.php</a>定义。</p>
+</li>
+</ul>
+<h3 id="PSR-4-自动加载器"><a href="#PSR-4-自动加载器" class="headerlink" title="PSR-4 自动加载器"></a>PSR-4 自动加载器</h3><ul>
+<li>同PSR-0，该标准描述了如何在运行时定位及加载PHP的类、接口以及traits。可以成为PSR-0的简化升级版。移除了对<code>_</code>转换成<code>DIRECTORY_SEPARATOR</code>的支持，目录结构也不需要再在<code>src/</code>下重复vendor和namespace。</li>
+<li>比如<code>\Oreilly\ModernPHP</code>这个命名空间对应的物理地址<code>src/</code>。PHP就知道所有使用了这个命名空间的类、接口以及traits都在<code>src/</code>目录下边。而命名空间<code>\Oreilly\ModernPHP\Chapter1\</code>对应的物理文件应该是<code>src/Chapter1/</code>。</li>
+</ul>
+<p><em>本文档参考了《O’Reilly Modern PHP》以及PHP官方文档</em></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/PHP/"># PHP</a>
+                    
+                        <a href="/tags/%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/"># 编程规范</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">首页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2016-10-25-semantic-versioning-2.html">简要说明语义化版本号的具体用法</a>
+            
+            
+            <a class="next" rel="next" href="/2016-08-05-a-sand-county-almanac.html">《沙郡年记》读书笔记</a>
+            
+        </section>
+
+        <!--
+        <section class="comments">
+        <div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+    this.page.url = 'https://ericyy.me/2016-10-03-php-advance-2-psr.html';
+    this.page.identifier = '2016-10-03-php-advance-2-psr.html';
+    this.page.title = 'PSR标准解读 - PHP进阶 (2)';
+};
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://ericyy.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+        </section>
+        -->
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Eric Yang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>, <span>Hosted on GitHub Pages</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

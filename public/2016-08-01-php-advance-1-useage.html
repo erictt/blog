@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Eric Yang">
+
+
+
+    <meta name="keywords" content="PHP的一些知识梳理">
+
+
+    <meta name="keywords" content="Modern PHP, PHP, Namespace, traits, closure, 命名空间, 闭包, Hiphop">
+
+
+<title>常规用法 - PHP进阶 (1) | Eric&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Eric&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Eric&#39;s Blog</a>
+                    <i class='iconfont icon-dot'></i>
+                    <a id="mobile-toggle-theme"><i class='iconfont icon-daytime-mode'></i></a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <i class="iconfont icon-menu"></i>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开</a>
+        <a onclick="go_top()">返回顶部</a>
+        <!-- <a onclick="go_bottom()">底部</a> -->
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+            expand_toc()
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "收起"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">常规用法 - PHP进阶 (1)</h1>
+            
+                <div class="post-meta">
+                    
+                        <span class="post-time">
+                          <i class="iconfont icon-calendar"></i>
+                          2016/08/01
+                        </span>
+                    
+                    
+                        | <span class="post-category">
+                            <i class="iconfont icon-category"></i>
+                            
+                                <a href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
+                            
+                        </span>
+                    
+                    
+                        | <span class="post-category">
+                            <i class="iconfont icon-tags"></i>
+                            
+                                <a href="/tags/PHP/">#PHP</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="命名空间-Namespace-PHP-5-3"><a href="#命名空间-Namespace-PHP-5-3" class="headerlink" title="命名空间 Namespace (PHP 5.3+)"></a>命名空间 Namespace (PHP 5.3+)</h3><p>沙盒机制。虚拟的层级关系，更好的隔离不同的组建。PS：以下仅为推荐用法。</p>
+<ul>
+<li><p>声明、引用、别名 (Declear, Import, Alias)</p>
+</li>
+<li><p>声明：</p>
+<pre><code>  &lt;?php 
+  // 必须在首行，推荐保持每个命名空间一行
+  namespace Symfony\Component\HttpFoundation;
+</code></pre>
+</li>
+<li><p>引用 &amp; 别名<br>  &#x2F;&#x2F; 推荐保持每个引用一行</p>
+</li>
+</ul>
+<h3 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h3><pre><code>&lt;?php
+// 引用
+use Symfony\Component\HttpFoundation\Response;
+
+$response = new Response(&#39;Oops&#39;, 400);
+$response-&gt;send();
+
+// 别名
+use Symfony\Component\HttpFoundation\Response as Res;
+
+$r = new Res(&#39;Oops&#39;, 400);
+$r-&gt;send();
+</code></pre>
+<h3 id="Function-PHP-5-6"><a href="#Function-PHP-5-6" class="headerlink" title="Function (PHP 5.6+)"></a>Function (PHP 5.6+)</h3><pre><code>&lt;?php 
+// 引用
+use function My\Full\functionName;
+
+// 别名
+use function My\Full\functionName as func;
+</code></pre>
+<h3 id="Constant"><a href="#Constant" class="headerlink" title="Constant"></a>Constant</h3><pre><code>// 引用
+use const My\Full\CONSTANT;
+</code></pre>
+<h3 id="PHP-7-code"><a href="#PHP-7-code" class="headerlink" title="PHP 7+ code"></a>PHP 7+ code</h3><pre><code>use some\namespace\&#123;ClassA, ClassB, ClassC as C&#125;;
+use function some\namespace\&#123;fn_a, fn_b, fn_c&#125;;
+use const some\namespace\&#123;ConstA, ConstB, ConstC&#125;;
+</code></pre>
+<h3 id="全局命名空间"><a href="#全局命名空间" class="headerlink" title="全局命名空间"></a>全局命名空间</h3><ul>
+<li><p>引用时不加入命名空间，程序默认为与当前命名空间相同</p>
+</li>
+<li><p>没有命名空间的程序，默认在global下，例如Exception。使用时需要在前边加上”&#x2F;“：</p>
+<pre><code>  &lt;?php
+  namespace My\App;
+
+  class Foo
+  &#123;
+      public function doSomething()
+      &#123;
+          $exception = new \Exception();
+      &#125;
+  &#125;
+</code></pre>
+</li>
+</ul>
+<h3 id="代码设计接口化"><a href="#代码设计接口化" class="headerlink" title="代码设计接口化"></a>代码设计接口化</h3><ul>
+<li><p>面向对象思维中的典型应用，在开发组件时尽可能的使用接口来统一功能，能为复用者或者后继开发人员节省非常多的时间</p>
+<pre><code>  // 实例来自PHP官方文档
+  interface iTemplate
+  &#123;
+      public function setVariable($name, $var);
+      public function getHtml($template);
+  &#125;
+
+  // Implement the interface
+  class Template implements iTemplate
+  &#123;
+      private $vars = array();
+    
+      public function setVariable($name, $var)
+      &#123;
+          $this-&gt;vars[$name] = $var;
+      &#125;
+    
+      public function getHtml($template)
+      &#123;
+          foreach($this-&gt;vars as $name =&gt; $value) &#123;
+              $template = str_replace(&#39;&#123;&#39; . $name . &#39;&#125;&#39;, $value, $template);
+          &#125;
+   
+          return $template;
+      &#125;
+  &#125;
+</code></pre>
+</li>
+</ul>
+<h3 id="Traits-PHP-5-4"><a href="#Traits-PHP-5-4" class="headerlink" title="Traits (PHP 5.4+)"></a>Traits (PHP 5.4+)</h3><ul>
+<li><p>大部分编程语言都是采用继承(extend)来实现类的扩展，Traits存在的目的是注入代码片段。</p>
+</li>
+<li><p>简单的理解就是一段需要复用的代码，我们不再复制粘贴到各个文件当中，而仅仅是使用traits的方式来引入。</p>
+</li>
+<li><p>其实include好像也可以实现同样的功能？</p>
+<pre><code>  &lt;?php
+  trait SayWorld &#123;
+      public function sayHello() &#123;
+          echo &#39;Hello World!&#39;;
+      &#125;
+  &#125;
+
+  class MyHelloWorld &#123;
+      use SayWorld;
+  &#125;
+</code></pre>
+</li>
+</ul>
+<h3 id="生成器-Generator-PHP-5-5"><a href="#生成器-Generator-PHP-5-5" class="headerlink" title="生成器 (Generator) (PHP 5.5+)"></a>生成器 (Generator) (PHP 5.5+)</h3><ul>
+<li><p>不同于JS中的Generator，PHP更单纯的是个迭代器，封装了自己的状态。目的是节省性能以及降低代码复杂度。</p>
+<pre><code>  &lt;?php 
+  // 如下代码在执行的时候会依次输出三个值
+  function myGenerator()
+  &#123;
+      yield &#39;value1&#39;;
+      yield &#39;value2&#39;;
+      yield &#39;value3&#39;;
+  &#125;
+</code></pre>
+</li>
+<li><p>常与foreach循环一起连用。使用场景如逐行读取文件，重复的计算等</p>
+<pre><code>  &lt;?php
+  function getLines($file) &#123;
+      $f = fopen($file, &#39;r&#39;);
+      try &#123;
+          while ($line = fgets($f)) &#123;
+              yield $line;
+          &#125;
+      &#125; finally &#123;
+          fclose($f);
+      &#125;
+  &#125;
+
+  foreach (getLines(&quot;file.txt&quot;) as $n =&gt; $line) &#123;
+      if ($n &gt; 5) break;
+      echo $line;
+  &#125;
+</code></pre>
+</li>
+</ul>
+<h3 id="闭包-Closures-PHP-5-3"><a href="#闭包-Closures-PHP-5-3" class="headerlink" title="闭包(Closures) (PHP 5.3+)"></a>闭包(Closures) (PHP 5.3+)</h3><ul>
+<li><p>通常会用在需要回调函数时，比如array_map()和preg_replace_callback()。</p>
+<pre><code>  &lt;?php
+  function cube($n)
+  &#123;
+      return($n * $n * $n);
+  &#125;
+
+  $a = array(1, 2, 3, 4, 5);
+  $b = array_map(&quot;cube&quot;, $a);
+  print_r($b);
+</code></pre>
+</li>
+<li><p>另一种情况是动态追加函数或变量到当前函数&#x2F;类中。</p>
+<ul>
+<li><p>低级用法</p>
+<pre><code>  &lt;?php
+  function enclosePerson($name) &#123;
+      return function ($doCommand) use ($name) &#123;
+          return sprintf(&#39;%s, %s&#39;, $name, $doCommand);
+      &#125;;
+  &#125;
+  // 在闭包函数中封装了字符串&#39;Clay&#39;
+  $clay = enclosePerson(&#39;Clay&#39;);
+  echo $clay(&#39;get me sweet tea!&#39;);
+</code></pre>
+</li>
+<li><p>高级用法</p>
+<pre><code>  &lt;?php
+  class App
+  &#123;
+      protected $routes = [];
+      protected $responseStatus = &#39;200 OK&#39;;
+      protected $responseContentType = &#39;text/html&#39;;
+      protected $responseBody = &#39;Hello world&#39;;
+      public function addRoute($routePath, $routeCallback)
+      &#123;
+          // bindTo 将routeCallback函数追加给当前的app对象，然后将其赋值给$routePath键
+          // __CLASS__ 为当前类名，并包含当前声明的命名空间，使用在此处，意为$routeCallback的作用域在当前类，
+          // 想了解更多作用域相关信息请移步：http://php.net/manual/zh/closure.bindto.php#119410
+          $this-&gt;routes[$routePath] = $routeCallback-&gt;bindTo($this, __CLASS__);
+      &#125;
+      public function dispatch($currentPath)
+      &#123;
+          foreach ($this-&gt;routes as $routePath =&gt; $callback) &#123;
+              if ($routePath === $currentPath) &#123;
+                  // 该函数是在addRoute函数执行时被追加
+                  // 执行了回调函数后，赋值了responseContentType和responseBody
+                  $callback();
+              &#125;
+          &#125;
+          header(&#39;HTTP/1.1 &#39; . $this-&gt;responseStatus);
+          header(&#39;Content-type: &#39; . $this-&gt;responseContentType);
+          header(&#39;Content-length: &#39; . mb_strlen($this-&gt;responseBody));
+          echo $this-&gt;responseBody;
+      &#125;
+  &#125;
+  $app = new App();
+  $app-&gt;addRoute(&#39;/users/josh&#39;, function () &#123;
+      $this-&gt;responseContentType = &#39;application/json;charset=utf8&#39;;
+      $this-&gt;responseBody = &#39;&#123;&quot;name&quot;: &quot;Josh&quot;&#125;&#39;;
+  &#125;);
+  $app-&gt;dispatch(&#39;/users/josh&#39;);
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Zend-OPcache-PHP-5-5"><a href="#Zend-OPcache-PHP-5-5" class="headerlink" title="Zend OPcache (PHP 5.5+)"></a>Zend OPcache (PHP 5.5+)</h3><ul>
+<li>类似于APC、XCache等第三方cache扩展，预编译PHP代码为二进制程序，缓存在内存中。</li>
+</ul>
+<p><em>本文档参考了《O’Reilly Modern PHP》以及PHP官方文档</em></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/PHP/"># PHP</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">首页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2016-08-05-a-sand-county-almanac.html">《沙郡年记》读书笔记</a>
+            
+            
+            <a class="next" rel="next" href="/2016-07-01-jin-gang-jing-note.html">《金刚经说什么》读书笔记</a>
+            
+        </section>
+
+        <!--
+        <section class="comments">
+        <div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+    this.page.url = 'https://ericyy.me/2016-08-01-php-advance-1-useage.html';
+    this.page.identifier = '2016-08-01-php-advance-1-useage.html';
+    this.page.title = '常规用法 - PHP进阶 (1)';
+};
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://ericyy.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+        </section>
+        -->
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Eric Yang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>, <span>Hosted on GitHub Pages</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

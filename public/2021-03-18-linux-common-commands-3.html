@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Eric Yang">
+
+
+
+    <meta name="keywords" content="Linux 常用命令, tcpdump">
+
+
+    <meta name="keywords" content="tcpdump">
+
+
+<title>Linux 常用命令(3) - 检查网络流量 | Eric&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Eric&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Eric&#39;s Blog</a>
+                    <i class='iconfont icon-dot'></i>
+                    <a id="mobile-toggle-theme"><i class='iconfont icon-daytime-mode'></i></a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <i class="iconfont icon-menu"></i>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开</a>
+        <a onclick="go_top()">返回顶部</a>
+        <!-- <a onclick="go_bottom()">底部</a> -->
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+            expand_toc()
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "收起"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Linux 常用命令(3) - 检查网络流量</h1>
+            
+                <div class="post-meta">
+                    
+                        <span class="post-time">
+                          <i class="iconfont icon-calendar"></i>
+                          2021/03/18
+                        </span>
+                    
+                    
+                        | <span class="post-category">
+                            <i class="iconfont icon-category"></i>
+                            
+                                <a href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
+                            
+                        </span>
+                    
+                    
+                        | <span class="post-category">
+                            <i class="iconfont icon-tags"></i>
+                            
+                                <a href="/tags/Linux/">#Linux</a>
+                            
+                                <a href="/tags/tcpdump/">#tcpdump</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="检查网络流量"><a href="#检查网络流量" class="headerlink" title="检查网络流量"></a>检查网络流量</h2><h3 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h3><p>Tcpdump 是用于捕获发出和收到的网络流量的工具。在日常工作中经常用来检查调试网络问题。它不单能捕获 TCP 流量，也能捕获 UDP、ARP 和 ICMP 流量。</p>
+<p>首先，tcpdump 需要 root 权限，所以别忘了用 sudo 来执行。</p>
+<h4 id="常用参数及对应的命令组合"><a href="#常用参数及对应的命令组合" class="headerlink" title="常用参数及对应的命令组合"></a>常用参数及对应的命令组合</h4><ul>
+<li><code>-D</code>: 查看所有的网络接口</li>
+<li><code>-i &lt;interface&gt;</code>: 捕获特定网络接口，输出到屏幕</li>
+<li><code>-n</code>: 不反向解析域名。在捕获的记录里，默认情况tcpdump会反向解析所有的IP地址，然后显示域名地址。该参数可以避免这个行为。</li>
+<li><code>-w &lt;file.pcap&gt;</code>: 输出到文件 file.pcap。通常大家会使用<code>.pcap</code>扩展名，表示 packet capture。<ul>
+<li>在输出到文件的时候，内容是不会输出到屏幕的。如果希望查看，可以打开新的终端，然后使用 <code>tcpdump -r file.pcap</code> 命令查看。</li>
+<li>当然，你也可以使用 <code>tcpdump -w file.pcap &amp;</code> 命令。让输出到文件的命令运行在后台。或者使用 <code>-l</code> + <code>tee</code> 命令输出到文件的同时查看。</li>
+<li>推荐使用 Wireshark 来分析捕获的流量日志。</li>
+</ul>
+</li>
+<li><code>-l</code>: 缓存输出，用于输出到屏幕的同时保存到文件。常用命令为 <code>tcpdump -l | tee file.out</code> 或者 <code>tcpdump -l &gt; file.out &amp; tail -f file.out</code></li>
+<li><code>-W 10 -C 200</code>: 当需要运行很长时间并且保存日志的时候，可以指定这两个参数。<code>-C</code> 指定单个文件大小， 单位为MB。<code>-W</code> 文件数量。Tcpdump会自动切分和更新日志。</li>
+<li><code>-A | -X</code> 默认情况下，tcpdump <strong>输出到屏幕</strong>时，仅捕获数据包的headers。如果需要检查包信息，可以加上 <code>-A</code> 以ASCII格式输出，或者 <code>-X</code> 以HEX格式输出。</li>
+</ul>
+<h4 id="过滤流量"><a href="#过滤流量" class="headerlink" title="过滤流量"></a>过滤流量</h4><p>tcpdump使用的是<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Berkeley_Packet_Filter">BPF</a>语法用来作为过滤参数，很接近自然语言。比如，只希望捕获端口27017的TCP流量：<code>tcpdump tcp port 27017</code>。以下是常用的组合：</p>
+<ul>
+<li><code>tcpdump [udp|tcp]</code>: 只捕获 UDP 或 TCP 流量。Tcpdump也支持使用<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers">IP协议数字</a>的格式。比如 udp 是 17， tcp 是 6，所以这个命令也可以写作 <code>tcpdump proto [17|6]</code>。 </li>
+<li><code>tcpdump host 192.168.1.185</code>: 只捕获跟 host: 192.168.1.185 相关的流量。也可以指定IP范围，比如 <code>tcpdump net 10.10</code> 是捕获10.10.0.0&#x2F;16 相关的所有流量。</li>
+<li><code>tcpdump port 27017</code>: 只捕获跟端口27017相关的流量， 也可以指定端口范围：<code>tcpdump portrange 100-200</code></li>
+<li><code>tcpdump src host 192.168.1.185</code>: 只捕获来自 host: 192.168.1.185 的流量</li>
+<li><code>tcpdump dst port 80</code>: 只捕获访问本机 80 端口的流量</li>
+</ul>
+<p>复杂的过滤可以使用 <code>&amp;&amp;</code>， <code>｜｜</code>， <code>！</code> 或者 <code>and</code> 和 <code>not</code> 等关键词，比如：</p>
+<ul>
+<li><code>tcpdump -n src 192.168.1.185 and not dst port 22</code>: 捕获来自 host: 192.169.1.185 并且目的端口不是22的流量</li>
+<li>还可以加上 <code>()</code> 来实现更复杂的过滤： <code>tcpdump -n &#39;host 192.168.1.185 and (tcp port 80 or tcp port 443)&#39;</code></li>
+</ul>
+<h4 id="几个例子"><a href="#几个例子" class="headerlink" title="几个例子"></a>几个例子</h4><ul>
+<li><p><code>tcpdump -D</code> 来查看所有的网络接口</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># tcpdump -D</span><br><span class="line">1.eth0</span><br><span class="line">2.nflog (Linux netfilter log (NFLOG) interface)</span><br><span class="line">3.nfqueue (Linux netfilter queue (NFQUEUE) interface)</span><br><span class="line">4.any (Pseudo-device that captures on all interfaces)</span><br><span class="line">5.lo [Loopback]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>其中 eth0 是物理网卡。any 比较特殊是包含了所有接口的流量。lo 是本地流量。其他两个我也不知道是什么。</li>
+</ul>
+</li>
+<li><p><code>tcpdump -i &lt;interface&gt;</code> 来查看特定的接口，比如 <code>tcpdump -i any</code>  可以捕获所有接口的所有流量，输出到屏幕。 可以追加 <code>-c &lt;number&gt;</code> 来指定捕获包的数量。</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># tcpdump -i any -c 10 -n</span><br><span class="line">tcpdump: data link type PKTAP</span><br><span class="line">tcpdump: verbose output suppressed, use -v or -vv for full protocol decode</span><br><span class="line">listening on any, link-type PKTAP (Apple DLT_PKTAP), capture size 262144 bytes</span><br><span class="line">23:23:45.199840 IP 127.0.0.1.57437 &gt; 127.0.0.1.64582: Flags [F.], seq 3146809726, ack 228856637, win 6375, options [nop,nop,TS val 1294890263 ecr 1294763197], length 0</span><br><span class="line">23:23:45.199884 IP 127.0.0.1.57437 &gt; 127.0.0.1.64582: Flags [F.], seq 0, ack 1, win 6375, options [nop,nop,TS val 1294890263 ecr 1294763197], length 0</span><br><span class="line">23:23:45.199903 IP 127.0.0.1.64582 &gt; 127.0.0.1.57437: Flags [.], ack 1, win 6376, options [nop,nop,TS val 1294890263 ecr 1294890263], length 0</span><br><span class="line">23:23:45.199908 IP 127.0.0.1.64582 &gt; 127.0.0.1.57437: Flags [.], ack 1, win 6376, options [nop,nop,TS val 1294890263 ecr 1294890263], length 0</span><br><span class="line">23:23:45.432277 IP 192.168.10.123.63284 &gt; 70.103.220.153.4501: UDP, length 132</span><br><span class="line">23:23:45.511805 IP 70.103.220.153.4501 &gt; 192.168.10.123.63284: UDP, length 132</span><br><span class="line">23:23:45.716903 ARP, Announcement 192.168.10.101, length 28</span><br><span class="line">23:23:46.639929 IP 192.168.10.124.49154 &gt; 255.255.255.255.6667: UDP, length 188</span><br><span class="line">23:23:46.837854 IP 192.168.10.123.64333 &gt; 172.217.6.69.443: Flags [.], seq 1059163531:1059164949, ack 51371873, win 2048, options [nop,nop,TS val 1294891899 ecr 1148464805], length 1418</span><br><span class="line">23:23:46.837860 IP 192.168.10.123.64333 &gt; 172.217.6.69.443: Flags [.], seq 1418:2836, ack 1, win 2048, options [nop,nop,TS val 1294891899 ecr 1148464805], length 1418</span><br><span class="line">10 packets captured</span><br><span class="line">13 packets received by filter</span><br><span class="line">0 packets dropped by kernel</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="输出日志解析"><a href="#输出日志解析" class="headerlink" title="输出日志解析"></a>输出日志解析</h4><p>典型的结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Timestamp] [Protocol] [Src IP].[Src Port] &gt; [Dst IP].[Dst Port]: [Flags], [Seq], [Ack], [Win Size], [Options], [Data Length]</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">23:25:46.253052 IP 192.168.10.123.64581 &gt; 192.168.10.107.8009: Flags [P.], seq 139835987:139836097, ack 801463949, win 2048, options [nop,nop,TS val 1295011047 ecr 5804669], length 110</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li><code>23:25:46.253052</code> 时间戳</li>
+<li><code>IP</code> 包协议。IP意思是 IPv4</li>
+<li><code>192.168.10.123.64581</code> 来源IP和端口，最后一个 <code>.</code> 后边是端口</li>
+<li><code>&gt;</code> 数据流从源IP到目的IP</li>
+<li><code>192.168.10.107.8009</code> 目的IP和端口，最后一个 <code>.</code> 后边是端口</li>
+<li><code>Flags [P.]</code> TCP 标识。 <code>[P.]</code> 是 发送告知以接收的数据包，用于告知上一个数据包和发送数据。其他的标识包括：<ul>
+<li>[S] - SYN (数据包发送者发起TCP第一次握手)</li>
+<li>[S.] - SYN-ACK (接送者发起第二次握手，并告知上一个数据包接受不了成功)</li>
+<li>[.] - ACK (发送者发起第三次握手，告知接收成功)</li>
+<li>[P] - PSH (发送数据)</li>
+<li>[F] - FIN (发送者告知数据传输完成)</li>
+<li>[R] - RST (接收者发起，表示接收到了意外数据包)</li>
+<li>还有 URG、CWR等</li>
+</ul>
+</li>
+<li><code>seq 139835987:139836097</code><ul>
+<li>当前数据流中包含了完整数据包的第 139835987 到 139836097 byte</li>
+</ul>
+</li>
+<li><code>ack 801463949</code><ul>
+<li>最后的期望的 bytes 数量</li>
+</ul>
+</li>
+<li><code>win 2048</code><ul>
+<li>接收者可以缓存的 bytes</li>
+</ul>
+</li>
+<li><code>options [nop,nop,TS val 1295011047 ecr 5804669]</code><ul>
+<li><code>nop</code>: no operation</li>
+<li><code>TS val</code> TCP 时间戳</li>
+<li><code>ecr</code>: echo reply.</li>
+</ul>
+</li>
+<li><code>length 110</code><ul>
+<li>本次数据流传输的大小 当前是 1024 bytes</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://linuxize.com/post/tcpdump-command-in-linux/">https://linuxize.com/post/tcpdump-command-in-linux/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.tcpdump.org/manpages/tcpdump.1.html">https://www.tcpdump.org/manpages/tcpdump.1.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Berkeley_Packet_Filter">https://en.wikipedia.org/wiki/Berkeley_Packet_Filter</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.keycdn.com/support/tcp-flags">https://www.keycdn.com/support/tcp-flags</a></li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Linux/"># Linux</a>
+                    
+                        <a href="/tags/tcpdump/"># tcpdump</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">首页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021-03-10-linux-common-commands-2.html">Linux 常用命令(2) - 重定向输出和输入, 查看网络端口, 压缩和解压缩</a>
+            
+        </section>
+
+        <!--
+        <section class="comments">
+        <div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+    this.page.url = 'https://ericyy.me/2021-03-18-linux-common-commands-3.html';
+    this.page.identifier = '2021-03-18-linux-common-commands-3.html';
+    this.page.title = 'Linux 常用命令(3) - 检查网络流量';
+};
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://ericyy.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+        </section>
+        -->
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Eric Yang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>, <span>Hosted on GitHub Pages</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

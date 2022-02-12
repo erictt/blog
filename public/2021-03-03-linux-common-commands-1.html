@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Eric Yang">
+
+
+
+    <meta name="keywords" content="Linux 常用命令, ps, netstat, ss, lsof, less, cat, kill, tee">
+
+
+    <meta name="keywords" content="ps, netstat, ss, lsof, less, cat, kill, tee">
+
+
+<title>Linux 常用命令(1) - 检查本地端口, 查看进程, 文件 | Eric&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="Eric's Blog" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Eric&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Eric&#39;s Blog</a>
+                    <i class='iconfont icon-dot'></i>
+                    <a id="mobile-toggle-theme"><i class='iconfont icon-daytime-mode'></i></a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <i class="iconfont icon-menu"></i>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://cs.ericyy.me">学习笔记</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://github.com/erictt">Github</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开</a>
+        <a onclick="go_top()">返回顶部</a>
+        <!-- <a onclick="go_bottom()">底部</a> -->
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+            expand_toc()
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "收起"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Linux 常用命令(1) - 检查本地端口, 查看进程, 文件</h1>
+            
+                <div class="post-meta">
+                    
+                        <span class="post-time">
+                          <i class="iconfont icon-calendar"></i>
+                          2021/03/03
+                        </span>
+                    
+                    
+                        | <span class="post-category">
+                            <i class="iconfont icon-category"></i>
+                            
+                                <a href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
+                            
+                        </span>
+                    
+                    
+                        | <span class="post-category">
+                            <i class="iconfont icon-tags"></i>
+                            
+                                <a href="/tags/Linux/">#Linux</a>
+                            
+                                <a href="/tags/ps/">#ps</a>
+                            
+                                <a href="/tags/netstat/">#netstat</a>
+                            
+                                <a href="/tags/ss/">#ss</a>
+                            
+                                <a href="/tags/lsof/">#lsof</a>
+                            
+                                <a href="/tags/less/">#less</a>
+                            
+                                <a href="/tags/cat/">#cat</a>
+                            
+                                <a href="/tags/kill/">#kill</a>
+                            
+                                <a href="/tags/tee/">#tee</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="检查本地端口"><a href="#检查本地端口" class="headerlink" title="检查本地端口"></a>检查本地端口</h2><h3 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h3><ul>
+<li><p>大多数linux系统已经内置了这个命令。如果没有，可以通过以下命令安装：</p>
+<ul>
+<li>Ubuntu &amp; Debian: <code>sudo apt install net-tools</code></li>
+<li>CentOS: <code>sudo yum install net-tools</code></li>
+</ul>
+</li>
+<li><p>列出所有在使用的TCP和UDP端口，包括服务名称和 Socket：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo netstat -tunlp</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-t</code> - 显示 TCP 端口</li>
+<li><code>-u</code> - 显示 UDP 端口</li>
+<li><code>-n</code> - 直接使用 IP 地址，不通过域名服务器</li>
+<li><code>-l</code> - 仅显示正在监听的端口</li>
+<li><code>-p</code> - 显示正在使用 Socket 的 PID 和程序名称</li>
+</ul>
+</li>
+<li><p>输出结果示例：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo netstat -tunlp</span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name</span><br><span class="line">tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1755/sshd</span><br><span class="line">tcp6       0      0 :::22                   :::*                    LISTEN      1755/sshd</span><br><span class="line">udp        0      0 0.0.0.0:68              0.0.0.0:*                           1075/dhclient</span><br><span class="line">udp        0      0 0.0.0.0:68              0.0.0.0:*                           1074/dhclient</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Proto - 协议名称.</li>
+<li>Local Address - 程序监听的 IP 和端口</li>
+<li>PID&#x2F;Program name - PID 和程序名称</li>
+</ul>
+</li>
+<li><p>通常情况下我们只需要查看特定的端口监听情况，可以通过 grep 管道命令来实现：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo netstat -tnlp | grep :22</span><br><span class="line">tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1755/sshd</span><br><span class="line">tcp6       0      0 :::22                   :::*                    LISTEN      1755/sshd</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果输出结果为空，说明现在没有程序在监听这个端口。</li>
+<li>你也可以通过 grep PID、协议、监听状态等来过滤结果。比如：<ul>
+<li><code>sudo netstat -tunlp | grep 0.0.0.0</code></li>
+<li><code>sudo netstat -tunlp | grep tcp</code></li>
+<li><code>sudo netstat -tunlp | grep sshd</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="ss"><a href="#ss" class="headerlink" title="ss"></a>ss</h3><ul>
+<li><p>使用上类似 netstat。优点是速度更快，得到更多TCP状态。</p>
+</li>
+<li><p>示例：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ss -tunlp</span><br><span class="line">Netid State      Recv-Q Send-Q Local Address:Port               Peer Address:Port</span><br><span class="line">udp   UNCONN     0      0               *:68                          *:*                   users:((&quot;dhclient&quot;,pid=1075,fd=6))</span><br><span class="line">udp   UNCONN     0      0               *:68                          *:*                   users:((&quot;dhclient&quot;,pid=1074,fd=6))</span><br><span class="line">tcp   LISTEN     0      128             *:22                          *:*                   users:((&quot;sshd&quot;,pid=1755,fd=3))</span><br><span class="line">tcp   LISTEN     0      128            :::22                         :::*                   users:((&quot;sshd&quot;,pid=1755,fd=4))</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="lsof"><a href="#lsof" class="headerlink" title="lsof"></a>lsof</h3><ul>
+<li><p><code>lsof</code>(list opened files) 是用来查看当前系统打开文件的工具。但是由于在类 unix 的系统中，一切皆文件，所以 lsof 也可以用来查看进程、端口等。</p>
+</li>
+<li><p>输出示例：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">COMMAND     PID   TID             USER   FD      TYPE             DEVICE SIZE/OFF       NODE NAME</span><br><span class="line">systemd       1                   root  cwd       DIR                8,1     4096          2 /</span><br><span class="line">systemd       1                   root  rtd       DIR                8,1     4096          2 /</span><br><span class="line">systemd       1                   root  txt       REG                8,1  1589552      10104 /lib/systemd/systemd</span><br><span class="line">systemd       1                   root  DEL       REG                8,1                2119 /lib/x86_64-linux-gnu/libuuid.so.1.3.0</span><br><span class="line">systemd       1                   root  mem       REG                8,1   162632       2068 /lib/x86_64-linux-gnu/ld-2.23.so</span><br><span class="line">systemd       1                   root    0u      CHR                1,3      0t0          6 /dev/null</span><br><span class="line">systemd       1                   root    2u      CHR                1,3      0t0          6 /dev/null</span><br><span class="line">dnsmasq     972                dnsmasq    5u      IPv4             19118      0t0        TCP 127.0.0.1:53 (LISTEN)</span><br><span class="line">sshd       1515                   root    3u      IPv4             22999      0t0        TCP *:ssh (LISTEN)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Command: 进程相关的命令</li>
+<li>PID: 进程 ID</li>
+<li>TID: 线程 ID。为空的话说明当前是进程。</li>
+<li>User: 用户名或用户ID</li>
+<li>Type: 有超过70种。常见的包括<ul>
+<li>REG: 常规系统文件文件</li>
+<li>DIR: 目录</li>
+<li>FIFO: 先进先出</li>
+<li>CHR: Character special file</li>
+<li>BLK: Block special file</li>
+<li>INET: 网络 socket</li>
+<li>unix: UNIX domain socket</li>
+</ul>
+</li>
+<li>Device: 磁盘的名称</li>
+<li>Size&#x2F;Off: 文件大小或者文件所在的磁盘中的位置</li>
+<li>Node: 文件在磁盘中的索引节点</li>
+<li>Name: 文件挂载点</li>
+<li>FD: 可能是以下几种:<ul>
+<li>文件描述。常见的包括 cwd、rtd、txt、mem 和一些数字等等。其中，<ul>
+<li>cwd 表示当前的工作目录</li>
+<li>rtd 表示根目录</li>
+<li>txt 表示程序的可执行文件</li>
+<li>mem 表示内存映射文件</li>
+<li>mmap 表示内存映射设备</li>
+</ul>
+</li>
+<li>数字描述。以数字表示的，比如标准输入输出文件。数字后面的字母表示进程对该文件的读写模式。<ul>
+<li>u 表示该文件被打开并处于读取&#x2F;写入模式</li>
+<li>r 表示只读模式</li>
+<li>w 表示只写模式</li>
+<li>‘ ‘ 空字符表示未知</li>
+<li>当字母<code>u</code>, <code>r</code>, <code>w</code> 大写的情况下表示该进程拥有对文件的对应操作的锁。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h4><ul>
+<li>查看所有正在监听的TCP端口: <code>lsof -nP -iTCP -sTCP:LISTEN</code><ul>
+<li><code>-n</code> - 不解析域名，直接使用IP地址</li>
+<li><code>-P</code> - 不解析端口，直接使用数字。比如默认情况下 端口22会用<code>ssh</code>来表示。带上这个参数后，会直接显示22。</li>
+<li><code>-iTCP -sTCP:LISTEN</code> - 仅显示网络文件，并且是TCP协议,以及状态为LISTEN</li>
+</ul>
+</li>
+<li>查看特定的端口：<code>lsof -i :22</code><ul>
+<li>只看 TCP：<code>lsof -i TCP:22</code></li>
+</ul>
+</li>
+<li>查看已建立的连接: <code>lsof  -i -s TCP:ESTABLISHED</code></li>
+<li>列出指定进程打开的所有文件： <code>lsof -p 588</code></li>
+<li>查看指定文件正在被哪些进程访问： <code>lsof -t /var/log/auth.log</code></li>
+</ul>
+<h2 id="管理进程"><a href="#管理进程" class="headerlink" title="管理进程"></a>管理进程</h2><h3 id="查看进程-ps"><a href="#查看进程-ps" class="headerlink" title="查看进程 - ps"></a>查看进程 - ps</h3><ul>
+<li><p><code>ps aux</code> - BSD风格，没有 <code>-</code></p>
+<ul>
+<li><code>a</code> - 显示所有用户的所有的进程</li>
+<li><code>u</code> - 提供更多细节，包括进程所属用户，以及内存使用</li>
+<li><code>x</code> - 显示所有程序，包括没有 attacth 终端的</li>
+</ul>
+</li>
+<li><p><code>ps -elf</code> - UNIX风格，一个 <code>-</code>。（其实还有GNU风格，是两个<code>-</code>）</p>
+<ul>
+<li><code>-l</code> &#x2F; <code>-f</code> - 类似于<code>u</code>，显示更多细节，只是侧重不同。两个参数都包含了PPID(父进程ID)</li>
+<li><code>-e</code> - 类似于 <code>x</code>，显示所有程序</li>
+</ul>
+</li>
+<li><p>示例：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># ps aux | head -10</span><br><span class="line">USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</span><br><span class="line">root         8  0.0  0.0      0     0 ?        S    Feb25   0:00 [rcu_bh]</span><br><span class="line">root         9  0.0  0.0      0     0 ?        R    Feb25   1:02 [rcu_sched]</span><br><span class="line">root        10  0.0  0.0      0     0 ?        S&lt;   Feb25   0:00 [lru-add-drain]</span><br><span class="line">root        11  0.0  0.0      0     0 ?        S    Feb25   0:04 [watchdog/0]</span><br><span class="line">root        13  0.0  0.0      0     0 ?        S    Feb25   0:00 [kdevtmpfs]</span><br><span class="line">root        14  0.0  0.0      0     0 ?        S&lt;   Feb25   0:00 [netns]</span><br><span class="line">root        15  0.0  0.0      0     0 ?        S    Feb25   0:00 [khungtaskd]</span><br><span class="line">root        16  0.0  0.0      0     0 ?        S&lt;   Feb25   0:00 [writeback]</span><br><span class="line">root        17  0.0  0.0      0     0 ?        S&lt;   Feb25   0:00 [kintegrityd]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>USER</code> - 用户</li>
+<li><code>PID</code> - 进程ID</li>
+<li><code>%CPU</code> - CPU占有率</li>
+<li><code>%MEM</code> - 内存占有率</li>
+<li><code>VSZ</code> - 虚拟内存占有大小(KB)</li>
+<li><code>RSS</code> - 物理内存占有大小</li>
+<li><code>STAT</code> - 进程状态 Z (僵死), S (中断), R (运行), T (停止), D (不可中断)</li>
+<li><code>START</code> - 进程开始运行时间</li>
+</ul>
+</li>
+</ul>
+<h3 id="重启-x2F-杀死进程-kill-x2F-pkill"><a href="#重启-x2F-杀死进程-kill-x2F-pkill" class="headerlink" title="重启&#x2F;杀死进程 - kill &#x2F; pkill"></a>重启&#x2F;杀死进程 - kill &#x2F; pkill</h3><ul>
+<li><code>kill [OPTIONS] [PID]...</code></li>
+<li>常用参数：<ul>
+<li><code>1</code>(HUP) - 重新加载进程</li>
+<li><code>9</code>(KILL) - 直接杀死进程</li>
+<li><code>15</code>(TERM) - 逐步停止进程</li>
+<li><code>kill -l</code> 可以查看更多参数</li>
+</ul>
+</li>
+<li>用法：<ol>
+<li>使用数字 - <code>kill -1 &lt;PID&gt;</code> 或者 <code>kill -s 1 &lt;PID&gt;</code></li>
+<li>使用<code>SIG</code>前缀 - <code>kill -SIGHUP &lt;PID&gt;</code> 或者 <code>kill -s SIGHUP &lt;PID&gt;</code></li>
+<li>不使用<code>SIG</code>前缀 - <code>kill -HUP &lt;PID&gt;</code> 或者 <code>kill -s HUP &lt;PID&gt;</code></li>
+</ol>
+</li>
+<li>复合用法：<ul>
+<li><code>kill -9 $(pidof mongod)</code><ul>
+<li><code>pidof mongod</code> 会输出 mongod的PID, 作为变量传递给 kill命令</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>更多信号： <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Signal_(IPC)">https://en.wikipedia.org/wiki/Signal_(IPC)</a></li>
+</ul>
+<h2 id="查看文件"><a href="#查看文件" class="headerlink" title="查看文件"></a>查看文件</h2><h3 id="less"><a href="#less" class="headerlink" title="less"></a>less</h3><ul>
+<li>对比<code>more</code>的优点是，不会一次性加载整个文件。速度会快很多。</li>
+<li>常用命令：<ul>
+<li><code>less +5 /var/log/auth.log</code> 从第五行开始</li>
+<li><code>less -N /var/log/auth.log</code> 显示行数</li>
+<li><code>less -5 /var/log/auth.log</code> 按空格或回车时默认翻整页，<code>-5</code> 指定每页为5行</li>
+</ul>
+</li>
+<li>在查看文件时<ul>
+<li>可以使用 <code>/keyword</code> 来查找关键词，然后使用<code>n</code>或<code>N</code>来查找下一个或上一个</li>
+<li><code>gg</code>回到顶部，G至底部</li>
+<li><code>q</code> 退出阅读文件</li>
+</ul>
+</li>
+</ul>
+<h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h3><ul>
+<li>默认输出所有文本到终端。可搭配less使用：<ul>
+<li><code>cat /var/log/auth.log | less</code> &#x3D; <code>less /var/log/auth.log</code></li>
+</ul>
+</li>
+<li>常用：<ul>
+<li><code>cat -n /var/log/auth.log</code> 显示行数</li>
+<li><code>cat -b /var/log/auth.log</code> 过滤空行后，显示行数。会覆盖 <code>-n</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h2><h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><p>应该是最简单的输出命令了。类似java&#x2F;python的print方法。</p>
+<ul>
+<li><code>echo &quot;hello world&quot; &gt; file.txt</code></li>
+</ul>
+<h3 id="tee"><a href="#tee" class="headerlink" title="tee"></a>tee</h3><p>从标准输入流中读取并同时写入多个文件。</p>
+<p>常用参数：</p>
+<ul>
+<li><code>-a</code> - 以追加的方式写入，不覆盖文件已有文本。</li>
+</ul>
+<p>常用命令：</p>
+<ul>
+<li><code>command | tee file1.out file2.out file3.out</code></li>
+</ul>
+<p>一个特殊的使用场景：</p>
+<p>当使用 <code>echo</code> 输入文本到 没有权限的文件时：<code>sudo echo &quot;text&quot; &gt;&gt; /etc/hello.conf</code> 是会失败的。因为重定向 <code>&gt;</code> 不是 sudo 执行的。这个时候可以使用 <code>tee</code> 解决： <code>echo &quot;text&quot; | sudo tee -a /etc/hello.conf</code></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>Mac 里的 <code>netstat</code> 跟 Linux 差异很大。比如 <code>-p</code> 在 Linux 里是指定是否查看 PID，但在 Mac 里是用来指定协议的 – <code>-p tcp</code>。为了避免搞混，建议在 Mac 里使用 <code>lsof</code> 代替。</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://linuxize.com/post/check-listening-ports-linux/">https://linuxize.com/post/check-listening-ports-linux/</a></li>
+<li><a target="_blank" rel="noopener" href="https://computingforgeeks.com/netstat-vs-ss-usage-guide-linux/">https://computingforgeeks.com/netstat-vs-ss-usage-guide-linux/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.howtogeek.com/426031/how-to-use-the-linux-lsof-command/">https://www.howtogeek.com/426031/how-to-use-the-linux-lsof-command/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.tecmint.com/linux-more-command-and-less-command-examples/">https://www.tecmint.com/linux-more-command-and-less-command-examples/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/be0c534c6a41">https://www.jianshu.com/p/be0c534c6a41</a></li>
+<li><a target="_blank" rel="noopener" href="https://linuxize.com/post/ps-command-in-linux/">https://linuxize.com/post/ps-command-in-linux/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-ps.html">https://www.runoob.com/linux/linux-comm-ps.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.linuxcool.com/ps">https://www.linuxcool.com/ps</a></li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Linux/"># Linux</a>
+                    
+                        <a href="/tags/ps/"># ps</a>
+                    
+                        <a href="/tags/netstat/"># netstat</a>
+                    
+                        <a href="/tags/ss/"># ss</a>
+                    
+                        <a href="/tags/lsof/"># lsof</a>
+                    
+                        <a href="/tags/less/"># less</a>
+                    
+                        <a href="/tags/cat/"># cat</a>
+                    
+                        <a href="/tags/kill/"># kill</a>
+                    
+                        <a href="/tags/tee/"># tee</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">首页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021-03-10-linux-common-commands-2.html">Linux 常用命令(2) - 重定向输出和输入, 查看网络端口, 压缩和解压缩</a>
+            
+            
+            <a class="next" rel="next" href="/2021-02-28-get-start-with-tmux.html">如何使用 Tmux</a>
+            
+        </section>
+
+        <!--
+        <section class="comments">
+        <div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+    this.page.url = 'https://ericyy.me/2021-03-03-linux-common-commands-1.html';
+    this.page.identifier = '2021-03-03-linux-common-commands-1.html';
+    this.page.title = 'Linux 常用命令(1) - 检查本地端口, 查看进程, 文件';
+};
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://ericyy.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+        </section>
+        -->
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Eric Yang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>, <span>Hosted on GitHub Pages</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

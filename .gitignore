@@ -27,6 +27,3 @@ db.json
 *.log
 
 .deploy*/
-
-
-public/

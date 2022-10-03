@@ -4,14 +4,14 @@ layout: page
 date: 2014-11-11
 ---
 
-## 个人简介/Profile
+## About me
 
-Nothing to talk about...
+I'm Eric, been working for 10+ years as a software engineer. I'm currently taking the OMSCS program to extend my knowledge and explore some new topics in machine learning.
 
-## 个人链接/Links
+## Links
 
 Github: [@erictt](https://github.com/erictt)
 Email: ericyy87@gmail.com
 Blog: https://ericyy.me
-LinkedIn: https://www.linkedin.com/in/ericyyy/
-软件工程 & 机器学习笔记/CS & ML Notes: https://cs.ericyy.me
+LinkedIn: https://www.linkedin.com/in/ericy87/
+CS Notes: https://cs.ericyy.me

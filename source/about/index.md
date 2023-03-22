@@ -1,17 +1,17 @@
 ---
-title: 关于/About Me
+title: 关于
 layout: page
 date: 2014-11-11
 ---
 
-## About me
+## 关于我
 
-I'm Eric, been working for 10+ years as a software engineer. I'm currently taking the OMSCS program to extend my knowledge and explore some new topics in machine learning.
+记得十年前一直想有个自己的博客。现在有了却不知道写什么。
 
 ## Links
 
 Github: [@erictt](https://github.com/erictt)
 Email: ericyy87@gmail.com
-Blog: https://ericyy.me
-LinkedIn: https://www.linkedin.com/in/ericy87/
-CS Notes: https://cs.ericyy.me
+Blog: <https://ericy.me>
+LinkedIn: <https://www.linkedin.com/in/ericy87/>
+CS Notes: <https://cs.ericy.me>

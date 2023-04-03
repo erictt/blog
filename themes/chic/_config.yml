@@ -17,8 +17,9 @@ favicon: /favicon.png
 nickname: Eric Yang
 
 ### this variable is MarkDown form.
-description: |
-  人生是艺术，而且像真正的艺术那样，必须忘却自己。 -- 林木大拙《禅学入门》
+description: ""
+# description: |
+#   人生是艺术，而且像真正的艺术那样，必须忘却自己。 -- 林木大拙《禅学入门》
 avatar: /image/gavatar.jpg
 
 # main menu navigation
@@ -97,7 +98,6 @@ scripts:
   - /js/tocbot.min.js
     # tscanlin/tocbot: Build a table of contents from headings in an HTML document.
     # https://github.com/tscanlin/tocbot
-
 
 # plugin functions
 ## Katex: Math Formula Support

@@ -4,6 +4,7 @@ title: An Early Dive into LLMs
 categories: [AI]
 tags: [LLM, AI]
 date: 2023-06-01
+description:
 ---
 
 ## Introduction

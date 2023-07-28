@@ -1,7 +1,0 @@
-User-agent: *
-Allow: /
-Allow: /archives/
-Disallow: /public/js/
-Disallow: /public/css/
-Sitemap: https://ericyy.me/sitemap.xml
-Sitemap: https://cs.ericyy.me/sitemap.xml

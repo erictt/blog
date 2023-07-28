@@ -1,0 +1,96 @@
+baseURL = 'https://ericy.me/'
+languageCode = 'en-us'
+title = "Eric's Blog"
+theme = 'PaperMod'
+
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+
+[permalinks]
+  post = '/post/:slug/'
+  page = '/:slug/'
+
+[minify]
+  disableXML = true
+  minifyOutput = true
+
+[params]
+  description = "Eric's Blog"
+  keywords = ["Blog", "Portfolio", "PaperMod"]
+  author = "Eric Yang"
+  # author = ["Me", "You"] # multiple authors
+  # images = ["<link or path of image for opengraph, twitter-cards>"]
+  DateFormat = "January 2, 2006"
+  defaultTheme = "auto" # dark, light
+  disableThemeToggle = false
+
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = false
+  ShowWordCount = true
+  ShowRssButtonInSectionTermList = true
+  UseHugoToc = true
+  disableSpecial1stPost = false
+  disableScrollToTop = false
+  comments = false
+  hidemeta = false
+  hideSummary = false
+  showtoc = true
+  tocopen = false
+  introSection = 'home-intro'
+  favicon = '/favicon.png'
+
+[params.homeInfoParams]
+  Title = '👋 Welcome'
+  Content = "I'm Eric Yang, a software engineer, using this blog to share my learning journey and insights from the field."
+
+[[params.socialIcons]]
+  name = "Github"
+  url = "<https://github.com/erictt>"
+
+[[params.socialIcons]]
+  name = "LinkedIn"
+  url = "https://www.linkedin.com/in/ericy87/"
+
+[outputs]
+  home = [ "HTML", "RSS", "JSON"]
+
+[[menu.main]]
+  identifier = "archives"
+  name = "Archives"
+  url = "/archives/"
+  weight = 10
+
+[[menu.main]]
+  identifier = "categories"
+  name = "Categories"
+  url = "/categories/"
+  weight = 10
+
+[[menu.main]]
+  identifier = "tags"
+  name = "Tags"
+  url = "/tags/"
+  weight = 20
+
+[[menu.main]]
+  identifier = "cs-notes"
+  name = "Notes"
+  url = "https://cs.ericy.me"
+  weight = 40
+
+# Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
+pygmentsUseClasses = true
+
+[markup.highlight]
+  noClasses = false
+  # anchorLineNos = true
+  # codeFences = true
+  # guessSyntax = true
+  # lineNos = true
+  # style = "monokai"
+

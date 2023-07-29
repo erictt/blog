@@ -17,6 +17,7 @@ buildExpired = false
   minifyOutput = true
 
 [params]
+  env = "production"
   description = "Eric's Blog"
   keywords = ["Blog", "Portfolio", "PaperMod"]
   author = "Eric Yang"

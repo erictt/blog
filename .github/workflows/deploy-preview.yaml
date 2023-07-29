@@ -41,12 +41,6 @@ jobs:
       - name: Build
         run: hugo --gc --minify --config=hugo.toml
 
-      - name: Build site and push to release branch
-        uses: aormsby/hugo-deploy-to-pages@v2.1
-        with:
-          source_branch: "main"
-          release_branch: "release"
-
         # Push our generated Hugo site to Vercel
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25

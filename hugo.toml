@@ -1,4 +1,4 @@
-# baseURL = 'https://ericy.me/'
+baseURL = '/'
 languageCode = 'en-us'
 title = "Eric's Blog"
 theme = 'PaperMod'
